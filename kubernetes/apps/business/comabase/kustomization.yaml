@@ -6,7 +6,4 @@ resources:
   - secret.sops.yaml
   - backend-config.sops.yaml
   - web-config.sops.yaml
-  - db
-  - redis
-  - backend
-  - frontend
+  - ks.yaml

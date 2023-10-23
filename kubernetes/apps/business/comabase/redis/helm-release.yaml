@@ -26,11 +26,14 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    global:
+      storageClass: home-cluster-nfs-1
+    architecture: standalone
     auth:
       existingSecret: db-secrets
       existingSecretPasswordKey: redis-password
     master:
       persistence:
         enabled: true
-        storageClass: home-cluster-nfs-1
+        storageClass: local-path
         size: 10Gi
