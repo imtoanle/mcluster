@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: minio
-      version: 5.0.14
+      version: 5.0.7
       sourceRef:
         kind: HelmRepository
         name: minio
@@ -29,9 +29,9 @@ spec:
     environment:
       MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
       MINIO_BROWSER_REDIRECT_URL: https://console.s3.${SECRET_DOMAIN}
-    mode: distributed
+    mode: standalone
     drivesPerNode: 1
-    replicas: 2
+    replicas: 1
     existingSecret: user-secrets
     persistence:
       enabled: true
