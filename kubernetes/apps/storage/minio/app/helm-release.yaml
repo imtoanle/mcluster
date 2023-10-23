@@ -38,6 +38,7 @@ spec:
       storageClass: home-cluster-nfs-1
       accessMode: ReadWriteOnce
       size: 500Gi
+      subPath: data
     ingress:
       enabled: true
       ingressClassName: nginx
