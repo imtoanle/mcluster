@@ -1,0 +1,115 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mattermost-team-edition
+  namespace: mattermost
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: mattermost-team-edition
+      version: 6.6.40
+      sourceRef:
+        kind: HelmRepository
+        name: imtoanle
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    persistence:
+      ## This volume persists generated data from users, like images, attachments...
+      ##
+      data:
+        enabled: true
+        size: 10Gi
+        ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
+        ## Default: volume.alpha.kubernetes.io/storage-class: default
+        ##
+        storageClass: home-cluster-nfs-1
+        accessMode: ReadWriteOnce
+      # existingClaim: ""
+      plugins:
+        enabled: true
+        size: 1Gi
+        ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
+        ## Default: volume.alpha.kubernetes.io/storage-class: default
+        ##
+        storageClass: home-cluster-nfs-1
+        accessMode: ReadWriteMany
+      # existingClaim: ""
+    ingress:
+      enabled: true
+      path: /
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        kubernetes.io/ingress.class: external
+        # certmanager.k8s.io/issuer:  your-issuer
+        nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+        # nginx.ingress.kubernetes.io/proxy-buffering: "on"
+        # nginx.ingress.kubernetes.io/configuration-snippet: |
+        #   proxy_cache mattermost_cache;
+        #   proxy_cache_revalidate on;
+        #   proxy_cache_min_uses 2;
+        #   proxy_cache_use_stale timeout;
+        #   proxy_cache_lock on;
+        #### To use the nginx cache you will need to set an http-snippet in the ingress-nginx configmap
+        #### http-snippet: |
+        ####     proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=mattermost_cache:10m max_size=3g inactive=120m use_temp_path=off;
+      hosts:
+        - &host "chat.${SECRET_DOMAIN}"
+      tls:
+        - secretName: mattermost-tls
+          hosts:
+            - *host
+    extraEnvVars:
+      - name: MM_CONFIG
+        valueFrom:
+          secretKeyRef:
+            name: mattermost-secrets
+            key: mattermost.dbsecret
+      - name: MM_SERVICESETTINGS_SITEURL
+        value: "https://chat.${SECRET_DOMAIN}"
+      - name: MM_SQLSETTINGS_DRIVERNAME
+        value: "postgres"
+      - name: POSTGRES_USER_GITLAB
+        value: "mattermost-team-edition"
+      - name: POSTGRES_DB_NAME_MATTERMOST
+        value: "mattermost-team-edition"
+      - name: POSTGRES_HOST_GITLAB
+        value: "mattermost-db-postgresql.mattermost.svc.cluster.local"
+      - name: POSTGRES_PORT_GITLAB
+        value: "5432"
+      - name: POSTGRES_PASSWORD_GITLAB
+        valueFrom:
+          secretKeyRef:
+            name: mattermost-secrets
+            key: password
+      - name: MM_SQLSETTINGS_DATASOURCE
+        value: "postgres://$(POSTGRES_USER_GITLAB):$(POSTGRES_PASSWORD_GITLAB)@$(POSTGRES_HOST_GITLAB):$(POSTGRES_PORT_GITLAB)/$(POSTGRES_DB_NAME_MATTERMOST)?sslmode=disable&connect_timeout=10"
+    configJSON:
+      ServiceSettings:
+        SiteURL: "https://chat.${SECRET_DOMAIN}"
+      TeamSettings:
+        SiteName: "Mattermost on ${SECRET_DOMAIN}"
+    mysql:
+      enabled: false
+    externalDB:
+      enabled: true
+      includeConfig: false
+      externalDriverType: postgres
+    securityContext:
+      fsGroup: 2000
+      runAsGroup: 2000
+      runAsUser: 2000
