@@ -31,7 +31,7 @@ spec:
       MINIO_BROWSER_REDIRECT_URL: https://console.s3.${SECRET_DOMAIN}
     mode: distributed
     drivesPerNode: 1
-    replicas: 1
+    replicas: 2
     existingSecret: user-secrets
     persistence:
       enabled: true
