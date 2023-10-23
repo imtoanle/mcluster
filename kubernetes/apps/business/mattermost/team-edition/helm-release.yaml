@@ -49,10 +49,10 @@ spec:
       # existingClaim: ""
     ingress:
       enabled: true
+      className: external
       path: /
       annotations:
         external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        kubernetes.io/ingress.class: external
         # certmanager.k8s.io/issuer:  your-issuer
         nginx.ingress.kubernetes.io/proxy-body-size: 10240m
         nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
