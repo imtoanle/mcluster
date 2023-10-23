@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: minio
-      version: 5.0.7
+      version: 5.0.14
       sourceRef:
         kind: HelmRepository
         name: minio
@@ -28,7 +28,7 @@ spec:
   values:
     environment:
       MINIO_SERVER_URL: http://minio.minio.svc.cluster.local:9000
-      MINIO_BROWSER_REDIRECT_URL: https://console.s3.${SECRET_DOMAIN}
+      MINIO_BROWSER_REDIRECT_URL: https://console.s3.fat-space.com
     mode: standalone
     drivesPerNode: 1
     replicas: 1
@@ -54,7 +54,7 @@ spec:
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
       path: /
       hosts:
-        - &host "s3.${SECRET_DOMAIN}"
+        - &host "s3.fat-space.com"
       tls:
         - secretName: minio-ingress-tls
           hosts:
@@ -74,7 +74,7 @@ spec:
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
       path: /
       hosts:
-        - &host "console.s3.${SECRET_DOMAIN}"
+        - &host "console.s3.fat-space.com"
       tls:
         - secretName: minio-console-ingress-tls
           hosts:
