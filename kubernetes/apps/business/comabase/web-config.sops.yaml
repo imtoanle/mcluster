@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: web-config
+    namespace: comabase
+data:
+    nginx-my.conf: ENC[AES256_GCM,data:JCGU2I4/N7H7ea62bug4h8rL3hzV0shAFomPbZ4A/ZT313E+wlZ0n83LPcV8WNp3qXpCpCNnGiNQnfBbzBZoIblpgs768bZyTd26tICa3KBc8w+QGpdfKu9tqjsAV1bBPGb8+zQDj2yG2q+FSBO/jyLYXk8BGVHi9ll1Bx2LUV9LBRqYMtJ/rUAxz82AofLfHjyjVzpN2s51XcYJ7R5b7CbTeK43+dxZbU5cLpFDzUzKh3selcJ+qgbsr7YS1LV6HFsHL7oXXMtrcARXwTgtMN69lLo5LILSgpDntYrw5A5vrvW1P6METjZNtm2EyIBBRoqnOJ5wmzYLtUsKWWeAoejNNU2hKxghbIQiVjk3jRrVxnnbtgxMVfDt0lkwM/W2XBDENAU1GLZ3tsMHIDFTjfuDlJE4szXbCzr/PFFfxkMsNiTOjvBwHPeT3OQUuiHcPiXhkn45WauBC5x0Am16B1OWCf2+sYWoTGonKKp2cJ2A59jZb4uDiomlPE10WxcT6T5UI4PGz+pnZocYejWu/Rfl+eTWXmXQfeSU2TXtcPoixlyFmukUF1nI+9ndwpo0q9FzYMhFd2AujAohUY9k11r+UVSgYr2FvtbPrZeeHlSEjwU/zNPWhyWNR16eOpFxjU3NxWzHw3ffbjoCIholQ615Z0XKlkYadHQRntJJXB46EnZZsItc/PP0LpdXS9JmiVpkqupjSErIcNwGVvfF+2kW1DULeFYHIWj5+eHE8ZSZrUWp1Hlx/ZIGIQPN/Gzh/mURVA3ku3URix3jkRzUtTP0SzJIe9k+UPDVkTtMZ77bLX0QJ+qWtE2Yp5WELDr3eoe5VrjUYij7dmM/PI2g4qmR2urUMmQhvaVaBrMJUVZoJVovAmMR8F5pwvvGhjkCLxKLAcqVpzcmt6zfLtu6dcYC/IKBtFi8kmpr4k68QiWGY8ugRGyChRm7si4GaBlMmZPbYHyOtf4jhq3zWj+qXucQH+zFCVH5r+O4wHB+aKTwoWvZcGIjsXP5ioocmdC05x0139xH294UtvuPsCDLp3d/uj0ATOCkDHS0Tvj+F4d2uuh6lqQVhDag5KMj98gj406ajFvyrJfD,iv:566qmFOwAp5XGSTCSnVCyDWelTGvRWAGxFc7GVi7g5U=,tag:Ua8Uh/Xkp07wD9/1YiAlQA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14j28wpn82nnskt0rzcaqxzwnhx33ardgl640rckvwrys8grphvwsyt4ch2
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFUU5XYTZMcTJpNm52bzlR
+            VHJWQnFOeE1xaW0vNHcrNVJFZXo1ZStEZlMwCnZoZkdnbTdYNGZOUlUwRGJWdCtn
+            SGtDT3dFZGdOWmtBZ3BENSs5cXZGLzAKLS0tIDIvYkE2K210WjE5ZWxXdFQ1Z2hv
+            K1JlNCtxT0V2b2VBRmRrb2NvZzJFTWcKg0mD2FDocwxcjhHIxACr1mjVSXFTYGLV
+            cGbApIYXyhWVslvPO5PbOLHOSO7FW6IfKo9jB44SuAqMYJC417d6Dw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-10-23T14:02:14Z"
+    mac: ENC[AES256_GCM,data:CtwJSp1vLezQ8eVTq1hbmSecGRC96ayIL6/0ijkBZfG0PW5f+rPT5hBzrU4er/co4uqjtrQbtraoh8ig7InunwXqC1Xgm20GnGSD9wa7MzHqHMIJ3oZebX8QAernEovqfUEQB3tVeHu33F8mxGSmEzLXoXdt9nfX4zpwp2hHVn4=,iv:lj6swlrrY3mh++N21rJ/9IeqfCSfCvWp/k/yG7qM/I0=,tag:vq/wE8X9/L8cdxCsiOUhSQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
