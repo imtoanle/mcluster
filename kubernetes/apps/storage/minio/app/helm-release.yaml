@@ -27,8 +27,8 @@ spec:
     keepHistory: false
   values:
     environment:
-      MINIO_SERVER_URL: https://s3.fat-space.com
-      MINIO_BROWSER_REDIRECT_URL: https://console.s3.fat-space.com
+      MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
+      MINIO_BROWSER_REDIRECT_URL: https://console.s3.${SECRET_DOMAIN}
     mode: standalone
     drivesPerNode: 1
     replicas: 5
@@ -50,12 +50,12 @@ spec:
         # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         # nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0
         cert-manager.io/cluster-issuer: "letsencrypt-production"
-        external-dns.alpha.kubernetes.io/target: "ipv4.fat-space.com"
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
         external-dns/is-public: "true"
       path: /
       hosts:
-        - &host "s3.fat-space.com"
+        - &host "s3.${SECRET_DOMAIN}"
       tls:
         - secretName: minio-ingress-tls
           hosts:
@@ -71,12 +71,12 @@ spec:
         # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         # nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0
         cert-manager.io/cluster-issuer: "letsencrypt-production"
-        external-dns.alpha.kubernetes.io/target: "ipv4.fat-space.com"
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
         external-dns/is-public: "true"
       path: /
       hosts:
-        - &host "console.s3.fat-space.com"
+        - &host "console.s3.${SECRET_DOMAIN}"
       tls:
         - secretName: minio-console-ingress-tls
           hosts:
