@@ -52,7 +52,6 @@ spec:
         # cert-manager.io/cluster-issuer: "letsencrypt-production"
         external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         # external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-        external-dns/is-public: "true"
       path: /
       hosts:
         - &host "s3.${SECRET_DOMAIN}"
@@ -73,7 +72,6 @@ spec:
         # cert-manager.io/cluster-issuer: "letsencrypt-production"
         external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         # external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-        external-dns/is-public: "true"
       path: /
       hosts:
         - &host "console.s3.${SECRET_DOMAIN}"
