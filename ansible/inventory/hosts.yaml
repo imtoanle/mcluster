@@ -1,0 +1,19 @@
+---
+kubernetes:
+  children:
+    master:
+      hosts:
+        home-cluster-master-1:
+          ansible_user: mitm
+          ansible_host: 10.0.99.113
+    worker:
+      hosts:
+        home-cluster-worker-1:
+          ansible_user: mitm
+          ansible_host: 10.0.99.116
+        home-cluster-worker-2:
+          ansible_user: mitm
+          ansible_host: 10.0.99.128
+        home-cluster-worker-3:
+          ansible_user: mitm
+          ansible_host: 10.0.99.130
