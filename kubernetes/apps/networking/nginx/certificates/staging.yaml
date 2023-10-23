@@ -13,4 +13,4 @@ spec:
   dnsNames:
     - "${SECRET_DOMAIN}"
     - "*.${SECRET_DOMAIN}"
-    - "*.*.${SECRET_DOMAIN}"
+    - "*.s3.${SECRET_DOMAIN}"
