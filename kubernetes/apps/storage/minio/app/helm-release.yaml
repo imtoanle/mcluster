@@ -29,9 +29,9 @@ spec:
     environment:
       MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
       MINIO_BROWSER_REDIRECT_URL: https://console.s3.${SECRET_DOMAIN}
-    mode: standalone
+    mode: distributed
     drivesPerNode: 1
-    replicas: 5
+    replicas: 1
     existingSecret: user-secrets
     persistence:
       enabled: true
