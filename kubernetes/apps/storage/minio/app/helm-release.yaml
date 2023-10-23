@@ -83,3 +83,6 @@ spec:
     metrics:
       serviceMonitor:
         enabled: true
+
+    securityContext:
+      fsGroup: 65534
