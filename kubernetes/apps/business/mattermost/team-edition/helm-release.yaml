@@ -52,7 +52,8 @@ spec:
       className: external
       path: /
       annotations:
-        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        external-dns.alpha.kubernetes.io/target: "ipv4.fat-space.com"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
         # certmanager.k8s.io/issuer:  your-issuer
         nginx.ingress.kubernetes.io/proxy-body-size: 10240m
         nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
@@ -68,7 +69,7 @@ spec:
         #### http-snippet: |
         ####     proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=mattermost_cache:10m max_size=3g inactive=120m use_temp_path=off;
       hosts:
-        - &host "chat.${SECRET_DOMAIN}"
+        - &host "chat.fat-space.com"
       tls:
         - secretName: mattermost-tls
           hosts:
@@ -80,7 +81,7 @@ spec:
             name: mattermost-secrets
             key: mattermost.dbsecret
       - name: MM_SERVICESETTINGS_SITEURL
-        value: "https://chat.${SECRET_DOMAIN}"
+        value: "https://chat.fat-space.com"
       - name: MM_SQLSETTINGS_DRIVERNAME
         value: "postgres"
       - name: POSTGRES_USER_GITLAB
@@ -100,9 +101,9 @@ spec:
         value: "postgres://$(POSTGRES_USER_GITLAB):$(POSTGRES_PASSWORD_GITLAB)@$(POSTGRES_HOST_GITLAB):$(POSTGRES_PORT_GITLAB)/$(POSTGRES_DB_NAME_MATTERMOST)?sslmode=disable&connect_timeout=10"
     configJSON:
       ServiceSettings:
-        SiteURL: "https://chat.${SECRET_DOMAIN}"
+        SiteURL: "https://chat.fat-space.com"
       TeamSettings:
-        SiteName: "Mattermost on ${SECRET_DOMAIN}"
+        SiteName: "Mattermost on fat-space.com"
     mysql:
       enabled: false
     externalDB:
