@@ -13,3 +13,5 @@ spec:
   dnsNames:
     - "${SECRET_DOMAIN}"
     - "*.${SECRET_DOMAIN}"
+    - "*.fat-space.com"
+    - "*.s3.fat-space.com"
