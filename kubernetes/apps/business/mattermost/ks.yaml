@@ -21,6 +21,8 @@ metadata:
   name: cluster-apps-business-mattermost-team-edition
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-business-mattermost-db
   path: ./kubernetes/apps/business/mattermost/team-edition
   prune: true
   sourceRef:
