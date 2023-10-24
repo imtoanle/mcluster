@@ -38,17 +38,3 @@ spec:
         enabled: true
         storageClass: home-cluster-nfs-1
         size: 5Gi
-      # podSecurityContext:
-      #   enabled: true
-      #   fsGroup: 65534
-      # containerSecurityContext:
-      #   enabled: true
-      #   runAsUser: 65534
-      #   runAsGroup: 65534
-      #   runAsNonRoot: false
-    volumePermissions:
-      enabled: true
-      containerSecurityContext:
-        runAsUser: 0
-        runAsGroup: 0
-        runAsNonRoot: false
