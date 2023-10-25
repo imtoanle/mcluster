@@ -33,7 +33,7 @@ spec:
             image:
               repository: aitbase/comabase-server
               tag: v1.3.7
-            
+
             probes:
               liveness: &probes
                 enabled: true
@@ -41,7 +41,7 @@ spec:
                 spec:
                   httpGet:
                     path: /health
-                    port: *port
+                    port: &port 8888
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -53,8 +53,8 @@ spec:
       main:
         ports:
           http:
-            port: &port 8888
-    
+            port: *port
+
     ingress:
       main:
         enabled: false
