@@ -43,11 +43,11 @@ spec:
         username: superset
         database: superset
       primary:
-        podSecurityContext:
-          fsGroup: 65534
-        containerSecurityContext:
-          runAsUser: 0
-          runAsNonRoot: false
+        # podSecurityContext:
+        #   fsGroup: 65534
+        # containerSecurityContext:
+        #   runAsUser: 0
+        #   runAsNonRoot: false
 
         # volumePermissions:
         #   enabled: false
