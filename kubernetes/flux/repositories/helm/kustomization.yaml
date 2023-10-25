@@ -20,5 +20,6 @@ resources:
   - ./minio.yaml
   - ./prometheus-community.yaml
   - ./stakater.yaml
+  - ./superset.yaml
   - ./weave-gitops.yaml
   - ./windmill.yaml

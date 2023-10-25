@@ -1,0 +1,76 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: superset
+  namespace: superset
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: superset
+      version: 0.10.5
+      sourceRef:
+        kind: HelmRepository
+        name: superset
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    extraEnvRaw:
+      - name: DB_PASS
+        valueFrom:
+          secretKeyRef:
+            name: db-secrets
+            key: password
+
+    postgresql:
+      enabled: true
+
+      ## Authentication parameters
+      auth:
+        ## The name of an existing secret that contains the postgres password.
+        existingSecret: db-secrets
+        username: superset
+        database: superset
+      primary:
+        ##
+        ## Persistent Volume Storage configuration.
+        ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
+        persistence:
+          enabled: true
+          storageClass: home-cluster-nfs-1
+          size: 20Gi
+          accessModes:
+            - ReadWriteOnce
+
+    ingress:
+      enabled: true
+      ingressClassName: external
+      annotations:
+        kubernetes.io/tls-acme: "true"
+        kubernetes.io/ingress.allow-http: "false"
+        # kubernetes.io/ingress.global-static-ip-name: ""
+        # nginx.ingress.kubernetes.io/custom-http-errors: '401,403,404,501,502,503'
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+      path: /
+      pathType: ImplementationSpecific
+      hosts:
+        - &host "superset.${SECRET_DOMAIN}"
+      tls:
+        - secretName: superset-ingress-tls
+          hosts:
+            - *host
+      extraHostsRaw: []
+      #  - secretName: chart-example-tls
+      #    hosts:
+      #      - chart-example.local
