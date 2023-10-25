@@ -34,19 +34,11 @@ spec:
           database: mattermost-team-edition
           existingSecret: mattermost-secrets
     primary:
-      # volumePermissions:
-      #   enabled: false
-      # shmVolume:
-      #   enabled: false
       podSecurityContext:
         fsGroup: 65534
       containerSecurityContext:
-        runAsUser: 0
-        runAsNonRoot: false
-        # capabilities:
-        #   drop: ["ALL"]
-        # seccompProfile:
-        #   type: RuntimeDefault
+        runAsUser: 65534
+        runAsGroup: 0
 
       persistence:
         enabled: true
