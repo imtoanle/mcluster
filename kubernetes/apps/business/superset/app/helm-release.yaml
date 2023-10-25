@@ -43,6 +43,18 @@ spec:
         username: superset
         database: superset
       primary:
+        volumePermissions:
+          enabled: false
+        shmVolume:
+          enabled: false
+        podSecurityContext:
+          fsGroup: null
+        containerSecurityContext:
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile:
+            type: RuntimeDefault
+
         ##
         ## Persistent Volume Storage configuration.
         ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
