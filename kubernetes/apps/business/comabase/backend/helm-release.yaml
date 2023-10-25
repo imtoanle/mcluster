@@ -64,11 +64,14 @@ spec:
         enabled: true
         type: "configMap"
         name: "backend-config"
-        mountPath: "/app/config.yaml"
-        subPath: "config.yaml"
+        globalMounts:
+          - path: /app/config.yaml
+            subPath: config.yaml
       uploads:
         enabled: true
-        mountPath: /app/uploads
+        globalMounts:
+          - path: /app/uploads
+            readOnly: false
         storageClass: home-cluster-nfs-1
         accessMode: ReadWriteOnce
         size: 1Gi
