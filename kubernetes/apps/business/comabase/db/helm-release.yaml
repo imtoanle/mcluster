@@ -33,6 +33,11 @@ spec:
           database: vietwings_comabase
           existingSecret: db-secrets
     primary:
+      podSecurityContext:
+        fsGroup: 65534
+      containerSecurityContext:
+        runAsUser: 65534
+        runAsGroup: 0
       persistence:
         enabled: true
         storageClass: home-cluster-nfs-1
