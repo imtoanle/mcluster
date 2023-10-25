@@ -43,17 +43,23 @@ spec:
         username: superset
         database: superset
       primary:
-        volumePermissions:
-          enabled: false
-        shmVolume:
-          enabled: false
         podSecurityContext:
-          fsGroup: null
+          fsGroup: 65534
         containerSecurityContext:
-          capabilities:
-            drop: ["ALL"]
-          seccompProfile:
-            type: RuntimeDefault
+          runAsUser: 0
+          runAsNonRoot: false
+
+        # volumePermissions:
+        #   enabled: false
+        # shmVolume:
+        #   enabled: false
+        # podSecurityContext:
+        #   fsGroup: null
+        # containerSecurityContext:
+        #   capabilities:
+        #     drop: ["ALL"]
+        #   seccompProfile:
+        #     type: RuntimeDefault
 
         ##
         ## Persistent Volume Storage configuration.
