@@ -59,3 +59,16 @@ spec:
         memory: 100Mi
       # limits:
       #   memory: 500Mi
+    persistence:
+      config:
+        enabled: true
+        type: "configMap"
+        name: "backend-config"
+        mountPath: "/app/config.yaml"
+        subPath: "config.yaml"
+      uploads:
+        enabled: true
+        mountPath: /app/uploads
+        storageClass: home-cluster-nfs-1
+        accessMode: ReadWriteOnce
+        size: 1Gi
