@@ -2,19 +2,18 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: comabase
+  name: comabase-backend
   namespace: comabase
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
-      chart: comabase
-      version: 1.0.1
+      chart: app-template
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
-        name: imtoanle
+        name: bjw-s
         namespace: flux-system
-      interval: 15m
   maxHistory: 2
   install:
     remediation:
@@ -26,25 +25,37 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    hostNetwork: false
-    env:
-
+    controller:
+      strategy: RollingUpdate
     image:
       repository: aitbase/comabase-server
       tag: v1.3.7
+    service:
+      main:
+        ports:
+          http:
+            port: &port 8888
+    probes:
+      liveness: &probes
+        enabled: true
+        custom: true
+        spec:
+          httpGet:
+            path: /health
+            port: *port
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      readiness: *probes
+      startup:
+        enabled: false
     ingress:
       main:
         enabled: false
-    persistence:
-      config:
-        enabled: true
-        type: "configMap"
-        name: "backend-config"
-        mountPath: "/app/config.yaml"
-        subPath: "config.yaml"
-      uploads:
-        enabled: true
-        mountPath: /app/uploads
-        storageClass: home-cluster-nfs-1
-        accessMode: ReadWriteOnce
-        size: 1Gi
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      # limits:
+      #   memory: 500Mi
