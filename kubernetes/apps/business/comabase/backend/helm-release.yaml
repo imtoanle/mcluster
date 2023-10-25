@@ -26,30 +26,35 @@ spec:
     keepHistory: false
   values:
     controller:
-      strategy: RollingUpdate
-    image:
-      repository: aitbase/comabase-server
-      tag: v1.3.7
+      main:
+        strategy: RollingUpdate
+        containers:
+          main:
+            image:
+              repository: aitbase/comabase-server
+              tag: v1.3.7
+            
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
     service:
       main:
         ports:
           http:
             port: &port 8888
-    probes:
-      liveness: &probes
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /health
-            port: *port
-          initialDelaySeconds: 0
-          periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
-      readiness: *probes
-      startup:
-        enabled: false
+    
     ingress:
       main:
         enabled: false
