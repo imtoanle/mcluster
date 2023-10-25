@@ -39,7 +39,7 @@ spec:
       shmVolume:
         enabled: false
       podSecurityContext:
-        fsGroup: null
+        fsGroup: 65534
       containerSecurityContext:
         runAsUser: 0
         runAsNonRoot: false
