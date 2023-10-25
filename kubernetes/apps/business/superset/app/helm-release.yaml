@@ -45,9 +45,9 @@ spec:
       primary:
         # podSecurityContext:
         #   fsGroup: 65534
-        # containerSecurityContext:
-        #   runAsUser: 0
-        #   runAsNonRoot: false
+        containerSecurityContext:
+          runAsUser: 1001
+          runAsNonRoot: true
 
         # volumePermissions:
         #   enabled: false
