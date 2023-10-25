@@ -76,8 +76,8 @@ spec:
     persistence:
       config:
         enabled: true
-        type: "configMap"
-        name: "web-config"
+        type: configMap
+        name: web-config
         globalMounts:
           - path: /etc/nginx/conf.d/my.conf
             subPath: nginx-my.conf
