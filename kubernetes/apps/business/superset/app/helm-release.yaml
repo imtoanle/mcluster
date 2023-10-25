@@ -48,6 +48,7 @@ spec:
         ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
         persistence:
           enabled: true
+          subPath: superset
           storageClass: home-cluster-nfs-1
           size: 20Gi
           accessModes:
