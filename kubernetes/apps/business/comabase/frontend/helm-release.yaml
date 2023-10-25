@@ -74,10 +74,10 @@ spec:
             secretName: "vietwings-comabase-web-tls"
 
     persistence:
-      config:
+      nginx-config:
         enabled: true
         type: configMap
-        existingClaim: web-config
+        name: web-config
         globalMounts:
           - path: /etc/nginx/conf.d/my.conf
             subPath: nginx-my.conf
