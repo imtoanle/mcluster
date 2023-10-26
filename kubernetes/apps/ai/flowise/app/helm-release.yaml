@@ -1,0 +1,117 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: flowise-app
+  namespace: flowise
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        strategy: RollingUpdate
+        containers:
+          main:
+            image:
+              repository: aitbase/flowise-ai
+              tag: v1.3.8
+
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 3000
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+
+            env:
+              FLOWISE_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: flowise.username
+              FLOWISE_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: flowise.password
+              FLOWISE_SECRETKEY_OVERWRITE:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: flowise.secretkey.overwrite
+              APIKEY_PATH: /flowise_data/api
+              LOG_PATH: /flowise_data/logs
+              SECRETKEY_PATH: /flowise_data/secrets
+              DATABASE_TYPE: postgres
+              DATABASE_HOST: flowise-db-postgresql.flowise.svc.cluster.local
+              DATABASE_PORT: 5432
+              DATABASE_USER: flowise
+              DATABASE_NAME: flowise
+              DATABASE_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: password
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      main:
+        enabled: false
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "flowise.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        # tls:
+        #   - hosts:
+        #       - *host
+        #     secretName: "vietwings-comabase-web-tls"
+    # resources:
+    #   requests:
+    #     cpu: 100m
+    #     memory: 100Mi
+    #   limits:
+    #     memory: 500Mi
+    persistence:
+      data:
+        enabled: true
+        storageClass: home-cluster-nfs-1
+        size: 5Gi
+        globalMounts:
+          - path: /flowise_data
+            readOnly: false
+      
