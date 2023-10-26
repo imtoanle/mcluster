@@ -96,10 +96,10 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-        # tls:
-        #   - hosts:
-        #       - *host
-        #     secretName: "vietwings-comabase-web-tls"
+        tls:
+          - hosts:
+              - *host
+            secretName: "flowise-app-tls"
     # resources:
     #   requests:
     #     cpu: 100m
