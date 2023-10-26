@@ -5,3 +5,4 @@ resources:
   - ./staging.yaml
   - ./staging_domain2.yaml
   - ./production.yaml
+  - ./production_domain2.yaml
