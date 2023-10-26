@@ -110,6 +110,7 @@ spec:
       data:
         enabled: true
         storageClass: home-cluster-nfs-1
+        accessMode: ReadWriteOnce
         size: 5Gi
         globalMounts:
           - path: /flowise_data
