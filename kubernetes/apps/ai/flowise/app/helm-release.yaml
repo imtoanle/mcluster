@@ -96,10 +96,13 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
         tls:
-          - hosts:
+          - secretName: "flowise-app-tls"
+            hosts:
               - *host
-            secretName: "flowise-app-tls"
+
     # resources:
     #   requests:
     #     cpu: 100m
