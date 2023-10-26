@@ -52,7 +52,7 @@ spec:
       className: external
       path: /
       annotations:
-        cert-manager.io/issuer: "letsencrypt-production"
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
         nginx.ingress.kubernetes.io/proxy-body-size: 10240m
