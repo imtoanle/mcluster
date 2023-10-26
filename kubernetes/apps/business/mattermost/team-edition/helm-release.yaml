@@ -52,9 +52,9 @@ spec:
       className: external
       path: /
       annotations:
+        cert-manager.io/issuer: "letsencrypt-production"
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-        # certmanager.k8s.io/issuer:  your-issuer
         nginx.ingress.kubernetes.io/proxy-body-size: 10240m
         nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
         nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
@@ -71,7 +71,7 @@ spec:
       hosts:
         - &host "chat.${SECRET_DOMAIN_2}"
       tls:
-        - secretName: mattermost-tls
+        - secretName: "${SECRET_DOMAIN_2/./-}-production-tls"
           hosts:
             - *host
     extraEnvVars:
