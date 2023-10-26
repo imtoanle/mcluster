@@ -33,6 +33,11 @@ spec:
       existingSecret: db-secrets
       existingSecretPasswordKey: redis-password
     master:
+      podSecurityContext:
+        fsGroup: 65534
+      containerSecurityContext:
+        runAsUser: 65534
+        runAsGroup: 0
       persistence:
         enabled: true
         storageClass: local-path
