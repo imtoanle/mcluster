@@ -25,6 +25,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    deployment:
+      env:
+        REBUILD: true
+        CMAKE_ARGS: "-DLLAMA_AVX512=OFF"
     promptTemplates:
       ggml-gpt4all-j.tmpl: |
         The prompt below is a question to answer, a task to complete, or a conversation to respond to; decide which and write an appropriate response.
