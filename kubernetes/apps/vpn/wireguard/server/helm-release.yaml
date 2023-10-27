@@ -34,6 +34,16 @@ spec:
         - FriendlyName: macbook
           AllowedIPs: 10.34.0.101/32
           PublicKey: /BDcs4+QaEmfY8j0VABdS+RlSttoiY6/GlEIswpJvTc=
+        - FriendlyName: iphone
+          AllowedIPs: 10.34.0.102/32
+          PublicKey: ec/pFmlgHpvgVXdP1mQ5KmhitWejZ2vUgOTCr9xIRn4=
+    service:
+      # -- Whether the service will be created or not
+      enabled: true
+      # -- Service type, to keep internal to cluster use ClusterIP or NodePort
+      type: LoadBalancer
+      # -- Service port, default is 51820 UDP
+      port: 51820
     secretName: server-secrets
 
     metrics:
