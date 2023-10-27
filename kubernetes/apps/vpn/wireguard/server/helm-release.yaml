@@ -35,3 +35,6 @@ spec:
           AllowedIPs: 10.34.0.101/32
           PublicKey: /BDcs4+QaEmfY8j0VABdS+RlSttoiY6/GlEIswpJvTc=
     secretName: server-secrets
+
+    metrics:
+      enabled: true
