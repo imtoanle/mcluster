@@ -27,7 +27,7 @@ spec:
   values:
     deployment:
       env:
-        REBUILD: true
+        REBUILD: false
         CMAKE_ARGS: "-DLLAMA_AVX512=OFF"
     promptTemplates:
       ggml-gpt4all-j.tmpl: |
