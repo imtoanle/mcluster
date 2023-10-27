@@ -32,6 +32,6 @@ spec:
       serverCidr: 10.34.0.0/24
       clients:
         - FriendlyName: macbook
-        AllowedIPs: 10.34.0.101/32
-        PublicKey: /BDcs4+QaEmfY8j0VABdS+RlSttoiY6/GlEIswpJvTc=
+          AllowedIPs: 10.34.0.101/32
+          PublicKey: /BDcs4+QaEmfY8j0VABdS+RlSttoiY6/GlEIswpJvTc=
     secretName: server-secrets
