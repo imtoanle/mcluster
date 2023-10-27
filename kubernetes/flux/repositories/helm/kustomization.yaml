@@ -8,6 +8,7 @@ resources:
   - ./coredns.yaml
   - ./csi-driver-nfs.yaml
   - ./external-dns.yaml
+  - ./go-skynet.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
   - ./imtoanle.yaml
