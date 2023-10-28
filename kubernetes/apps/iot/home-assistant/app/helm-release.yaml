@@ -65,7 +65,7 @@ spec:
               tag: 4.18.0
               pullPolicy: IfNotPresent
             securityContext:
-              runAsUser: 65534
+              runAsUser: 0
               runAsGroup: 0
             env:
               TZ: "Asia/Ho_Chi_Minh"
