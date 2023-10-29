@@ -60,6 +60,8 @@ spec:
                   secretKeyRef:
                     name: app-secrets
                     key: app-admin-password
+            securityContext:
+              fsGroup: 65534
     service:
       main:
         ports:
