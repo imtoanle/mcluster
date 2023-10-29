@@ -53,6 +53,7 @@ spec:
               startup:
                 enabled: false
             env:
+              DEBUG: true
               TIME_ZONE: Asia/Ho_Chi_Minh
               SEAFILE_SERVER_HOSTNAME: "files.${SECRET_DOMAIN_2}"
               DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
@@ -92,6 +93,11 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header X-Forwarded-Host $server_name;
         hosts:
           - host: &host "files.${SECRET_DOMAIN_2}"
             paths:
