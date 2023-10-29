@@ -53,7 +53,7 @@ spec:
               startup:
                 enabled: false
             env:
-              DEBUG: true
+              DEBUG: "True"
               TIME_ZONE: Asia/Ho_Chi_Minh
               SEAFILE_SERVER_HOSTNAME: "files.${SECRET_DOMAIN_2}"
               DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
