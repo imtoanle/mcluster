@@ -43,7 +43,7 @@ spec:
         containers:
           main:
             image:
-              repository: seafileltd/seafile-mc
+              repository: aitbase/seafile
               tag: 11.0.1
             probes:
               liveness:
