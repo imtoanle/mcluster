@@ -68,8 +68,6 @@ spec:
                     key: app-admin-password
             securityContext:
               fsGroup: 65534
-              runAsUser: 65534
-              runAsGroup: 0
     service:
       main:
         ports:
