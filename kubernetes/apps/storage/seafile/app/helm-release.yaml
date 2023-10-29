@@ -44,7 +44,7 @@ spec:
           main:
             image:
               repository: aitbase/seafile
-              tag: 11.0.1
+              tag: 11.0.1-build-2
             probes:
               liveness:
                 enabled: false
