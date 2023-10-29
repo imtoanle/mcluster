@@ -28,28 +28,6 @@ spec:
     controllers:
       main:
         strategy: RollingUpdate
-        env:
-          DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
-            valueFrom:
-              secretKeyRef:
-                name: app-secrets
-                key: mariadb-root-password
-          TIME_ZONE: Asia/Ho_Chi_Minh
-          DB_ROOT_PASSWD:
-            valueFrom:
-              secretKeyRef:
-                name: app-secrets
-                key: mariadb-root-password
-          SEAFILE_ADMIN_EMAIL:
-            valueFrom:
-              secretKeyRef:
-                name: app-secrets
-                key: app-admin-email
-          SEAFILE_ADMIN_PASSWORD:
-            valueFrom:
-              secretKeyRef:
-                name: app-secrets
-                key: app-admin-password
 
         containers:
           main:
@@ -63,6 +41,28 @@ spec:
                 enabled: false
               startup:
                 enabled: false
+            env:
+              DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: mariadb-root-password
+              TIME_ZONE: Asia/Ho_Chi_Minh
+              DB_ROOT_PASSWD:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: mariadb-root-password
+              SEAFILE_ADMIN_EMAIL:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: app-admin-email
+              SEAFILE_ADMIN_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: app-admin-password
     service:
       main:
         ports:
