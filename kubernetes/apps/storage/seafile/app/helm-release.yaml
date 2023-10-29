@@ -43,6 +43,7 @@ spec:
                 enabled: false
             env:
               TIME_ZONE: Asia/Ho_Chi_Minh
+              SEAFILE_SERVER_HOSTNAME: "files.${SECRET_DOMAIN_2}"
               DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
               DB_ROOT_PASSWD:
                 valueFrom:
@@ -90,7 +91,7 @@ spec:
       data:
         enabled: true
         globalMounts:
-          - path: /opt/seafile-data
+          - path: /shared
             readOnly: false
         storageClass: home-cluster-nfs-1
         accessMode: ReadWriteOnce
