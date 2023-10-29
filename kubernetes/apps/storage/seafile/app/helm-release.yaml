@@ -27,7 +27,18 @@ spec:
   values:
     controllers:
       main:
+        pod:
+          securityContext:
+            fsGroup: 0
         strategy: RollingUpdate
+
+        initContainers:
+          init-permissions:
+            image:
+              repository: busybox
+              tag: 1.36
+              imagePullPolicy: IfNotPresent
+            command: ["sh", "-c", "chown -Rv root:root /shared/seafile/seafile-data"]
 
         containers:
           main:
@@ -66,8 +77,7 @@ spec:
                   secretKeyRef:
                     name: app-secrets
                     key: app-admin-password
-            securityContext:
-              fsGroup: 0
+
     service:
       main:
         ports:
