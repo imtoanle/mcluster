@@ -57,10 +57,13 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hosts:
-          - host: &host "notes.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
+        - host: "notes.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+            service:
+              name: main
+              port: http
 
     persistence:
       data:
