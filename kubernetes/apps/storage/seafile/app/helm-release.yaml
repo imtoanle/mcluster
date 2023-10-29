@@ -30,7 +30,6 @@ spec:
         strategy: RollingUpdate
         env:
           DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
-          DB_ROOT_PASSWD:
             valueFrom:
               secretKeyRef:
                 name: app-secrets
