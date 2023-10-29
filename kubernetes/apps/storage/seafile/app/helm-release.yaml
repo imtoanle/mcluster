@@ -42,12 +42,8 @@ spec:
               startup:
                 enabled: false
             env:
-              DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
-                valueFrom:
-                  secretKeyRef:
-                    name: app-secrets
-                    key: mariadb-root-password
               TIME_ZONE: Asia/Ho_Chi_Minh
+              DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
               DB_ROOT_PASSWD:
                 valueFrom:
                   secretKeyRef:
