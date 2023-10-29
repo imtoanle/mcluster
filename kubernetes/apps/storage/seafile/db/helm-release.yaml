@@ -27,6 +27,7 @@ spec:
     keepHistory: false
   values:
     auth:
+      username: seafile
       existingSecret: app-secrets
     primary:
       podSecurityContext:
