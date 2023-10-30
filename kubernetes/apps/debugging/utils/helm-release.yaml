@@ -44,6 +44,9 @@ spec:
       #   hostnames:
       #   - "example.com"
       #   - "www.example.com"
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
     controllers:
       main:
         strategy: RollingUpdate
