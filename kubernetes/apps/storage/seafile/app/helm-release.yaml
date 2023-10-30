@@ -29,7 +29,7 @@ spec:
       main:
         pod:
           securityContext:
-            fsGroup: 0
+            fsGroup: 65534
         strategy: RollingUpdate
 
         # initContainers:
