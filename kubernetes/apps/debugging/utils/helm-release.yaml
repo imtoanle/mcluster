@@ -53,7 +53,7 @@ spec:
               repository: arunvelsriram/utils
               tag: latest
 
-            command: ["sleep infinity"]
+            command: ["sh", "-c", "sleep infinity"]
 
             probes:
               liveness:
