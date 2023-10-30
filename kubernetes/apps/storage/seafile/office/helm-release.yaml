@@ -85,3 +85,11 @@ spec:
           - secretName: "files-office-production-tls"
             hosts:
               - *host
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: seafile-office-config
+        globalMounts:
+          - path: /etc/onlyoffice/documentserver/production-linux.json
+            subPath: production-linux.json
