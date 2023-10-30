@@ -111,31 +111,6 @@ spec:
                   secretKeyRef:
                     name: app-secrets
                     key: onlyoffice-jwt-secret
-              DEBUG: "True"
-              TIME_ZONE: Asia/Ho_Chi_Minh
-              SEAFILE_SERVER_HOSTNAME: "files.${SECRET_DOMAIN_2}"
-              DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
-              MYSQL_USER_HOST: seafile
-              MYSQL_USER_PASSWD:
-                valueFrom:
-                  secretKeyRef:
-                    name: app-secrets
-                    key: mariadb-password
-              DB_ROOT_PASSWD:
-                valueFrom:
-                  secretKeyRef:
-                    name: app-secrets
-                    key: mariadb-root-password
-              SEAFILE_ADMIN_EMAIL:
-                valueFrom:
-                  secretKeyRef:
-                    name: app-secrets
-                    key: app-admin-email
-              SEAFILE_ADMIN_PASSWORD:
-                valueFrom:
-                  secretKeyRef:
-                    name: app-secrets
-                    key: app-admin-password
 
     service:
       main:
