@@ -47,16 +47,16 @@ spec:
               DB_NAME: onlyoffice
               DB_USER: onlyoffice
               JWT_ENABLED: true
-            DB_PWD:
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: mariadb-password
-            JWT_SECRET:
-              valueFrom:
-                secretKeyRef:
-                  name: app-secrets
-                  key: onlyoffice-jwt-secret
+              DB_PWD:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: mariadb-password
+              JWT_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: onlyoffice-jwt-secret
 
     service:
       main:
