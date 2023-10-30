@@ -57,7 +57,7 @@ spec:
               TIME_ZONE: Asia/Ho_Chi_Minh
               SEAFILE_SERVER_HOSTNAME: "files.${SECRET_DOMAIN_2}"
               DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
-              MYSQL_USER_HOST: seafile
+              MYSQL_USER: seafile
               MYSQL_USER_PASSWD:
                 valueFrom:
                   secretKeyRef:
