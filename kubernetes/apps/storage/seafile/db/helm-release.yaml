@@ -44,12 +44,7 @@ spec:
       username: seafile
       existingSecret: app-secrets
     primary:
-      extraEnvVars:
-        ONLYOFFICE_DB_PASSWORD:
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: onlyoffice-db-password
+      extraEnvVarsSecret: db-envs
       podSecurityContext:
         fsGroup: 65534
       containerSecurityContext:
