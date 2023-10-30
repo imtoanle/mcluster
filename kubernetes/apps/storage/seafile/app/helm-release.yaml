@@ -100,17 +100,10 @@ spec:
               DB_PORT: 3306
               DB_NAME: onlyoffice
               DB_USER: onlyoffice
-              DB_PWD:
-                valueFrom:
-                  secretKeyRef:
-                    name: app-secrets
-                    key: onlyoffice-db-password
               JWT_ENABLED: true
-              JWT_SECRET:
-                valueFrom:
-                  secretKeyRef:
-                    name: app-secrets
-                    key: onlyoffice-jwt-secret
+            envFrom:
+              - secretRef:
+                name: db-envs
 
     service:
       main:

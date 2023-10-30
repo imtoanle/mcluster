@@ -5,7 +5,8 @@ metadata:
     name: db-envs
     namespace: seafile
 stringData:
-    ONLYOFFICE_DB_PASSWORD: ENC[AES256_GCM,data:Cj9/lvBiFfAv5oFmTVUB9g==,iv:EoyR4XFzcsEkCAkSXigvwS2mzkYyFX+QSJ2sojkI++4=,tag:OzsZ2AKBF7qw72iXIgshNQ==,type:str]
+    DB_PWD: ENC[AES256_GCM,data:RNk6KYkXKg0BZNm6/C8MPw==,iv:Nx49NKwtl0jZRvfWppc5cHfm1Wydj/Bfv3VJdUqANF4=,tag:2GyUoXU7BYHOCZM2hvlrLw==,type:str]
+    JWT_SECRET: ENC[AES256_GCM,data:Zv7HHt+8fVs17CVsuWG/0+t90Rk8HoNlhxvC7Zi6n1c=,iv:2sguf2aPr4gSO6/WauQFflMhlzXCt6J1zwiiapmJGW0=,tag:vU+Labe5+vXLu/Hawh79Xg==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -21,8 +22,8 @@ sops:
             bWdJSHVEOEhWVEhzYXpUQWpBd3A4a28KYCNf5iuKmZ8pKMAIJ2bBV5J8l95wuTb8
             Wt8+3HIsI1wQtBff0ToNBa9L/gAV0iuU3bynYzCnG2+999C4dHS1MA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-10-30T03:45:18Z"
-    mac: ENC[AES256_GCM,data:OwCVi4Wuo1nNO9CXDt4w2cM8LSDjXK5vCdqQiJmTdm/0ovECYUhsT30nmcAiFvG2NJnFh9reeEWEkg+POaA6jLV5cSLwFOlCHuY+pk54yYb/b0+Yz72VVBLHpT/c2Tc207nG3hp7uvo36zqUdJYZI3548c+e3F4nnjFwm4KC4uI=,iv:ATO1uLoHo7rj5qUV9OTtG6BRFXOScsVReMKTXy3jZbI=,tag:LGKw7Mq4o5pPylkh1qM/Ng==,type:str]
+    lastmodified: "2023-10-30T04:12:14Z"
+    mac: ENC[AES256_GCM,data:WVEcvWNU6U03DcgcizByilauhI9vOF2IoCSo0fTe/sAzA83RINOVuBPoNjZW+K07iDIOrpD9kvMhcwJwOEeFQ7rx8TtEpeqBvSMQ+qf7Sp5/uQzXEtgu3ade+8BbunPuR8Ai/AEcx4m+cAJ3TJCyF+L9C3U5B2BqtpzpxdPb5ys=,iv:xyCfCzPw8bksmpJDFp/FbpV/+9FQ76y3lyu36tdZAb4=,tag:iLJs/ZcxmKn2UTynn32HUQ==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
