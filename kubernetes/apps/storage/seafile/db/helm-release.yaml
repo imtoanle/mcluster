@@ -26,12 +26,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    extraEnvVars:
-      ONLYOFFICE_DB_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: app-secrets
-            key: onlyoffice-db-password
     initdbScripts:
       create_onlyoffice_db.sql: |
         -- Create a new database
@@ -50,6 +44,12 @@ spec:
       username: seafile
       existingSecret: app-secrets
     primary:
+      extraEnvVars:
+        ONLYOFFICE_DB_PASSWORD:
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: onlyoffice-db-password
       podSecurityContext:
         fsGroup: 65534
       containerSecurityContext:
