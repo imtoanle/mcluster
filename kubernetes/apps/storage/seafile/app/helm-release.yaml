@@ -165,7 +165,7 @@ spec:
                   name: office
                   port: http
         tls:
-          - secretName: "${SECRET_DOMAIN_2/./-}-production-tls"
+          - secretName: "files-office-production-tls"
             hosts:
               - *officehost
 
