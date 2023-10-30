@@ -26,25 +26,25 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    initdbScripts:
-      create_onlyoffice_db.sql: |
-        -- Create a new database
-        CREATE DATABASE onlyoffice;
+    # initdbScripts:
+    #   create_onlyoffice_db.sql: |
+    #     -- Create a new database
+    #     CREATE DATABASE onlyoffice;
 
-        -- Create a new user and set a password
-        CREATE USER 'onlyoffice'@'%' IDENTIFIED BY '${DB_PWD}';
+    #     -- Create a new user and set a password
+    #     CREATE USER 'onlyoffice'@'%' IDENTIFIED BY '${DB_PWD}';
 
-        -- Grant privileges to the user on the database
-        GRANT ALL PRIVILEGES ON onlyoffice.* TO 'onlyoffice'@'%';
+    #     -- Grant privileges to the user on the database
+    #     GRANT ALL PRIVILEGES ON onlyoffice.* TO 'onlyoffice'@'%';
 
-        -- Flush privileges
-        FLUSH PRIVILEGES;
+    #     -- Flush privileges
+    #     FLUSH PRIVILEGES;
 
     auth:
-      username: seafile
+      username: onlyoffice
+      database: onlyoffice
       existingSecret: app-secrets
     primary:
-      extraEnvVarsSecret: db-envs
       podSecurityContext:
         fsGroup: 65534
       containerSecurityContext:
