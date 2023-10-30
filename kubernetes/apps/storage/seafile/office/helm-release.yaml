@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: seafile-app
+  name: seafile-office
   namespace: seafile
 spec:
   interval: 30m
@@ -49,7 +49,7 @@ spec:
               JWT_ENABLED: true
             envFrom:
               - secretRef:
-                  name: db-envs
+                name: db-envs
 
     service:
       main:
