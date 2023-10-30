@@ -49,7 +49,7 @@ spec:
               JWT_ENABLED: true
             envFrom:
               - secretRef:
-                name: db-envs
+                  name: db-envs
 
     service:
       main:
