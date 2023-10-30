@@ -79,7 +79,11 @@ spec:
                     name: app-secrets
                     key: app-admin-password
 
-          office:
+      office:
+        strategy: RollingUpdate
+
+        containers:
+          main:
             image:
               repository: onlyoffice/documentserver
               tag: 7.5
