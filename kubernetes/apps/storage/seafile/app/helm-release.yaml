@@ -79,40 +79,9 @@ spec:
                     name: app-secrets
                     key: app-admin-password
 
-      office:
-        strategy: RollingUpdate
-
-        containers:
-          main:
-            image:
-              repository: onlyoffice/documentserver
-              tag: 7.5
-            probes:
-              liveness:
-                enabled: false
-              readiness:
-                enabled: false
-              startup:
-                enabled: false
-            env:
-              DB_TYPE: mariadb
-              DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
-              DB_PORT: 3306
-              DB_NAME: onlyoffice
-              DB_USER: onlyoffice
-              JWT_ENABLED: true
-            envFrom:
-              - secretRef:
-                name: db-envs
-
     service:
       main:
         controller: main
-        ports:
-          http:
-            port: 80
-      office:
-        controller: office
         ports:
           http:
             port: 80
@@ -131,7 +100,7 @@ spec:
             proxy_set_header X-Forwarded-For $remote_addr;
             proxy_set_header X-Forwarded-Host $server_name;
         hosts:
-          - host: &mainhost "files.${SECRET_DOMAIN_2}"
+          - host: &host "files.${SECRET_DOMAIN_2}"
             paths:
               - path: /
                 pathType: Prefix
@@ -141,26 +110,7 @@ spec:
         tls:
           - secretName: "${SECRET_DOMAIN_2/./-}-production-tls"
             hosts:
-              - *mainhost
-      office:
-        enabled: true
-        className: external
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-        hosts:
-          - host: &officehost "files-office.${SECRET_DOMAIN_2}"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: office
-                  port: http
-        tls:
-          - secretName: "files-office-production-tls"
-            hosts:
-              - *officehost
+              - *host
 
     persistence:
       data:

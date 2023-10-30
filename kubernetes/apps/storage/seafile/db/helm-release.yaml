@@ -32,10 +32,10 @@ spec:
         CREATE DATABASE onlyoffice;
 
         -- Create a new user and set a password
-        CREATE USER 'onlyoffice'@'localhost' IDENTIFIED BY '${DB_PWD}';
+        CREATE USER 'onlyoffice'@'%' IDENTIFIED BY '${DB_PWD}';
 
         -- Grant privileges to the user on the database
-        GRANT ALL PRIVILEGES ON onlyoffice.* TO 'onlyoffice'@'localhost';
+        GRANT ALL PRIVILEGES ON onlyoffice.* TO 'onlyoffice'@'%';
 
         -- Flush privileges
         FLUSH PRIVILEGES;
