@@ -32,7 +32,7 @@ spec:
           main:
             image:
               repository: aitbase/comabase-server
-              tag: v1.3.7
+              tag: v1.3.8
 
             probes:
               liveness: &probes
