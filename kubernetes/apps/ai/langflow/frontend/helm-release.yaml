@@ -48,7 +48,6 @@ spec:
 
             env:
               VITE_PROXY_TARGET: http://langflow-app.langflow.svc.cluster.local:7860
-              BACKEND_URL: http://langflow-app.langflow.svc.cluster.local:7860
               LANGFLOW_DATABASE_URL: "sqlite:////langflow_data/langflow.db"
               LANGFLOW_LANGCHAIN_CACHE: SQLiteCache
               LANGFLOW_HOST: "127.0.0.1"
@@ -87,23 +86,12 @@ spec:
                 pathType: Prefix
                 service:
                   name: main
-      api:
-        enabled: true
-        className: external
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            rewrite ^/api(/|$)(.*) /$2 break;
-            proxy_pass http://langflow-app.langflow.svc.cluster.local:7860/api;
-        hosts:
-          - host: &host "langflow.${SECRET_DOMAIN}"
-            paths:
-              - path: /api
-                pathType: Prefix
-                service:
-                  name: main
 
-        tls:
-          - secretName: "langflow-app-tls"
-            hosts:
-              - *host
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: app-config
+        globalMounts:
+          - path: /etc/nginx/conf.d/default.conf
+            subPath: nginx-default.conf
