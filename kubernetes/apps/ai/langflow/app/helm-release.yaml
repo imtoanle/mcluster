@@ -25,6 +25,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 65534
+
     controllers:
       main:
         strategy: RollingUpdate
