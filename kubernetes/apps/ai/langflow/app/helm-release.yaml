@@ -57,6 +57,8 @@ spec:
             env:
               LANGFLOW_DATABASE_URL: "sqlite:////langflow_data/langflow.db"
               LANGFLOW_LANGCHAIN_CACHE: SQLiteCache
+              LANGFLOW_LOG_FILE: logs/langflow.log
+              LANGFLOW_LOG_LEVEL: debug
               LANGFLOW_HOST: "127.0.0.1"
               LANGFLOW_WORKERS: 1
               LANGFLOW_PORT: &port 7860
