@@ -14,3 +14,21 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-ai-langflow-frontend
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-apps-ai-langflow-app
+  path: ./kubernetes/apps/ai/langflow/frontend
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
