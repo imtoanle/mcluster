@@ -55,7 +55,7 @@ spec:
               LANGFLOW_LANGCHAIN_CACHE: SQLiteCache
               LANGFLOW_HOST: "127.0.0.1"
               LANGFLOW_WORKERS: 1
-              LANGFLOW_PORT: &port
+              LANGFLOW_PORT: *port
               LANGFLOW_OPEN_BROWSER: false
               LANGFLOW_REMOVE_API_KEYS: false
               LANGFLOW_CACHE_TYPE: memory
