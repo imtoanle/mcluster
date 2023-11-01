@@ -51,44 +51,25 @@ spec:
                 enabled: false
 
             env:
-              LANGFLOW_HOST: '127.0.0.1'
+              LANGFLOW_DATABASE_URL: "sqlite:///langflow_data/langflow.db"
+              LANGFLOW_LANGCHAIN_CACHE: SQLiteCache
+              LANGFLOW_HOST: "127.0.0.1"
               LANGFLOW_WORKERS: 1
               LANGFLOW_PORT: &port
               LANGFLOW_OPEN_BROWSER: false
               LANGFLOW_REMOVE_API_KEYS: false
-              LANGFLOW_CACHE_TYPE: 'memory'
-
-
-
-
-              FLOWISE_USERNAME:
+              LANGFLOW_CACHE_TYPE: memory
+              LANGFLOW_AUTO_LOGIN: false
+              LANGFLOW_SUPERUSER:
                 valueFrom:
                   secretKeyRef:
                     name: app-secrets
-                    key: flowise.username
-              FLOWISE_PASSWORD:
+                    key: app.username
+              LANGFLOW_SUPERUSER_PASSWORD:
                 valueFrom:
                   secretKeyRef:
                     name: app-secrets
-                    key: flowise.password
-              FLOWISE_SECRETKEY_OVERWRITE:
-                valueFrom:
-                  secretKeyRef:
-                    name: app-secrets
-                    key: flowise.secretkey.overwrite
-              APIKEY_PATH: /flowise_data/api
-              LOG_PATH: /flowise_data/logs
-              SECRETKEY_PATH: /flowise_data/secrets
-              DATABASE_TYPE: postgres
-              DATABASE_HOST: flowise-db-postgresql.flowise.svc.cluster.local
-              DATABASE_PORT: 5432
-              DATABASE_USER: flowise
-              DATABASE_NAME: flowise
-              DATABASE_PASSWORD:
-                valueFrom:
-                  secretKeyRef:
-                    name: app-secrets
-                    key: password
+                    key: app.password
     service:
       main:
         ports:
@@ -102,14 +83,14 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hosts:
-          - host: &host "flowise.${SECRET_DOMAIN}"
+          - host: &host "langflow.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
                 service:
                   name: main
         tls:
-          - secretName: "flowise-app-tls"
+          - secretName: "langflow-app-tls"
             hosts:
               - *host
 
@@ -124,8 +105,7 @@ spec:
         enabled: true
         storageClass: home-cluster-nfs-1
         accessMode: ReadWriteOnce
-        size: 5Gi
+        size: 1Gi
         globalMounts:
-          - path: /flowise_data
+          - path: /langflow_data
             readOnly: false
-      
