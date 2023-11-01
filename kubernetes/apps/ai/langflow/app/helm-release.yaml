@@ -39,18 +39,10 @@ spec:
               tag: v0.5.5
 
             probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /
-                    port: &port 7860
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
               startup:
                 enabled: false
 
@@ -59,7 +51,7 @@ spec:
               LANGFLOW_LANGCHAIN_CACHE: SQLiteCache
               LANGFLOW_HOST: "127.0.0.1"
               LANGFLOW_WORKERS: 1
-              LANGFLOW_PORT: *port
+              LANGFLOW_PORT: &port 7860
               LANGFLOW_OPEN_BROWSER: false
               LANGFLOW_REMOVE_API_KEYS: false
               LANGFLOW_CACHE_TYPE: memory
