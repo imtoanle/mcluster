@@ -5,3 +5,4 @@ namespace: kube-system
 resources:
   - ./helmrelease.yaml
   - ./storageclass.yaml
+  - ./zfs1-storageclass.yaml

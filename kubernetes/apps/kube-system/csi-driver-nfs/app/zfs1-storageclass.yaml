@@ -1,0 +1,12 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-zfs-1
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: ${SECRET_NFS_ZFS1_SERVER}
+  share: ${SECRET_NFS_ZFS1_PATH}
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+mountOptions: ["hard", "noatime"]
