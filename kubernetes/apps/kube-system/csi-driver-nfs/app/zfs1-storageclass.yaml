@@ -5,8 +5,8 @@ metadata:
   name: nfs-zfs-1
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: 10.0.99.166
-  share: /mnt/data/home_cluster_data
+  server: ${SECRET_NFS_ZFS1_SERVER}
+  share: ${SECRET_NFS_ZFS1_PATH}
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions: ["hard", "noatime"]
