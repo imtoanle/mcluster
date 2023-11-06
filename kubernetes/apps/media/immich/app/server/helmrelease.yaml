@@ -96,5 +96,5 @@ spec:
     persistence:
       library:
         existingClaim: immich-nfs
-        globalmounts:
+        globalMounts:
           - path: /usr/src/app/upload
