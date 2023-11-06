@@ -10,8 +10,8 @@ spec:
   accessModes: ["ReadWriteMany"]
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: ${SECRET_MEDIA_SERVER}
-    path: /backup/data/k8s/immich
+    server: ${SECRET_NFS_ZFS1_SERVER}
+    path: /mnt/data/home_cluster_data/immich
   # Note: The first two options are strictly for NFSv4.2
   mountOptions: ["nfsvers=4.2", "nconnect=8", "hard", "noatime"]
 ---
