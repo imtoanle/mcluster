@@ -48,10 +48,6 @@ spec:
               - /bin/sh
             args:
               - ./entrypoint.sh
-            env:
-              PORT: &port 3000
-              PUBLIC_IMMICH_SERVER_URL: &host photos.${SECRET_DOMAIN_2}
-              IMMICH_API_URL_EXTERNAL: /api
             envFrom:
               - configMapRef:
                   name: *configMap
