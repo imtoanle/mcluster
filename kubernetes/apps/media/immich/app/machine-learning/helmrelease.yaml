@@ -72,15 +72,6 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: *app
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: node.home.arpa/physical
-                  operator: In
-                  values:
-                    - "true"
     service:
       main:
         ports:
