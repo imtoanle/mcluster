@@ -69,7 +69,7 @@ spec:
       main:
         ports:
           http:
-            port: *port
+            port: 3000
 
     ingress:
       main:
