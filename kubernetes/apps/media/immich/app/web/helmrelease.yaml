@@ -38,7 +38,6 @@ spec:
         annotations:
           configmap.reloader.stakater.com/reload: &configMap immich-configmap
           secret.reloader.stakater.com/reload: &secret immich-secret
-
         containers:
           main:
             image:
@@ -50,7 +49,7 @@ spec:
               - ./entrypoint.sh
             env:
               PORT: &port 3000
-              PUBLIC_IMMICH_SERVER_URL: &host photos.${SECRET_DOMAIN_2}
+              PUBLIC_IMMICH_SERVER_URL: &host photos.${SECRET_DOMAIN}
               IMMICH_API_URL_EXTERNAL: /api
             envFrom:
               - configMapRef:
@@ -80,19 +79,11 @@ spec:
         enabled: true
         className: external
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          # cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          # external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           nginx.ingress.kubernetes.io/configuration-snippet: |
             rewrite /api/(.*) /$1 break;
-            set $forwarded_client_ip "";
-            if ($http_x_forwarded_for ~ "^([^,]+)") {
-              set $forwarded_client_ip $1;
-            }
-            set $client_ip $remote_addr;
-            if ($forwarded_client_ip != "") {
-              set $client_ip $forwarded_client_ip;
-            }
           nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
           nginx.ingress.kubernetes.io/upstream-hash-by: "$client_ip"
