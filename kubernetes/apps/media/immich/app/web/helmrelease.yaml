@@ -92,7 +92,8 @@ spec:
                   name: immich-server
                   port: 3001
         tls:
-          - hosts:
+          - secretName: immich-ingress-tls
+            hosts:
               - *host
     persistence:
       library:
