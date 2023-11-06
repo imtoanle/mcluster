@@ -93,7 +93,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
           nginx.ingress.kubernetes.io/upstream-hash-by: "$client_ip"
         hosts:
-          - host: *host
+          - host: &host photos.${SECRET_DOMAIN_2}
             paths:
               - path: /
                 service:
