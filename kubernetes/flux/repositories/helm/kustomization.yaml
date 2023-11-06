@@ -6,7 +6,7 @@ resources:
   - ./bjw-s.yaml
   - ./bryopsida.yaml
   - ./cilium.yaml
-  - ./cnpg.yaml
+  - ./cloudnative-pg.yaml
   - ./coredns.yaml
   - ./csi-driver-nfs.yaml
   - ./external-dns.yaml
