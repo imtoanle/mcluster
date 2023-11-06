@@ -77,7 +77,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: nginx
+        className: external
         annotations:
           external-dns.home.arpa/enabled: "true"
           hajimari.io/appName: Immich
@@ -86,8 +86,9 @@ spec:
             rewrite /api/(.*) /$1 break;
           nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN_2}"
         hosts:
-          - host: &host photos.${CLUSTER_DOMAIN}
+          - host: &host photos.${SECRET_DOMAIN_2}
             paths:
               - path: /
                 service:
