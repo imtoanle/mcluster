@@ -13,6 +13,9 @@ data:
         group: database
         url: tcp://postgres-rw.database.svc.cluster.local:5432
         interval: 1m
+        ui:
+          hide-hostname: true
+          hide-url: true
         conditions:
           - "[CONNECTED] == true"
         alerts:
