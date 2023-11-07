@@ -63,11 +63,6 @@ spec:
               AUTHELIA_THEME: dark
               X_AUTHELIA_CONFIG: /config/configuration.yaml
               X_AUTHELIA_CONFIG_FILTERS: expand-env
-              GRAFANA_OAUTH_CLIENT_SECRET:
-                valueFrom:
-                  secretKeyRef:
-                    name: grafana-admin-secret
-                    key: oauth-client-secret
             envFrom: *envFrom
             probes:
               liveness: &probes
