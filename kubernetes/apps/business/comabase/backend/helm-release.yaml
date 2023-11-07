@@ -28,6 +28,15 @@ spec:
     controllers:
       main:
         strategy: RollingUpdate
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14.9
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: db-secrets
         containers:
           main:
             image:
