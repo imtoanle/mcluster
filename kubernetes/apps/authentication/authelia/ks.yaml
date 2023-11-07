@@ -2,12 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-gatus
+  name: cluster-apps-authelia
   namespace: flux-system
 spec:
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
-  path: ./kubernetes/apps/monitoring/gatus/app
+  path: ./kubernetes/apps/authentication/authelia/app
   prune: true
   sourceRef:
     kind: GitRepository
