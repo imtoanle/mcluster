@@ -48,7 +48,7 @@ spec:
             env:
               TZ: Asia/Ho_Chi_Minh
               LLDAP_HTTP_PORT: &port 80
-              LLDAP_HTTP_URL: &host "lldap.${SECRET_DOMAIN}"
+              LLDAP_HTTP_URL: "https://lldap.${SECRET_DOMAIN}"
               LLDAP_LDAP_PORT: &ldapPort 389
               LLDAP_LDAP_BASE_DN: dc=home,dc=com
             envFrom: *envFrom
@@ -78,7 +78,7 @@ spec:
         enabled: true
         className: internal
         hosts:
-          - host: *host
+          - host: &host "lldap.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
