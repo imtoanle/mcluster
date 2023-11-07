@@ -51,7 +51,8 @@ notifier:
   smtp:
     address: smtp.sendgrid.net:25
     username: apikey
-    sender: Authelia <authelia@${SECRET_DOMAIN}>
+    password: "${AUTHELIA_NOTIFIER_SMTP_PASSWORD}"
+    sender: "Authelia <authelia@${SECRET_DOMAIN}>"
     disable_require_tls: true
 
 totp:
