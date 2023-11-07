@@ -49,8 +49,9 @@ session:
 notifier:
   disable_startup_check: true
   smtp:
-    address: smtp-relay.turbo.ac:25
-    sender: Authelia <authelia@buhl.casa>
+    address: smtp.sendgrid.net:25
+    username: apikey
+    sender: Authelia <authelia@${SECRET_DOMAIN}>
     disable_require_tls: true
 
 totp:
