@@ -32,7 +32,7 @@ spec:
           init-db:
             image:
               repository: ghcr.io/onedr0p/postgres-init
-              tag: 14.9
+              tag: v1.3.9
               pullPolicy: IfNotPresent
             envFrom:
               - secretRef:
@@ -41,7 +41,7 @@ spec:
           main:
             image:
               repository: aitbase/comabase-server
-              tag: v1.3.8
+              tag: v1.3.9
 
             probes:
               liveness: &probes
