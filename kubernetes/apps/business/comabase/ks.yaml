@@ -22,6 +22,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: cluster-apps-cloudnative-pg-cluster
     - name: cluster-apps-business-comabase-redis
   path: ./kubernetes/apps/business/comabase/backend
   prune: true
@@ -40,6 +41,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: cluster-apps-cloudnative-pg-cluster
     - name: cluster-apps-business-comabase-redis
     - name: cluster-apps-business-comabase-backend
   path: ./kubernetes/apps/business/comabase/frontend

@@ -28,6 +28,16 @@ spec:
     controllers:
       main:
         strategy: Recreate
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14.9
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: app-secrets
+
         containers:
           main:
             image:
