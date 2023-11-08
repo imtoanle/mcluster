@@ -32,7 +32,7 @@ spec:
     windmill:
       tag: "main"
       image: "aitbase/windmill-puppeteer"
-      databaseUrlSecretName: app-secrets
+      databaseUrlSecretName: &secret app-secrets
       baseDomain: &host "windmill.${SECRET_DOMAIN}"
       baseProtocol: https
       workerGroups:
@@ -91,3 +91,19 @@ spec:
         - hosts:
             - *host
           secretName: "windmill-server-tls"
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - kind: Deployment
+            apiVersion: apps/v1
+            metadata:
+              name: windmill-app
+            spec:
+              template:
+                spec:
+                  initContainers:
+                    - name: 01-init-db
+                      image: ghcr.io/onedr0p/postgres-init:14.8
+                      envFrom:
+                        - secretRef:
+                            name: *secret
