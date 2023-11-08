@@ -28,6 +28,15 @@ spec:
     controllers:
       main:
         strategy: RollingUpdate
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14.9
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: app-secrets
         containers:
           main:
             image:
@@ -70,15 +79,27 @@ spec:
               LOG_PATH: /flowise_data/logs
               SECRETKEY_PATH: /flowise_data/secrets
               DATABASE_TYPE: postgres
-              DATABASE_HOST: flowise-db-postgresql.flowise.svc.cluster.local
               DATABASE_PORT: 5432
-              DATABASE_USER: flowise
-              DATABASE_NAME: flowise
+              DATABASE_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: INIT_POSTGRES_HOST
+              DATABASE_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: INIT_POSTGRES_USER
+              DATABASE_NAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: INIT_POSTGRES_DBNAME
               DATABASE_PASSWORD:
                 valueFrom:
                   secretKeyRef:
                     name: app-secrets
-                    key: password
+                    key: INIT_POSTGRES_PASS
     service:
       main:
         ports:
@@ -118,4 +139,3 @@ spec:
         globalMounts:
           - path: /flowise_data
             readOnly: false
-      
