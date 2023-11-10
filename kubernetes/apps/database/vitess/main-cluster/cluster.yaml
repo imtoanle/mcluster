@@ -129,7 +129,8 @@ spec:
             name: vitess-main-cluster-config
             key: s3_backup_secret
           bucket: aitbase
-          keyPrefix: backup
+          endpoint: https://s3.ap-southeast-1.amazonaws.com
+          keyPrefix: aitbase
           region: ap-southeast-1
   updateStrategy:
     type: Immediate
