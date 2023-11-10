@@ -5,3 +5,4 @@ namespace: database
 resources:
   - ./secret.sops.yaml
   - ./cluster.yaml
+  - ./service.yaml

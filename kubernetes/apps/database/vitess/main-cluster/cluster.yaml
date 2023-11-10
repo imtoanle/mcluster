@@ -133,5 +133,3 @@ spec:
           region: auto
   updateStrategy:
     type: Immediate
-status:
-  gatewayServiceName: main-mysql-vtgate
