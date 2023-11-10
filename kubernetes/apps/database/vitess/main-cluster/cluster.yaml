@@ -37,6 +37,10 @@ spec:
     etcd:
       dataVolumeClaimTemplate:
         storageClassName: local-path
+  gatewayService:
+    annotations:
+      name: main-mysql-vtgate
+
   vitessDashboard:
     cells:
       - zone1
