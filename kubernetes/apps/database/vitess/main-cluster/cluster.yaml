@@ -128,9 +128,8 @@ spec:
           authSecret:
             name: vitess-main-cluster-config
             key: s3_backup_secret
-          bucket: aitbase
-          endpoint: https://s3.ap-southeast-1.amazonaws.com
-          keyPrefix: aitbase
-          region: ap-southeast-1
+          bucket: hc-vitess-main
+          endpoint: https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
+          region: auto
   updateStrategy:
     type: Immediate
