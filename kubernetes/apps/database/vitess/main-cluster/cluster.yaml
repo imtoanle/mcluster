@@ -33,6 +33,10 @@ spec:
         etcd:
           dataVolumeClaimTemplate:
             storageClassName: local-path
+  globalLockserver:
+    etcd:
+      dataVolumeClaimTemplate:
+        storageClassName: local-path
   vitessDashboard:
     cells:
       - zone1
