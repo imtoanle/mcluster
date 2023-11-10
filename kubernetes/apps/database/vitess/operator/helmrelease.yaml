@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: vitess-operator
+  name: &app vitess-operator
   namespace: database
 spec:
   interval: 30m
@@ -32,6 +32,8 @@ spec:
       name: vitess-operator
     controllers:
       main:
+        labels:
+          app: *app
         containers:
           main:
             image:
