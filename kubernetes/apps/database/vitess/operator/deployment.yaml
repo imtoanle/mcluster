@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vitess-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vitess-operator
+  template:
+    metadata:
+      labels:
+        app: vitess-operator
+    spec:
+      containers:
+        - args:
+            - --default_vitess_fs_group=65534
+            - --logtostderr
+            - -v=4
+          command:
+            - vitess-operator
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: PS_OPERATOR_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: PS_OPERATOR_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: vitess-operator
+          image: planetscale/vitess-operator:latest
+          name: vitess-operator
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      priorityClassName: vitess-operator-control-plane
+      serviceAccountName: vitess-operator
+---
+apiVersion: scheduling.k8s.io/v1
+description: The vitess-operator control plane.
+globalDefault: false
+kind: PriorityClass
+metadata:
+  name: vitess-operator-control-plane
+value: 5000
+---
+apiVersion: scheduling.k8s.io/v1
+description: Vitess components (vttablet, vtgate, vtctld, etcd)
+globalDefault: false
+kind: PriorityClass
+metadata:
+  name: vitess
+value: 1000
