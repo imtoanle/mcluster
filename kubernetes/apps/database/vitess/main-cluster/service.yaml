@@ -5,7 +5,7 @@ metadata:
   name: main-mysql-vtgate
   namespace: database
 spec:
-  type: clusterIP
+  type: ClusterIP
   ports:
     - name: web
       protocol: TCP
