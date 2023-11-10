@@ -121,7 +121,7 @@ spec:
                         storage: 20Gi
 
   backup:
-    # engine: xtrabackup
+    engine: xtrabackup
     locations:
       - name: main-mysql-backup
         s3:
