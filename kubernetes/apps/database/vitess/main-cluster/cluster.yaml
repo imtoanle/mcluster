@@ -115,7 +115,7 @@ spec:
                         memory: 512Mi
                   dataVolumeClaimTemplate:
                     accessModes: ["ReadWriteOnce"]
-                    storageClassName: local-path
+                    storageClassName: home-cluster-nfs-1
                     resources:
                       requests:
                         storage: 20Gi
