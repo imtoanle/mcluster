@@ -29,10 +29,10 @@ spec:
             memory: 256Mi
           limits:
             memory: 256Mi
-      # lockserver:
-      #   etcd:
-      #     dataVolumeClaimTemplate:
-      #       storageClassName: local-path
+      lockserver:
+        etcd:
+          dataVolumeClaimTemplate:
+            storageClassName: local-path
   globalLockserver:
     etcd:
       dataVolumeClaimTemplate:
