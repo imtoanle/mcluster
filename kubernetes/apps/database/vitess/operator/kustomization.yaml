@@ -4,6 +4,3 @@ kind: Kustomization
 namespace: database
 resources:
   - ./operator.yaml
-  - ./service-account.yaml
-  - ./roles.yaml
-  - ./deployment.yaml
