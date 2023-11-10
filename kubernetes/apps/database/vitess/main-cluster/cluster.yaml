@@ -37,8 +37,6 @@ spec:
     etcd:
       dataVolumeClaimTemplate:
         storageClassName: local-path
-  gatewayService:
-    name: main-mysql-vtgate
 
   vitessDashboard:
     cells:
@@ -135,3 +133,5 @@ spec:
           region: auto
   updateStrategy:
     type: Immediate
+status:
+  gatewayServiceName: main-mysql-vtgate
