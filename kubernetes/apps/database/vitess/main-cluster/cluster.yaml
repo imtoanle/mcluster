@@ -104,7 +104,7 @@ spec:
                       enforce-tableacl-config: "true"
                       queryserver-config-enable-table-acl-dry-run: "true"
                       queryserver-config-strict-table-acl: "true"
-                      table-acl-config: /vt/config/acl/leantime.json
+                      table-acl-config: /tmp/acl/leantime.json
                     resources:
                       limits:
                         memory: 256Mi
@@ -133,7 +133,7 @@ spec:
                             path: leantime.json
                   extraVolumeMounts:
                   - name: acl-config-vol
-                    mountPath: /vt/config/acl
+                    mountPath: /tmp/acl
 
   backup:
     engine: xtrabackup
