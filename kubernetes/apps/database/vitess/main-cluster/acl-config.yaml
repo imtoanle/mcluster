@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vitess-main-cluster-acl-config
+  namespace: database
+data:
+  leantime.json: |
+    {
+      "table_groups": [
+        {
+          "name": "leantimeacls",
+          "table_names_or_prefixes": ["%"],
+          "readers": ["leantime", "vitess"],
+          "writers": ["leantime", "vitess"],
+          "admins": ["leantime", "vitess"]
+        }
+      ]
+    }
