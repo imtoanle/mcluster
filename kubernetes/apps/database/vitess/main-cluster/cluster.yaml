@@ -74,7 +74,7 @@ spec:
         memory: 128Mi
 
   keyspaces:
-    - name: commerce
+    - name: leantime
       durabilityPolicy: none
       turndownPolicy: Immediate
       vitessOrchestrator:
@@ -97,9 +97,14 @@ spec:
                 - cell: zone1
                   type: replica
                   replicas: 2
+                  backupLocationName: main-mysql-backup
                   vttablet:
                     extraFlags:
                       db_charset: utf8mb4
+                      enforce-tableacl-config: true
+                      queryserver-config-enable-table-acl-dry-run: true
+                      queryserver-config-strict-table-acl: true
+                      table-acl-config: /vt/config/acl/leantime.json
                     resources:
                       limits:
                         memory: 256Mi
@@ -119,6 +124,16 @@ spec:
                     resources:
                       requests:
                         storage: 20Gi
+                  extraVolumes:
+                    - name: acl-config-vol
+                      configMap:
+                        name: vitess-main-cluster-acl-config
+                        items:
+                          - key: leantime.json
+                            path: leantime.json
+                  extraVolumeMounts:
+                  - name: acl-config-vol
+                    mountPath: /vt/config/acl
 
   backup:
     engine: xtrabackup
