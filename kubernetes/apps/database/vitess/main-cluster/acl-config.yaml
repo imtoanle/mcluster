@@ -11,9 +11,9 @@ data:
         {
           "name": "leantimeacls",
           "table_names_or_prefixes": ["%"],
-          "readers": ["leantime", "vitess"],
-          "writers": ["leantime", "vitess"],
-          "admins": ["leantime", "vitess"]
+          "readers": ["leantime"],
+          "writers": ["leantime"],
+          "admins": ["leantime"]
         }
       ]
     }
