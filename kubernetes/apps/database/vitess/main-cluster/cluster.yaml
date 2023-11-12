@@ -110,14 +110,14 @@ spec:
                         memory: 256Mi
                       requests:
                         cpu: 100m
-                        memory: 128Mi
+                        memory: 256Mi
                   mysqld:
                     resources:
                       limits:
                         memory: 1024Mi
                       requests:
                         cpu: 100m
-                        memory: 128Mi
+                        memory: 512Mi
                   dataVolumeClaimTemplate:
                     accessModes: ["ReadWriteOnce"]
                     storageClassName: local-path
