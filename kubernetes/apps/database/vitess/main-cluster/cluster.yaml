@@ -110,20 +110,20 @@ spec:
                         memory: 256Mi
                       requests:
                         cpu: 100m
-                        memory: 256Mi
+                        memory: 128Mi
                   mysqld:
                     resources:
                       limits:
                         memory: 1024Mi
                       requests:
                         cpu: 100m
-                        memory: 512Mi
+                        memory: 128Mi
                   dataVolumeClaimTemplate:
                     accessModes: ["ReadWriteOnce"]
-                    storageClassName: home-cluster-nfs-1
+                    storageClassName: local-path
                     resources:
                       requests:
-                        storage: 20Gi
+                        storage: 10Gi
                   extraVolumes:
                     - name: acl-config-vol
                       configMap:

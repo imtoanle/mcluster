@@ -6122,8 +6122,6 @@ spec:
     spec:
       containers:
         - args:
-            - --default_vitess_run_as_user=65534
-            - --default_vitess_fs_group=999
             - --logtostderr
             - -v=4
           command:
