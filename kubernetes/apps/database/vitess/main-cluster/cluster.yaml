@@ -128,9 +128,6 @@ spec:
                     - name: acl-config-vol
                       configMap:
                         name: vitess-main-cluster-acl-config
-                        items:
-                          - key: leantime.json
-                            path: leantime.json
                   extraVolumeMounts:
                   - name: acl-config-vol
                     mountPath: /vt/acl
