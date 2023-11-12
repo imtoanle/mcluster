@@ -17,3 +17,15 @@ data:
         }
       ]
     }
+  seafile.json: |
+    {
+      "table_groups": [
+        {
+          "name": "seafileacls",
+          "table_names_or_prefixes": ["%"],
+          "readers": ["seafile", "vitess"],
+          "writers": ["seafile", "vitess"],
+          "admins": ["seafile", "vitess"]
+        }
+      ]
+    }
