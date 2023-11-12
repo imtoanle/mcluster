@@ -105,6 +105,7 @@ spec:
                       queryserver-config-enable-table-acl-dry-run: "false"
                       queryserver-config-strict-table-acl: "true"
                       table-acl-config: /vt/acl/leantime.json
+                      # table-acl-config-reload-interval: 50
                     resources:
                       limits:
                         memory: 256Mi
@@ -162,6 +163,7 @@ spec:
                       queryserver-config-enable-table-acl-dry-run: "false"
                       queryserver-config-strict-table-acl: "true"
                       table-acl-config: /vt/acl/seafile.json
+                      # table-acl-config-reload-interval: 50
                     resources:
                       limits:
                         memory: 256Mi
