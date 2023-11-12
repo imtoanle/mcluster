@@ -144,6 +144,7 @@ spec:
             name: vitess-main-cluster-config
             key: s3_backup_secret
           bucket: hc-vitess-main
+          forcePathStyle: true
           endpoint: https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
           region: auto
   updateStrategy:
