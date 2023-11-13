@@ -106,7 +106,6 @@ spec:
                       queryserver-config-strict-table-acl: "true"
                       table-acl-config: /vt/acl/leantime.json
                       # table-acl-config-reload-interval: 50
-                      min_retention_count: "60"
                     resources:
                       limits:
                         memory: 1024Mi
@@ -165,7 +164,6 @@ spec:
                       queryserver-config-strict-table-acl: "true"
                       table-acl-config: /vt/acl/seafile.json
                       # table-acl-config-reload-interval: 50
-                      min_retention_count: "60"
                     resources:
                       limits:
                         memory: 256Mi
@@ -224,7 +222,6 @@ spec:
                       queryserver-config-strict-table-acl: "true"
                       table-acl-config: /vt/acl/ccnet_db.json
                       # table-acl-config-reload-interval: 50
-                      min_retention_count: "60"
                     resources:
                       limits:
                         memory: 256Mi
