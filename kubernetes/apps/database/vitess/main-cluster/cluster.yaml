@@ -212,7 +212,7 @@ spec:
               tabletPools:
                 - cell: zone1
                   type: replica
-                  replicas: 0
+                  replicas: 2
                   backupLocationName: main-mysql-backup
                   vttablet:
                     extraFlags:
@@ -240,7 +240,7 @@ spec:
                     storageClassName: local-path
                     resources:
                       requests:
-                        storage: 5Gi
+                        storage: 1Gi
                   extraVolumes:
                     - name: acl-config-vol
                       configMap:
