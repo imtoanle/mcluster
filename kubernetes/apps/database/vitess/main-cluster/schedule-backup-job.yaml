@@ -5,7 +5,7 @@ metadata:
   name: main-mysql-leantime-backup-job
   namespace: database
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "*/20 * * * *"
   concurrencyPolicy: "Forbid"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 5
@@ -19,7 +19,12 @@ spec:
           containers:
             - name: backup
               image: vitess/lite:latest
-              command: ["sh", "-c", "/vt/bin/vtctldclient BackupShard --server main-mysql-vtctld.database.svc.cluster.local:15999 leantime/-"]
+              command:
+                [
+                  "sh",
+                  "-c",
+                  "/vt/bin/vtctldclient BackupShard --server main-mysql-vtctld.database.svc.cluster.local:15999 leantime/-",
+                ]
 ---
 apiVersion: batch/v1
 kind: CronJob
@@ -41,4 +46,9 @@ spec:
           containers:
             - name: backup
               image: vitess/lite:latest
-              command: ["sh", "-c", "/vt/bin/vtctldclient BackupShard --server main-mysql-vtctld.database.svc.cluster.local:15999 seafile/-"]
+              command:
+                [
+                  "sh",
+                  "-c",
+                  "/vt/bin/vtctldclient BackupShard --server main-mysql-vtctld.database.svc.cluster.local:15999 seafile/-",
+                ]
