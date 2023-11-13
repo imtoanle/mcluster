@@ -206,9 +206,9 @@ spec:
         - equal:
             parts: 1
             shardTemplate:
-              databaseInitScriptSecret:
-                name: vitess-main-cluster-config
-                key: init_db.sql
+              # databaseInitScriptSecret:
+              #   name: vitess-main-cluster-config
+              #   key: init_db.sql
               tabletPools:
                 - cell: zone1
                   type: replica
