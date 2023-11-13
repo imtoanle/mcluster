@@ -29,3 +29,15 @@ data:
         }
       ]
     }
+  ccnet_db.json: |
+    {
+      "table_groups": [
+        {
+          "name": "ccnetdbacls",
+          "table_names_or_prefixes": ["%"],
+          "readers": ["seafile"],
+          "writers": ["seafile"],
+          "admins": ["seafile"]
+        }
+      ]
+    }
