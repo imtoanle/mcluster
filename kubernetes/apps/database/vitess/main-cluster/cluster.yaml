@@ -108,16 +108,16 @@ spec:
                       # table-acl-config-reload-interval: 50
                     resources:
                       limits:
-                        memory: 256Mi
+                        memory: 1024Mi
                       requests:
-                        cpu: 100m
+                        cpu: 300m
                         memory: 256Mi
                   mysqld:
                     resources:
                       limits:
                         memory: 1024Mi
                       requests:
-                        cpu: 100m
+                        cpu: 300m
                         memory: 512Mi
                   dataVolumeClaimTemplate:
                     accessModes: ["ReadWriteOnce"]
@@ -130,8 +130,8 @@ spec:
                       configMap:
                         name: vitess-main-cluster-acl-config
                   extraVolumeMounts:
-                  - name: acl-config-vol
-                    mountPath: /vt/acl
+                    - name: acl-config-vol
+                      mountPath: /vt/acl
     - name: seafile
       durabilityPolicy: none
       turndownPolicy: Immediate
@@ -188,8 +188,8 @@ spec:
                       configMap:
                         name: vitess-main-cluster-acl-config
                   extraVolumeMounts:
-                  - name: acl-config-vol
-                    mountPath: /vt/acl
+                    - name: acl-config-vol
+                      mountPath: /vt/acl
 
   backup:
     engine: xtrabackup
