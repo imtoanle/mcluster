@@ -5,7 +5,7 @@ metadata:
   name: main-mysql-leantime-backup-job
   namespace: database
 spec:
-  schedule: "*/20 * * * *"
+  schedule: "0 */12 * * *"
   concurrencyPolicy: "Forbid"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 5
@@ -32,7 +32,7 @@ metadata:
   name: main-mysql-seafile-backup-job
   namespace: database
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "0 */12 * * *"
   concurrencyPolicy: "Forbid"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 5
