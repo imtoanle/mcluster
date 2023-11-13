@@ -5,7 +5,7 @@ metadata:
   name: main-mysql-backup-job
   namespace: database
 spec:
-  schedule: "0/1 * * * *"
+  schedule: "0/5 * * * *"
   concurrencyPolicy: "Forbid"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 5
@@ -18,11 +18,10 @@ spec:
           restartPolicy: Never
           containers:
             - name: backup-leantime
-              image: vitess/lite:latest
+              image: vitess/vtctlclient:latest
               command:
                 # - "/bin/bash"
-                - "ls -lia /vt"
-                # - "/vt/bin/vtctldclient BackupShard --server main-mysql-vtctld.database.svc.cluster.local:15999 leantime/-"
+                - "vtctldclient BackupShard --server main-mysql-vtctld.database.svc.cluster.local:15999 leantime/-"
             # - name: backup-seafile
             #   image: vitess/lite:latest
             #   command:
