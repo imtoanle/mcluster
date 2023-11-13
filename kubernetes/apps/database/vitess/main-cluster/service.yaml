@@ -22,3 +22,19 @@ spec:
   selector:
     planetscale.com/cluster: main-mysql
     planetscale.com/component: vtgate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: main-mysql-vtctld
+  namespace: database
+spec:
+  type: ClusterIP
+  ports:
+    - name: grpc
+      protocol: TCP
+      port: 15999
+      targetPort: grpc
+  selector:
+    planetscale.com/cluster: main-mysql
+    planetscale.com/component: vtctld
