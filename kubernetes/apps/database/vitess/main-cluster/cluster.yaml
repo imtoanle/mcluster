@@ -190,7 +190,7 @@ spec:
                   extraVolumeMounts:
                     - name: acl-config-vol
                       mountPath: /vt/acl
-    - name: ccnet_db
+    - name: onlyoffice
       durabilityPolicy: none
       turndownPolicy: Immediate
       vitessOrchestrator:
@@ -206,9 +206,9 @@ spec:
         - equal:
             parts: 1
             shardTemplate:
-              # databaseInitScriptSecret:
-              #   name: vitess-main-cluster-config
-              #   key: init_db.sql
+              databaseInitScriptSecret:
+                name: vitess-main-cluster-config
+                key: init_db.sql
               tabletPools:
                 - cell: zone1
                   type: replica
@@ -220,7 +220,7 @@ spec:
                       enforce-tableacl-config: "true"
                       queryserver-config-enable-table-acl-dry-run: "false"
                       queryserver-config-strict-table-acl: "true"
-                      table-acl-config: /vt/acl/ccnet_db.json
+                      table-acl-config: /vt/acl/onlyoffice.json
                       # table-acl-config-reload-interval: 50
                     resources:
                       limits:
