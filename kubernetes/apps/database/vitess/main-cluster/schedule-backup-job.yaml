@@ -19,7 +19,7 @@ spec:
           containers:
             - name: backup-leantime
               image: vitess/vtctlclient:latest
-              command: ["sh", "-c", "/usr/bin/vtctlclient BackupShard --server main-mysql-vtctld.database.svc.cluster.local:15999 leantime/-"]
+              command: ["sh", "-c", "/usr/bin/vtctldclient BackupShard --server main-mysql-vtctld.database.svc.cluster.local:15999 leantime/-"]
             # - name: backup-seafile
             #   image: vitess/lite:latest
             #   command:
