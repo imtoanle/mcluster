@@ -208,7 +208,7 @@ spec:
             shardTemplate:
               databaseInitScriptSecret:
                 name: vitess-main-cluster-config
-                key: init_db.sql
+                key: empty_init_db.sql
               tabletPools:
                 - cell: zone1
                   type: replica
