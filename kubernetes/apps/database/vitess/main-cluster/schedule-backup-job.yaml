@@ -20,6 +20,7 @@ spec:
             - name: backup-leantime
               image: vitess/lite:latest
               command:
+                - "/bin/bash"
                 - "/vt/bin/vtctldclient BackupShard --server main-mysql-vtctld.database.svc.cluster.local:15999 leantime/-"
             # - name: backup-seafile
             #   image: vitess/lite:latest
