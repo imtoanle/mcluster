@@ -333,10 +333,10 @@ spec:
                   vttablet:
                     extraFlags:
                       db_charset: utf8mb4
-                      # enforce-tableacl-config: "true"
-                      # queryserver-config-enable-table-acl-dry-run: "false"
-                      # queryserver-config-strict-table-acl: "true"
-                      # table-acl-config: /vt/acl/seafile_db.json
+                      enforce-tableacl-config: "true"
+                      queryserver-config-enable-table-acl-dry-run: "false"
+                      queryserver-config-strict-table-acl: "true"
+                      table-acl-config: /vt/acl/ccnet_db.json
                       # table-acl-config-reload-interval: 50
                     resources:
                       limits:
