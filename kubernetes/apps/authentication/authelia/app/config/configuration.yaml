@@ -106,7 +106,7 @@ identity_providers:
         public: false
         authorization_policy: two_factor
         redirect_uris:
-          - https://seafile.${SECRET_DOMAIN_2}/oauth/callback/
+          - https://files.${SECRET_DOMAIN_2}/oauth/callback/
         scopes:
           - openid
           - profile
