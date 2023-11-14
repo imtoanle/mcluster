@@ -250,7 +250,7 @@ spec:
                       mountPath: /vt/acl
 
   backup:
-    # engine: xtrabackup
+    engine: xtrabackup
     locations:
       - name: main-mysql-backup
         s3:
