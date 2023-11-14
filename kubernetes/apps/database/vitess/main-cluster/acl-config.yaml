@@ -41,3 +41,15 @@ data:
         }
       ]
     }
+  seahub_db.json: |
+    {
+      "table_groups": [
+        {
+          "name": "seahub_dbacls",
+          "table_names_or_prefixes": ["%"],
+          "readers": ["seafile"],
+          "writers": ["seafile"],
+          "admins": ["seafile"]
+        }
+      ]
+    }
