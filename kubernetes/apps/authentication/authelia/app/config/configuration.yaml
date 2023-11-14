@@ -105,7 +105,7 @@ identity_providers:
         secret: "${SEAFILE_OAUTH_CLIENT_SECRET}"
         public: false
         authorization_policy: two_factor
-        redirect_uris: ["https://files.fat-space.com/oauth/callback/"]
+        redirect_uris: ["https://files.${SECRET_DOMAIN_2}/oauth/callback/"]
         scopes:
           - openid
           - profile
