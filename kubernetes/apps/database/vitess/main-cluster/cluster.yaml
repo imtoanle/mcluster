@@ -217,10 +217,10 @@ spec:
                   vttablet:
                     extraFlags:
                       db_charset: utf8mb4
-                      # enforce-tableacl-config: "true"
-                      # queryserver-config-enable-table-acl-dry-run: "false"
-                      # queryserver-config-strict-table-acl: "true"
-                      # table-acl-config: /vt/acl/seahub_db.json
+                      enforce-tableacl-config: "true"
+                      queryserver-config-enable-table-acl-dry-run: "false"
+                      queryserver-config-strict-table-acl: "true"
+                      table-acl-config: /vt/acl/seahub_db.json
                       # table-acl-config-reload-interval: 50
                     resources:
                       limits:
@@ -241,6 +241,64 @@ spec:
                     resources:
                       requests:
                         storage: 10Gi
+                  extraVolumes:
+                    - name: acl-config-vol
+                      configMap:
+                        name: vitess-main-cluster-acl-config
+                  extraVolumeMounts:
+                    - name: acl-config-vol
+                      mountPath: /vt/acl
+    - name: onlyoffice
+      durabilityPolicy: none
+      turndownPolicy: Immediate
+      vitessOrchestrator:
+        resources:
+          limits:
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        extraFlags:
+          recovery-period-block-duration: 5s
+      partitionings:
+        - equal:
+            parts: 1
+            shardTemplate:
+              databaseInitScriptSecret:
+                name: vitess-main-cluster-config
+                key: init_db.sql
+              tabletPools:
+                - cell: zone1
+                  type: replica
+                  replicas: 2
+                  backupLocationName: main-mysql-backup
+                  vttablet:
+                    extraFlags:
+                      db_charset: utf8mb4
+                      # enforce-tableacl-config: "true"
+                      # queryserver-config-enable-table-acl-dry-run: "false"
+                      # queryserver-config-strict-table-acl: "true"
+                      # table-acl-config: /vt/acl/onlyoffice.json
+                      # table-acl-config-reload-interval: 50
+                    resources:
+                      limits:
+                        memory: 256Mi
+                      requests:
+                        cpu: 100m
+                        memory: 256Mi
+                  mysqld:
+                    resources:
+                      limits:
+                        memory: 1024Mi
+                      requests:
+                        cpu: 100m
+                        memory: 512Mi
+                  dataVolumeClaimTemplate:
+                    accessModes: ["ReadWriteOnce"]
+                    storageClassName: local-path
+                    resources:
+                      requests:
+                        storage: 2Gi
                   extraVolumes:
                     - name: acl-config-vol
                       configMap:
