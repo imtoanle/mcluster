@@ -132,7 +132,7 @@ spec:
                   extraVolumeMounts:
                     - name: acl-config-vol
                       mountPath: /vt/acl
-    - name: seafile
+    - name: ccnet_db
       durabilityPolicy: none
       turndownPolicy: Immediate
       vitessOrchestrator:
@@ -159,30 +159,30 @@ spec:
                   vttablet:
                     extraFlags:
                       db_charset: utf8mb4
-                      enforce-tableacl-config: "true"
-                      queryserver-config-enable-table-acl-dry-run: "false"
-                      queryserver-config-strict-table-acl: "true"
-                      table-acl-config: /vt/acl/seafile.json
+                      # enforce-tableacl-config: "true"
+                      # queryserver-config-enable-table-acl-dry-run: "false"
+                      # queryserver-config-strict-table-acl: "true"
+                      # table-acl-config: /vt/acl/ccnet_db.json
                       # table-acl-config-reload-interval: 50
                     resources:
                       limits:
                         memory: 256Mi
                       requests:
                         cpu: 100m
-                        memory: 256Mi
+                        memory: 128Mi
                   mysqld:
                     resources:
                       limits:
-                        memory: 1024Mi
+                        memory: 256Mi
                       requests:
                         cpu: 100m
-                        memory: 512Mi
+                        memory: 128Mi
                   dataVolumeClaimTemplate:
                     accessModes: ["ReadWriteOnce"]
                     storageClassName: local-path
                     resources:
                       requests:
-                        storage: 10Gi
+                        storage: 1Gi
                   extraVolumes:
                     - name: acl-config-vol
                       configMap:
@@ -333,10 +333,10 @@ spec:
                   vttablet:
                     extraFlags:
                       db_charset: utf8mb4
-                      # enforce-tableacl-config: "true"
-                      # queryserver-config-enable-table-acl-dry-run: "false"
-                      # queryserver-config-strict-table-acl: "true"
-                      # table-acl-config: /vt/acl/onlyoffice.json
+                      enforce-tableacl-config: "true"
+                      queryserver-config-enable-table-acl-dry-run: "false"
+                      queryserver-config-strict-table-acl: "true"
+                      table-acl-config: /vt/acl/seafile_db.json
                       # table-acl-config-reload-interval: 50
                     resources:
                       limits:

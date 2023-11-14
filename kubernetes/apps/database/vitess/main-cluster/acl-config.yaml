@@ -17,11 +17,11 @@ data:
         }
       ]
     }
-  seafile.json: |
+  ccnet_db.json: |
     {
       "table_groups": [
         {
-          "name": "seafileacls",
+          "name": "ccnet_dbacls",
           "table_names_or_prefixes": ["%"],
           "readers": ["seafile"],
           "writers": ["seafile"],
@@ -46,6 +46,18 @@ data:
       "table_groups": [
         {
           "name": "seahub_dbacls",
+          "table_names_or_prefixes": ["%"],
+          "readers": ["seafile"],
+          "writers": ["seafile"],
+          "admins": ["seafile"]
+        }
+      ]
+    }
+  seafile_db.json: |
+    {
+      "table_groups": [
+        {
+          "name": "seafile_dbacls",
           "table_names_or_prefixes": ["%"],
           "readers": ["seafile"],
           "writers": ["seafile"],
