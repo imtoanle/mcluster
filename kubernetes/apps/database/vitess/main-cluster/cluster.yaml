@@ -176,7 +176,7 @@ spec:
                         memory: 1024Mi
                       requests:
                         cpu: 100m
-                        memory: 512Mi
+                        memory: 128Mi
                   dataVolumeClaimTemplate:
                     accessModes: ["ReadWriteOnce"]
                     storageClassName: local-path
@@ -234,7 +234,7 @@ spec:
                         memory: 1024Mi
                       requests:
                         cpu: 100m
-                        memory: 512Mi
+                        memory: 128Mi
                   dataVolumeClaimTemplate:
                     accessModes: ["ReadWriteOnce"]
                     storageClassName: local-path
@@ -270,7 +270,7 @@ spec:
               tabletPools:
                 - cell: zone1
                   type: replica
-                  replicas: 1
+                  replicas: 2
                   backupLocationName: main-mysql-backup
                   vttablet:
                     extraFlags:
@@ -292,7 +292,7 @@ spec:
                         memory: 1024Mi
                       requests:
                         cpu: 100m
-                        memory: 512Mi
+                        memory: 128Mi
                   dataVolumeClaimTemplate:
                     accessModes: ["ReadWriteOnce"]
                     storageClassName: local-path
