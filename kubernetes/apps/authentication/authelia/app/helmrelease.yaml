@@ -49,7 +49,7 @@ spec:
           main:
             image:
               repository: ghcr.io/authelia/authelia
-              tag: v4.38.0-beta3@sha256:8b7bf17d5675c9668e2bf75a69732b6006076f901e69a670cc265b56fcacf30d
+              tag: v4.38.0-beta3@sha256:b2440c1731f8accc95c56b878eddb0e894e61c90e99acfc2df87067a94f9a9f8
             env:
               AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD:
                 valueFrom:
