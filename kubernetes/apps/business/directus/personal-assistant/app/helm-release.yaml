@@ -28,6 +28,15 @@ spec:
     controllers:
       main:
         strategy: RollingUpdate
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14.9
+              pullPolicy: IfNotPresent
+            envFrom: &envFrom
+              - secretRef:
+                  name: personal-assistant-secrets
         containers:
           main:
             image:
@@ -50,6 +59,29 @@ spec:
               startup:
                 enabled: false
 
+            env:
+              DB_CLIENT: postgres
+              DB_PORT: "5432"
+              DB_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: personal-assistant-secrets
+                    key: INIT_POSTGRES_HOST
+              DB_DATABASE:
+                valueFrom:
+                  secretKeyRef:
+                    name: personal-assistant-secrets
+                    key: INIT_POSTGRES_DBNAME
+              DB_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: personal-assistant-secrets
+                    key: INIT_POSTGRES_USER
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: personal-assistant-secrets
+                    key: INIT_POSTGRES_PASS
             envFrom:
               - secretRef:
                   name: personal-assistant-secrets
