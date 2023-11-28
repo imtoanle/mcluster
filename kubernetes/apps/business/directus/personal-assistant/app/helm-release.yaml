@@ -108,12 +108,12 @@ spec:
           - secretName: "directus-personal-assistant-app-tls"
             hosts:
               - *host
-    persistence:
-      uploads:
-        enabled: true
-        globalMounts:
-          - path: /directus/uploads
-            readOnly: false
-        storageClass: home-cluster-nfs-1
-        accessMode: ReadWriteOnce
-        size: 5Gi
+    # persistence:
+    #   uploads:
+    #     enabled: true
+    #     globalMounts:
+    #       - path: /directus/uploads
+    #         readOnly: false
+    #     storageClass: home-cluster-nfs-1
+    #     accessMode: ReadWriteOnce
+    #     size: 5Gi
