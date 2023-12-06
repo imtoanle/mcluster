@@ -1,0 +1,88 @@
+---
+# yaml-language-server: $schema=https://frigate.devbu.io/api/config/schema.json
+logger:
+  default: info
+  # logs:
+  #   frigate.record: debug
+
+mqtt:
+  host: mosquitto.default.svc.cluster.local
+  topic_prefix: frigate
+  user: "{FRIGATE_MQTT_USERNAME}"
+  password: "{FRIGATE_MQTT_PASSWORD}"
+
+database:
+  path: /data/frigate.db
+
+record:
+  enabled: true
+  retain:
+    days: 7
+  events:
+    retain:
+      default: 14
+snapshots:
+  enabled: True
+  timestamp: False
+  bounding_box: True
+  crop: False
+ffmpeg:
+  output_args:
+    record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac
+objects:
+  track:
+    - person
+  filters:
+    person:
+      min_area: 2500
+      max_area: 100000
+      threshold: 0.75
+cameras:
+  # Define at least one camera
+  door:
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.100:554/cam/realmonitor?channel=1&subtype=1
+          roles:
+            - detect
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.100:554/cam/realmonitor?channel=1&subtype=0
+          roles:
+            - rtmp
+            - record
+    detect:
+      height: 480
+      width: 704
+      fps: 5
+    objects:
+      track:
+        - person
+      filters:
+        person:
+          min_area: 1500
+          max_area: 100000
+          threshold: 0.75
+          min_score: 0.60
+    motion:
+      mask:
+        - 513,36,680,39,683,21,518,21
+  livingroom:
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.83:554/cam/realmonitor?channel=1&subtype=1
+          roles:
+            - detect
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.83:554/cam/realmonitor?channel=1&subtype=0
+          roles:
+            - rtmp
+            - record
+    detect:
+      height: 480
+      width: 704
+      fps: 5
+    motion:
+      mask:
+        - 513,36,680,39,683,21,518,21
+detectors:
+  coral:
+    type: edgetpu
+    device: pci
