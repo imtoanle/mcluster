@@ -85,4 +85,4 @@ cameras:
 detectors:
   coral:
     type: edgetpu
-    device: pci:0
+    device: pci
