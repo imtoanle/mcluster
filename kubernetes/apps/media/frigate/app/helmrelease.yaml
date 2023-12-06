@@ -40,7 +40,7 @@ spec:
               repository: ghcr.io/blakeblackshear/frigate
               tag: 0.13.0-beta4
             env:
-              TZ: America/New_York
+              TZ: Asia/Ho_Chi_Minh
             envFrom:
               - secretRef:
                   name: frigate-secret
@@ -68,6 +68,10 @@ spec:
               limits:
                 memory: 8Gi
         pod:
+          securityContext:
+            # runAsUser: 568
+            # runAsGroup: 568
+            fsGroup: 65534
           nodeSelector:
             google.feature.node.kubernetes.io/coral: "true"
         statefulset:
