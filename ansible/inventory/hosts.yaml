@@ -20,3 +20,6 @@ kubernetes:
         home-cluster-worker-4:
           ansible_user: mitm
           ansible_host: 10.0.99.198
+        home-cluster-worker-5:
+          ansible_user: mitm
+          ansible_host: 10.0.99.109
