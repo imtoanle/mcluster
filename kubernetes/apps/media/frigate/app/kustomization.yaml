@@ -7,7 +7,6 @@ resources:
   - ./frigate-pvc.yaml
   - ./secret.sops.yaml
   - ./helmrelease.yaml
-  - ./volsync.yaml
   - ./gatus.yaml
 configMapGenerator:
   - name: frigate-configmap
