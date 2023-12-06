@@ -46,16 +46,16 @@ spec:
                   name: frigate-secret
             probes:
               liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /api/version
-                    port: &port 5000
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
+                enabled: false
+                # custom: true
+                # spec:
+                #   httpGet:
+                #     path: /api/version
+                #     port: &port 5000
+                #   initialDelaySeconds: 0
+                #   periodSeconds: 10
+                #   timeoutSeconds: 1
+                #   failureThreshold: 3
               readiness: *probes
               startup:
                 enabled: false
