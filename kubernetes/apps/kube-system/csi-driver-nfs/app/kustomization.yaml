@@ -6,3 +6,4 @@ resources:
   - ./helmrelease.yaml
   - ./storageclass.yaml
   - ./zfs1-storageclass.yaml
+  - ./camera-storageclass.yaml
