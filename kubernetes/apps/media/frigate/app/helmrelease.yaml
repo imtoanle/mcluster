@@ -4,7 +4,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: frigate
-  namespace: default
+  namespace: frigate
 spec:
   interval: 30m
   chart:
@@ -26,14 +26,8 @@ spec:
   uninstall:
     keepHistory: false
   dependsOn:
-    - name: intel-device-plugin-gpu
-      namespace: kube-system
     - name: mosquitto
-      namespace: default
-    - name: rook-ceph-cluster
-      namespace: rook-ceph
-    - name: volsync
-      namespace: volsync
+      namespace: broker
   values:
     controllers:
       main:
@@ -47,7 +41,6 @@ spec:
               tag: 0.13.0-beta4
             env:
               TZ: America/New_York
-              LIBVA_DRIVER_NAME: i965
             envFrom:
               - secretRef:
                   name: frigate-secret
@@ -72,29 +65,17 @@ spec:
               requests:
                 cpu: 1000m
                 memory: 2Gi
-                gpu.intel.com/i915: "1"
               limits:
                 memory: 8Gi
-                gpu.intel.com/i915: "1"
         pod:
-          affinity:
-            podAntiAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                - labelSelector:
-                    matchExpressions:
-                      - key: app.kubernetes.io/name
-                        operator: In
-                        values: ["plex"]
-                  topologyKey: kubernetes.io/hostname
           nodeSelector:
             google.feature.node.kubernetes.io/coral: "true"
-            intel.feature.node.kubernetes.io/gpu: "true"
         statefulset:
           volumeClaimTemplates:
             - name: config
               accessMode: ReadWriteOnce
               size: 5Gi
-              storageClass: ceph-block
+              storageClass: home-cluster-nfs-1
               globalMounts:
                 - path: /data
     service:
@@ -117,7 +98,7 @@ spec:
         #     auth_request_set $redirection_url $upstream_http_location;
         #     error_page 401 =302 $redirection_url;
         hosts:
-          - host: &host "{{ .Release.Name }}.devbu.io"
+          - host: &host "frigate.${SECRET_DOMAIN_2}"
             paths:
               - path: /
                 service:
@@ -141,12 +122,10 @@ spec:
         sizeLimit: 4Gi
         globalMounts:
           - path: /dev/shm
-      usb:
+      pci:
         enabled: true
         type: hostPath
-        hostPath: /dev/bus/usb
-        hostPathType: Directory
-        globalMounts:
-          - path: /dev/bus/usb
+        hostPath: /dev/apex_0
+        mountPath: /dev/apex_0
       media:
         existingClaim: frigate

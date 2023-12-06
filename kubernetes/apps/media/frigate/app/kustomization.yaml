@@ -2,10 +2,10 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: default
+namespace: frigate
 resources:
   - ./frigate-pvc.yaml
-  - ./externalsecret.yaml
+  - ./secret.sops.yaml
   - ./helmrelease.yaml
   - ./volsync.yaml
   - ./gatus.yaml
