@@ -9,6 +9,7 @@ resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
   - ./gatus.yaml
+  - ./gatus-camera.yaml
 configMapGenerator:
   - name: frigate-configmap
     files:

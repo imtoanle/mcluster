@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frigate-gatus-camera
+  namespace: frigate
+  labels:
+    gatus.io/enabled: "true"
+data:
+  config.yaml: |
+    endpoints:
+      - name: frigate-livingroom-camera
+        group: camera
+        url: https://frigate.${SECRET_DOMAIN_2}/api/stats
+        interval: 2m
+        client:
+          dns-resolver: tcp://${COREDNS_ADDR}:53
+        conditions:
+          - "[STATUS] == 200"
+          - "[BODY].frigate_livingroom.camera_fps > 0"
+        alerts:
+          - type: pushover
