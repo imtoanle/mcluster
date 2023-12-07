@@ -49,8 +49,10 @@ spec:
             configBlock: |-
               lameduck 5s
           - name: ready
-          - name: rewrite
-            parameters: name frigate.${SECRET_DOMAIN_2} frigate.frigate.svc.cluster.local
+          - name: hosts
+            configBlock: |-
+              10.0.99.233 frigate.${SECRET_DOMAIN_2}
+              fallthrough
           - name: kubernetes
             parameters: cluster.local in-addr.arpa ip6.arpa
             configBlock: |-
