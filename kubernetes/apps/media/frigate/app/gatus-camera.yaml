@@ -12,7 +12,7 @@ data:
       - name: frigate-camera
         group: camera
         url: https://frigate.${SECRET_DOMAIN_2}/api/stats
-        interval: 2m
+        interval: 5m
         ui:
           hide-hostname: true
           hide-url: true
