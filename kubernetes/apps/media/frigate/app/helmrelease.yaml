@@ -37,8 +37,8 @@ spec:
         containers:
           main:
             image:
-              repository: "blakeblackshear/frigate"
-              tag: stable-amd64
+              repository: ghcr.io/blakeblackshear/frigate
+              tag: stable
             env:
               TZ: Asia/Ho_Chi_Minh
             envFrom:
