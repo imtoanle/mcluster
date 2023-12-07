@@ -9,9 +9,9 @@ metadata:
 data:
   config.yaml: |
     endpoints:
-      - name: frigate-livingroom-camera
+      - name: frigate-camera
         group: camera
-        url: http://frigate.frigate.svc.cluster.local:5000/api/stats
+        url: https://frigate.${SECRET_DOMAIN_2}/api/stats
         interval: 2m
         ui:
           hide-hostname: true
@@ -20,6 +20,7 @@ data:
           dns-resolver: tcp://${COREDNS_ADDR}:53
         conditions:
           - "[STATUS] == 200"
+          - "[BODY].frigate_door.camera_fps > 0"
           - "[BODY].frigate_livingroom.camera_fps > 0"
         alerts:
           - type: pushover
