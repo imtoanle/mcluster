@@ -62,9 +62,9 @@ cameras:
           max_area: 100000
           threshold: 0.75
           min_score: 0.60
-    motion:
-      mask:
-        - 513,36,680,39,683,21,518,21
+    # motion:
+    #   mask:
+    #     - 513,36,680,39,683,21,518,21
   livingroom:
     ffmpeg:
       inputs:
@@ -79,10 +79,10 @@ cameras:
       height: 480
       width: 704
       fps: 5
-    motion:
-      mask:
-        - 513,36,680,39,683,21,518,21
-detectors:
-  coral:
-    type: edgetpu
-    device: pci
+    # motion:
+    #   mask:
+    #     - 513,36,680,39,683,21,518,21
+# detectors:
+#   coral:
+#     type: edgetpu
+#     device: pci
