@@ -26,6 +26,8 @@ spec:
   uninstall:
     keepHistory: false
   dependsOn:
+    - name: intel-device-plugin-gpu
+      namespace: kube-system
     - name: mosquitto
       namespace: broker
   values:
@@ -41,21 +43,22 @@ spec:
               tag: stable
             env:
               TZ: Asia/Ho_Chi_Minh
+              LIBVA_DRIVER_NAME: i965
             envFrom:
               - secretRef:
                   name: frigate-secret
             probes:
               liveness: &probes
-                enabled: false
-                # custom: true
-                # spec:
-                #   httpGet:
-                #     path: /api/version
-                #     port: &port 5000
-                #   initialDelaySeconds: 0
-                #   periodSeconds: 10
-                #   timeoutSeconds: 1
-                #   failureThreshold: 3
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/version
+                    port: &port 5000
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
               readiness: *probes
               startup:
                 enabled: false
@@ -65,8 +68,10 @@ spec:
               requests:
                 cpu: 1000m
                 memory: 2Gi
+                gpu.intel.com/i915: "1"
               limits:
                 memory: 8Gi
+                gpu.intel.com/i915: "1"
         pod:
           securityContext:
             # runAsUser: 568
@@ -74,6 +79,7 @@ spec:
             fsGroup: 65534
           nodeSelector:
             google.feature.node.kubernetes.io/coral: "true"
+            intel.feature.node.kubernetes.io/gpu: "true"
         statefulset:
           volumeClaimTemplates:
             - name: config

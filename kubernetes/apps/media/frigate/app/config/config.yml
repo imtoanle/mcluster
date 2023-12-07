@@ -26,9 +26,21 @@ snapshots:
   timestamp: False
   bounding_box: True
   crop: False
+
 ffmpeg:
+  global_args: ["-hide_banner", "-loglevel", "warning"]
+  hwaccel_args:
+    [
+      "-hwaccel",
+      "vaapi",
+      "-hwaccel_device",
+      "/dev/dri/renderD128",
+      "-hwaccel_output_format",
+      "yuv420p",
+    ]
   output_args:
     record: -f segment -segment_time 10 -segment_format mp4 -reset_timestamps 1 -strftime 1 -c:v copy -c:a aac
+
 objects:
   track:
     - person
@@ -37,15 +49,23 @@ objects:
       min_area: 2500
       max_area: 100000
       threshold: 0.75
+
+go2rtc:
+  streams:
+    frigate_door_hq: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.100:554/cam/realmonitor?channel=1&subtype=0
+    frigate_door_lq: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.100:554/cam/realmonitor?channel=1&subtype=1
+    frigate_livingroom_hq: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.83:554/cam/realmonitor?channel=1&subtype=0
+    frigate_livingroom_lq: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.83:554/cam/realmonitor?channel=1&subtype=1
+
 cameras:
   # Define at least one camera
-  door:
+  frigate_door:
     ffmpeg:
       inputs:
-        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.100:554/cam/realmonitor?channel=1&subtype=1
+        - path: rtsp://localhost:8554/frigate_door_lq
           roles:
             - detect
-        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.100:554/cam/realmonitor?channel=1&subtype=0
+        - path: rtsp://localhost:8554/frigate_door_hq
           roles:
             - rtmp
             - record
@@ -65,13 +85,13 @@ cameras:
     motion:
       mask:
         - 513,36,680,39,683,21,518,21
-  livingroom:
+  frigate_livingroom:
     ffmpeg:
       inputs:
-        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.83:554/cam/realmonitor?channel=1&subtype=1
+        - path: rtsp://localhost:8554/frigate_livingroom_lq
           roles:
             - detect
-        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.83:554/cam/realmonitor?channel=1&subtype=0
+        - path: rtsp://localhost:8554/frigate_livingroom_hq
           roles:
             - rtmp
             - record
