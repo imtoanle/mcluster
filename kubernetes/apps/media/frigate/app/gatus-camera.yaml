@@ -11,7 +11,7 @@ data:
     endpoints:
       - name: frigate-livingroom-camera
         group: camera
-        url: https://frigate.${SECRET_DOMAIN_2}/api/stats
+        url: http://frigate.frigate.svc.cluster.local:5000/api/stats
         interval: 2m
         client:
           dns-resolver: tcp://${COREDNS_ADDR}:53
