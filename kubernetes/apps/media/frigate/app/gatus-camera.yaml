@@ -13,6 +13,9 @@ data:
         group: camera
         url: http://frigate.frigate.svc.cluster.local:5000/api/stats
         interval: 2m
+        ui:
+          hide-hostname: true
+          hide-url: true
         client:
           dns-resolver: tcp://${COREDNS_ADDR}:53
         conditions:

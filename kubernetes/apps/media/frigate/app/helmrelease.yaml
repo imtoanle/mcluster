@@ -115,7 +115,8 @@ spec:
                   name: main
                   port: http
         tls:
-          - hosts:
+          - secretName: "${SECRET_DOMAIN_2/./-}-production-tls"
+            hosts:
               - *host
     persistence:
       config-file:
