@@ -69,6 +69,7 @@ spec:
               ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
               ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: "false"
               ZIGBEE2MQTT_CONFIG_SERIAL_PORT: tcp://192.168.1.81:6638
+              ZIGBEE2MQTT_CONFIG_ADVANCED_TRANSMIT_POWER: 20
             envFrom:
               - secretRef:
                   name: zigbee2mqtt-secret
