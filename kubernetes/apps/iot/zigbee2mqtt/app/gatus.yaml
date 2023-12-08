@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: zigbee2mqtt-gatus-ep
-  namespace: default
+  namespace: zigbee2mqtt
   labels:
     gatus.io/enabled: "true"
 data:
