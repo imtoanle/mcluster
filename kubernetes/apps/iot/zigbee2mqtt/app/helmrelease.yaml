@@ -81,7 +81,7 @@ spec:
           securityContext:
             runAsUser: 568
             runAsGroup: 568
-            fsGroup: 568
+            fsGroup: 65536
             fsGroupChangePolicy: OnRootMismatch
         statefulset:
           volumeClaimTemplates:
