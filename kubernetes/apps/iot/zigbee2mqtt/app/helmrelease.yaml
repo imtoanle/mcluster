@@ -112,14 +112,3 @@ spec:
         tls:
           - hosts:
               - *host
-    persistence:
-      secret:
-        enabled: true
-        type: secret
-        name: zigbee2mqtt-secret
-        advancedMounts:
-          main:
-            main:
-              - path: /config/secret.yaml
-                readOnly: false
-                subPath: secret.yaml
