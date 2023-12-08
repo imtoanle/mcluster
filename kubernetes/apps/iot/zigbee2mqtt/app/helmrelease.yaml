@@ -116,6 +116,7 @@ spec:
         name: zigbee2mqtt-secret
         advancedMounts:
           main:
-            - path: /config/configuration.yaml
-              readOnly: true
-              subPath: configuration.yaml
+            main:
+              - path: /config/configuration.yaml
+                readOnly: true
+                subPath: configuration.yaml
