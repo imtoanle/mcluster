@@ -118,5 +118,5 @@ spec:
           main:
             main:
               - path: /config/configuration.yaml
-                readOnly: true
+                readOnly: false
                 subPath: configuration.yaml
