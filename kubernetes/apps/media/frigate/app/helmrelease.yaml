@@ -95,12 +95,6 @@ spec:
             port: 5000
           rtsp:
             port: 8554
-          rtc:
-            port: 8555
-            protocol: UDP
-          rtctcp:
-            port: 8555
-            protocol: TCP
     ingress:
       main:
         enabled: true
