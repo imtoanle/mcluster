@@ -92,18 +92,18 @@ cameras:
     objects:
       track:
         - person
-      # filters:
-      #   person:
-      #     min_area: 1500
-      #     max_area: 100000
-      #     threshold: 0.75
-      #     min_score: 0.60
+      filters:
+        person:
+          min_area: 1500
+          max_area: 100000
+          threshold: 0.75
+          min_score: 0.50
     motion:
       mask:
         - 513,36,680,39,683,21,518,21
-    zones:
-      front_door:
-        coordinates: 0,184,275,0,427,128,153,398
+    # zones:
+    #   front_door:
+    #     coordinates: 0,184,275,0,427,128,153,398
   frigate_livingroom:
     ffmpeg:
       inputs:
