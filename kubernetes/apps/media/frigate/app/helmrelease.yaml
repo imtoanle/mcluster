@@ -98,6 +98,9 @@ spec:
           rtc:
             port: 8555
             protocol: UDP
+          rtctcp:
+            port: 8555
+            protocol: TCP
     ingress:
       main:
         enabled: true
