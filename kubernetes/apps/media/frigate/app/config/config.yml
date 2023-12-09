@@ -63,8 +63,6 @@ go2rtc:
 
 cameras:
   # Define at least one camera
-  frigate_door_live:
-    stream_name: frigate_door_lq
   frigate_door:
     ffmpeg:
       inputs:
@@ -75,6 +73,8 @@ cameras:
           roles:
             - rtmp
             - record
+    live:
+      stream_name: frigate_door_lq
     detect:
       height: 480
       width: 704
