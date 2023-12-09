@@ -95,7 +95,7 @@ spec:
             port: 5000
           rtsp:
             port: 8554
-          rtcudp:
+          rtc:
             port: 8555
             protocol: UDP
     ingress:
