@@ -24,6 +24,9 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: cloudflared
+      namespace: networking
   values:
     fullnameOverride: nginx-internal
     controller:

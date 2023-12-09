@@ -35,6 +35,7 @@ spec:
       annotations:
         hajimari.io/icon: sawtooth-wave
         external-dns.alpha.kubernetes.io/target: "10.0.99.233"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
       hosts:
         - host: &host "gitops.${SECRET_DOMAIN}"
           paths:
