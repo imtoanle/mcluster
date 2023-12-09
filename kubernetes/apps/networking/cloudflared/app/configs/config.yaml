@@ -11,6 +11,10 @@ ingress:
     service: https://nginx-external-controller.networking.svc.cluster.local:443
     originRequest:
       originServerName: "external.${SECRET_DOMAIN}"
+  - hostname: "*.${SECRET_DOMAIN}"
+    service: https://nginx-internal-controller.networking.svc.cluster.local:443
+    originRequest:
+      originServerName: "internal.${SECRET_DOMAIN}"
   - hostname: "${SECRET_DOMAIN_2}"
     service: https://nginx-external-controller.networking.svc.cluster.local:443
     originRequest:
