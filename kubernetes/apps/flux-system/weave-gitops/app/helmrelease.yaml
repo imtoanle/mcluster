@@ -31,7 +31,7 @@ spec:
       username: admin
     ingress:
       enabled: true
-      className: internal
+      className: external
       annotations:
         hajimari.io/icon: sawtooth-wave
         external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
