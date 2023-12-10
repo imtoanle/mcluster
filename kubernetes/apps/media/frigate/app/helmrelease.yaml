@@ -101,6 +101,9 @@ spec:
           rtc:
             port: 8555
             protocol: UDP
+          rtctcp:
+            port: 8555
+            protocol: TCP
           rtcapi:
             port: 1984
     ingress:
