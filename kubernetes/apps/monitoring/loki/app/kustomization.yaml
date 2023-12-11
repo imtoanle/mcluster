@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./secret.sops.yaml
+  - ./nginx-auth.sops.yaml
   - ./helmrelease.yaml
   - ./gatus.yaml
 configMapGenerator:

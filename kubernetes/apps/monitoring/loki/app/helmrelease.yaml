@@ -114,7 +114,11 @@ spec:
         registry: ghcr.io
       ingress:
         enabled: true
-        ingressClassName: internal
+        ingressClassName: external
+        annotations:
+          nginx.ingress.kubernetes.io/auth-type: basic
+          nginx.ingress.kubernetes.io/auth-secret: loki-nginx-auth
+          nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
         hosts:
           - host: &host loki.${SECRET_DOMAIN}
             paths:

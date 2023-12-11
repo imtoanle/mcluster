@@ -1,0 +1,29 @@
+apiVersion: v1
+data:
+    #ENC[AES256_GCM,data:YeCn4QydIQk30MOQWW21rRLAu1s=,iv:puSEv2GXkHJFS35yxTQhmHavqT5k4TcllxEevGO6xo8=,tag:y44Zo/5YS3zbl+kKwapFnA==,type:comment]
+    auth: ENC[AES256_GCM,data:uCzqFeZfv1NbAjmTbzPEEMBkneVgaNg9uNMoe/nlv//NcStKaZuKgOQN,iv:dN424NaVw6ryYJz+trporsLIhRkcwpudQTtbeSOMEBY=,tag:4LNFmalQfTkFU3DZP8TE5w==,type:str]
+kind: Secret
+metadata:
+    name: loki-nginx-auth
+    namespace: monitoring
+type: Opaque
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age14j28wpn82nnskt0rzcaqxzwnhx33ardgl640rckvwrys8grphvwsyt4ch2
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBOeXE5VWxNc2dPUGU5Qy9N
+            K1JKd0RBSUUyNDZsNzZMZnVIWkFmMjN4dEVzCkZlVCs0bHRKV2U2WG15RThCS0Y3
+            NWZKdllOSU93TmJTR25PRTcvL2RkM3cKLS0tIFBhaDM1MThQaVZIUU82OHpWSVFx
+            RFZyZlNoMDAyMzk3WnFCUW0rbHhUdHMKrYogU2qfMZfFBvm7GE3PXWuDsWth1Xon
+            DZ8vpJjBGyuc23eFN0QWzkNHDW7AU0Kgu0taHrio5IG7BcZCwYTqDA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-12-11T23:37:31Z"
+    mac: ENC[AES256_GCM,data:efJpHG/+3UPNhZ9/4jp5hU9NQpwCqfQzV6IYQlE2d2u8kIlHzWujIg3P89xfoGE0OBd5hRoSA28gQ/0Qc4KFMs29CSf+ZiUEIDRMAJWXS5Ykq6VFSWU4Y8phfMWC9XShhI32Zjp6XWQYT3N4yoyyuEkcPe94p1QvDvtg8kII+2I=,iv:gBexd7NO8j244gpWA7vPMJAviSVZFJI+L1tr++2Pk9I=,tag:BmtCesuYS2Xh4zHJ8ctpzQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
