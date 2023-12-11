@@ -7,11 +7,11 @@ metadata:
   namespace: flux-system
 spec:
   path: ./kubernetes/apps/monitoring/loki/app
+  prune: true
   sourceRef:
     kind: GitRepository
-    name: homelab-kubernetes
-  prune: true
+    name: home-kubernetes
   wait: false
   interval: 30m
   retryInterval: 1m
-  timeout: 15m
+  timeout: 5m
