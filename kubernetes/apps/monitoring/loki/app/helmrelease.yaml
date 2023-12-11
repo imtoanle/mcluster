@@ -115,6 +115,7 @@ spec:
       ingress:
         enabled: true
         ingressClassName: external
+        className: "external"
         annotations:
           nginx.ingress.kubernetes.io/auth-type: basic
           nginx.ingress.kubernetes.io/auth-secret: loki-nginx-auth
