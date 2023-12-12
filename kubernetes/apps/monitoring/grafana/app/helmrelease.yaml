@@ -43,7 +43,7 @@ spec:
       GF_AUTH_GENERIC_OAUTH_ENABLED: true
       GF_AUTH_GENERIC_OAUTH_NAME: Authelia
       GF_AUTH_GENERIC_OAUTH_CLIENT_ID: grafana
-      GF_AUTH_GENERIC_OAUTH_SCOPES: 'openid profile email groups'
+      GF_AUTH_GENERIC_OAUTH_SCOPES: "openid profile email groups"
       GF_AUTH_GENERIC_OAUTH_EMPTY_SCOPES: false
       GF_AUTH_GENERIC_OAUTH_AUTH_URL: "https://auth.${SECRET_DOMAIN}/api/oidc/authorization"
       GF_AUTH_GENERIC_OAUTH_TOKEN_URL: "https://auth.${SECRET_DOMAIN}/api/oidc/token"
@@ -93,6 +93,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/nginx
+          - name: iot
+            orgId: 1
+            folder: IoT
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/iot
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -107,6 +115,11 @@ spec:
             jsonData:
               prometheusType: Prometheus
             isDefault: true
+          - name: Loki
+            type: loki
+            uid: loki
+            access: proxy
+            url: http://loki-gateway.monitoring.svc.cluster.local
     dashboards:
       default:
         cloudflared:
@@ -157,6 +170,10 @@ spec:
           datasource: Prometheus
         nginx-request-handling-performance:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/request-handling-performance.json
+          datasource: Prometheus
+      iot:
+        sms-gateways:
+          url: https://raw.githubusercontent.com/imtoanle/home-cluster/main/kubernetes/apps/monitoring/grafana/app/dashboards/iot/sms-gateways.json
           datasource: Prometheus
     sidecar:
       dashboards:
