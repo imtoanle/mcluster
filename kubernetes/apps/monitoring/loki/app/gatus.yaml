@@ -8,7 +8,6 @@ metadata:
     gatus.io/enabled: "true"
 data:
   config.yaml: |
-    debug: true
     endpoints:
       - name: loki
         group: guarded
