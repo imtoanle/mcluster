@@ -20,6 +20,5 @@ data:
           dns-resolver: tcp://${COREDNS_ADDR}:53
         conditions:
           - "[STATUS] == 200"
-          - '[BODY] == "OK"'
         alerts:
           - type: pushover
