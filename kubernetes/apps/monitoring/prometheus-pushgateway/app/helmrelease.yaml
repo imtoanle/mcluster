@@ -46,4 +46,4 @@ spec:
       enabled: true
       namespace: monitoring
       additionalLabels:
-        release: prometheus
+        release: kube-prometheus-stack
