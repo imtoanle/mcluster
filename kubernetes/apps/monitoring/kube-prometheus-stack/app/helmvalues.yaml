@@ -88,11 +88,10 @@ data:
     prometheus:
       ingress:
         enabled: true
-        ingressClassName: external
+        ingressClassName: internal
         annotations:
           hajimari.io/appName: Prometheus
           hajimari.io/icon: simple-icons:prometheus
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         pathType: Prefix
         hosts:
           - "prometheus.${SECRET_DOMAIN}"
