@@ -11,15 +11,15 @@ data:
     endpoints:
       - name: loki
         group: guarded
-        url: 1.1.1.1
+        url: http://loki-gateway.monitoring.svc.cluster.local
         interval: 1m
         ui:
           hide-hostname: true
           hide-url: true
-        dns:
-          query-name: loki.${SECRET_DOMAIN}
-          query-type: A
+        client:
+          dns-resolver: tcp://${COREDNS_ADDR}:53
         conditions:
-          - "len([BODY]) == 0"
+          - "[STATUS] == 200"
+          - '[BODY] == "OK"'
         alerts:
           - type: pushover
