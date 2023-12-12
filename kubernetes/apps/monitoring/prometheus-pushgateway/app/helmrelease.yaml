@@ -42,3 +42,8 @@ spec:
         - secretName: pushgateway-tls
           hosts:
             - *host
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+      additionalLabels:
+        release: prometheus
