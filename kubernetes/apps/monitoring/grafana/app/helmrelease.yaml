@@ -204,23 +204,3 @@ spec:
       storageClassName: local-path
     testFramework:
       enabled: false
-    notifiers:
-      - name: pushover-notifier
-        type: pushover
-        uid: pushover
-        org_id: 1
-        is_default: true
-        send_reminder: true
-        frequency: 1h
-        disable_resolve_message: false
-        # settings:
-        #   uploadImage: true
-  # valuesFrom:
-  #   - targetPath: notifiers[0].secure_settings.apiToken
-  #     kind: Secret
-  #     name: grafana-helm-secret-values
-  #     valuesKey: pushover-notifier-apitoken
-  #   - targetPath: notifiers[0].secure_settings.userKey
-  #     kind: Secret
-  #     name: grafana-helm-secret-values
-  #     valuesKey: pushover-notifier-userkey
