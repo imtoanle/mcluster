@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: grafana
-      version: 6.61.1
+      version: 7.0.17
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -204,40 +204,40 @@ spec:
       storageClassName: local-path
     testFramework:
       enabled: false
-    alerting:
-      contactpoints.yaml:
-        secret:
-          apiVersion: 1
-          contactPoints:
-            - orgId: 1
-              name: pushover
-              receivers:
-                - uid: pushover
-                  type: pushover
-                  settings:
-                    apiToken: XXX
-                    # <string, required>
-                    userKey: user1,user2
-                    # <string>
-                    device: device1,device2
-                    # <string> options (high to low): 2,1,0,-1,-2
-                    priority: "2"
-                    retry: "30"
-                    expire: "120"
-                    sound: siren
-                    okSound: magic
-                    message: |
-                      {{ `{{ include "default.message" . }}` }}
-  valuesFrom:
-    - targetPath: alerting.contactpoints\.yaml.secret.contactPoints[0].receivers[0].settings.apiToken
-      kind: Secret
-      name: grafana-helm-secret-values
-      valuesKey: pushover-notifier-apitoken
-    - targetPath: alerting.contactpoints\.yaml.secret.contactPoints[0].receivers[0].settings.userKey
-      kind: Secret
-      name: grafana-helm-secret-values
-      valuesKey: pushover-notifier-userkey
-    - targetPath: alerting.contactpoints\.yaml.secret.contactPoints[0].receivers[0].settings.device
-      kind: Secret
-      name: grafana-helm-secret-values
-      valuesKey: pushover-notifier-device
+  #   alerting:
+  #     contactpoints.yaml:
+  #       secret:
+  #         apiVersion: 1
+  #         contactPoints:
+  #           - orgId: 1
+  #             name: pushover
+  #             receivers:
+  #               - uid: pushover
+  #                 type: pushover
+  #                 settings:
+  #                   apiToken: XXX
+  #                   # <string, required>
+  #                   userKey: user1,user2
+  #                   # <string>
+  #                   device: device1,device2
+  #                   # <string> options (high to low): 2,1,0,-1,-2
+  #                   priority: "2"
+  #                   retry: "30"
+  #                   expire: "120"
+  #                   sound: siren
+  #                   okSound: magic
+  #                   message: |
+  #                     {{ `{{ include "default.message" . }}` }}
+  # valuesFrom:
+  #   - targetPath: alerting.contactpoints\.yaml.secret.contactPoints[0].receivers[0].settings.apiToken
+  #     kind: Secret
+  #     name: grafana-helm-secret-values
+  #     valuesKey: pushover-notifier-apitoken
+  #   - targetPath: alerting.contactpoints\.yaml.secret.contactPoints[0].receivers[0].settings.userKey
+  #     kind: Secret
+  #     name: grafana-helm-secret-values
+  #     valuesKey: pushover-notifier-userkey
+  #   - targetPath: alerting.contactpoints\.yaml.secret.contactPoints[0].receivers[0].settings.device
+  #     kind: Secret
+  #     name: grafana-helm-secret-values
+  #     valuesKey: pushover-notifier-device
