@@ -217,6 +217,9 @@ spec:
             disable_resolve_message: false
             settings:
               uploadImage: true
+            secure_settings:
+              apiToken: ""
+              userKey: ""
 
   valuesFrom:
     - targetPath: notifiers.notifiers\\.yaml.notifiers[0].secure_settings.apiToken
