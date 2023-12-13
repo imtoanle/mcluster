@@ -331,6 +331,6 @@
   "timezone": "",
   "title": "Sms Gateways",
   "uid": "iot-sms-gateways",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
