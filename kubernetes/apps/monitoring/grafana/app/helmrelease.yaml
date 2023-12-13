@@ -173,6 +173,7 @@ spec:
           datasource: Prometheus
       iot:
         sms-gateways:
+          revision: 2
           url: https://raw.githubusercontent.com/imtoanle/home-cluster/main/kubernetes/apps/monitoring/grafana/app/dashboards/iot/sms-gateways.json
           datasource: Prometheus
     sidecar:
