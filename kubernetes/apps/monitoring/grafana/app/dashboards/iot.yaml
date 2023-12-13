@@ -36,7 +36,7 @@ data:
           },
           "description": "",
           "gridPos": {
-            "h": 15,
+            "h": 13,
             "w": 12,
             "x": 0,
             "y": 0
@@ -93,7 +93,7 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 5,
+            "h": 13,
             "w": 6,
             "x": 12,
             "y": 0
@@ -112,9 +112,10 @@ data:
               "values": false
             },
             "text": {},
-            "textMode": "auto"
+            "textMode": "auto",
+            "wideLayout": true
           },
-          "pluginVersion": "10.1.5",
+          "pluginVersion": "10.2.2",
           "targets": [
             {
               "datasource": {
@@ -123,7 +124,7 @@ data:
               },
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "esp_uptime{job=\"sms_gateway\", instance=\"esp32_475\"}",
+              "expr": "increase(esp_uptime{job=\"sms_gateway\", instance=\"esp32_475\"}[10m])",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "instant": false,
@@ -158,12 +159,12 @@ data:
                   }
                 ]
               },
-              "unit": "dateTimeFromNow"
+              "unit": "s"
             },
             "overrides": []
           },
           "gridPos": {
-            "h": 5,
+            "h": 13,
             "w": 6,
             "x": 18,
             "y": 0
@@ -178,12 +179,13 @@ data:
               "calcs": [
                 "lastNotNull"
               ],
-              "fields": "/^Time$/",
+              "fields": "",
               "values": false
             },
-            "textMode": "auto"
+            "textMode": "auto",
+            "wideLayout": true
           },
-          "pluginVersion": "10.1.5",
+          "pluginVersion": "10.2.2",
           "targets": [
             {
               "datasource": {
@@ -191,8 +193,8 @@ data:
                 "uid": "prometheus"
               },
               "disableTextWrap": false,
-              "editorMode": "builder",
-              "expr": "esp_uptime{job=\"sms_gateway\", instance=\"esp32_475\"}",
+              "editorMode": "code",
+              "expr": "time() - last_heartbeat_time{job=\"sms_gateway\", instance=\"esp32_475\"}",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "instant": false,
@@ -204,137 +206,10 @@ data:
           ],
           "title": "Last Status",
           "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "displayName": "Free Heap Size",
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "decbytes"
-            },
-            "overrides": [
-              {
-                "__systemRef": "hideSeriesFrom",
-                "matcher": {
-                  "id": "byNames",
-                  "options": {
-                    "mode": "exclude",
-                    "names": [
-                      "Free Heap Size"
-                    ],
-                    "prefix": "All except:",
-                    "readOnly": true
-                  }
-                },
-                "properties": [
-                  {
-                    "id": "custom.hideFrom",
-                    "value": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": true
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 10,
-            "w": 12,
-            "x": 12,
-            "y": 5
-          },
-          "id": 4,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "disableTextWrap": false,
-              "editorMode": "builder",
-              "expr": "esp_free_heap{job=\"sms_gateway\", instance=\"esp32_475\"}",
-              "fullMetaSearch": false,
-              "includeNullMetadata": true,
-              "instant": false,
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "A",
-              "useBackend": false
-            }
-          ],
-          "title": "Memory",
-          "type": "timeseries"
         }
       ],
       "refresh": "5s",
       "schemaVersion": 38,
-      "style": "dark",
       "tags": [],
       "templating": {
         "list": []
@@ -347,6 +222,6 @@ data:
       "timezone": "",
       "title": "Sms Gateways",
       "uid": "iot-sms-gateways",
-      "version": 4,
+      "version": 5,
       "weekStart": ""
     }
