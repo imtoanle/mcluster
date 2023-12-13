@@ -219,11 +219,11 @@ spec:
               uploadImage: true
 
   valuesFrom:
-    - targetPath: notifiers['notifiers.yaml'].notifiers[0].secure_settings.apiToken
+    - targetPath: notifiers.notifiers\\.yaml.notifiers[0].secure_settings.apiToken
       kind: Secret
       name: grafana-helm-secret-values
       valuesKey: pushover-notifier-apitoken
-    - targetPath: notifiers['notifiers.yaml'].notifiers[0].secure_settings.userKey
+    - targetPath: notifiers.notifiers\\.yaml.notifiers[0].secure_settings.userKey
       kind: Secret
       name: grafana-helm-secret-values
       valuesKey: pushover-notifier-userkey
