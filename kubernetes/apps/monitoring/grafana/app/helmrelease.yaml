@@ -218,8 +218,8 @@ spec:
             settings:
               uploadImage: true
             secure_settings:
-              apiToken: ""
-              userKey: ""
+              apiToken: "abc"
+              userKey: "123"
 
   valuesFrom:
     - targetPath: notifiers.notifiers\\.yaml.notifiers[0].secure_settings.apiToken
