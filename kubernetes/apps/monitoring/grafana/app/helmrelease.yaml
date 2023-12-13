@@ -171,9 +171,6 @@ spec:
         nginx-request-handling-performance:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/request-handling-performance.json
           datasource: Prometheus
-      iot:
-        sms-gateways:
-          file: dashboards/iot/sms-gateways.json
     sidecar:
       dashboards:
         enabled: true
@@ -205,3 +202,8 @@ spec:
       storageClassName: local-path
     testFramework:
       enabled: false
+  valuesFrom:
+    - targetPath: dashboards.iot.sms-gateways.json
+      kind: ConfigMap
+      name: grafana-temp-iot-sms-gateways
+      valuesKey: json
