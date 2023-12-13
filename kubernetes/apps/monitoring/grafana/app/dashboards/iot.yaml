@@ -105,7 +105,9 @@ data:
             "justifyMode": "auto",
             "orientation": "auto",
             "reduceOptions": {
-              "calcs": ["lastNotNull"],
+              "calcs": [
+                "lastNotNull"
+              ],
               "fields": "",
               "values": false
             },
@@ -155,7 +157,8 @@ data:
                     "value": null
                   }
                 ]
-              }
+              },
+              "unit": "dateTimeFromNow"
             },
             "overrides": []
           },
@@ -172,7 +175,9 @@ data:
             "justifyMode": "auto",
             "orientation": "auto",
             "reduceOptions": {
-              "calcs": ["lastNotNull"],
+              "calcs": [
+                "lastNotNull"
+              ],
               "fields": "/^Time$/",
               "values": false
             },
@@ -187,7 +192,7 @@ data:
               },
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "heartbeat{job=\"sms_gateway\", instance=\"esp32_475\"}",
+              "expr": "esp_uptime{job=\"sms_gateway\", instance=\"esp32_475\"}",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "instant": false,
@@ -214,6 +219,7 @@ data:
               "custom": {
                 "axisCenteredZero": false,
                 "axisColorMode": "text",
+                "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
@@ -265,7 +271,9 @@ data:
                   "id": "byNames",
                   "options": {
                     "mode": "exclude",
-                    "names": ["Free Heap Size"],
+                    "names": [
+                      "Free Heap Size"
+                    ],
                     "prefix": "All except:",
                     "readOnly": true
                   }
@@ -339,6 +347,6 @@ data:
       "timezone": "",
       "title": "Sms Gateways",
       "uid": "iot-sms-gateways",
-      "version": 2,
+      "version": 4,
       "weekStart": ""
     }
