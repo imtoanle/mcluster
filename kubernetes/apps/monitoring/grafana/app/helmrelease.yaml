@@ -173,7 +173,7 @@ spec:
           datasource: Prometheus
       iot:
         sms-gateways:
-          file: kubernetes/apps/monitoring/grafana/app/dashboards/iot/sms-gateways.json
+          file: dashboards/iot/sms-gateways.json
     sidecar:
       dashboards:
         enabled: true
