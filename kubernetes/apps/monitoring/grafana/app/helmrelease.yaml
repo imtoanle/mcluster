@@ -28,6 +28,8 @@ spec:
     - name: local-path-provisioner
       namespace: kube-system
   values:
+    podAnnotations:
+      secret.reloader.stakater.com/reload: grafana-config-secret
     deploymentStrategy:
       type: Recreate
     admin:
