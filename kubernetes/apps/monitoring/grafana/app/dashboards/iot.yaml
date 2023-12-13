@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-temp-iot-sms-gateways
+  name: grafana-dashboards-iot
   namespace: monitoring
 data:
-  json: |
+  sms-gateways.json: |
     {
       "annotations": {
         "list": [
