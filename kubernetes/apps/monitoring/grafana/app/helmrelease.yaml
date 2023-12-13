@@ -173,6 +173,7 @@ spec:
           datasource: Prometheus
       iot:
         sms-gateways:
+          version: 2
           file: dashboards/iot/sms-gateways.json
     sidecar:
       dashboards:
