@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./secret.sops.yaml
+  - ./helm-secret-values.sops.yaml
   - ./dashboards/iot.yaml
   - ./helmrelease.yaml

@@ -204,3 +204,7 @@ spec:
       storageClassName: local-path
     testFramework:
       enabled: false
+  valuesFrom:
+    - name: grafana-helm-secret-values
+      kind: Secret
+      valuesKey: values.yaml
