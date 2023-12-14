@@ -124,7 +124,7 @@ data:
               },
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "increase(esp_uptime{job=\"sms_gateway\", instance=\"esp32_475\"}[10m])",
+              "expr": "esp_uptime{job=\"sms_gateway\", instance=\"esp32_475\"}",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "instant": false,
@@ -222,6 +222,6 @@ data:
       "timezone": "",
       "title": "Sms Gateways",
       "uid": "iot-sms-gateways",
-      "version": 5,
+      "version": 6,
       "weekStart": ""
     }
