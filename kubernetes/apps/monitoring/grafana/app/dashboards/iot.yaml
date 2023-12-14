@@ -156,6 +156,10 @@ data:
                   {
                     "color": "green",
                     "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 600
                   }
                 ]
               },
@@ -222,6 +226,6 @@ data:
       "timezone": "",
       "title": "Sms Gateways",
       "uid": "iot-sms-gateways",
-      "version": 6,
+      "version": 7,
       "weekStart": ""
     }
