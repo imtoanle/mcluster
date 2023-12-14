@@ -38,7 +38,9 @@ spec:
       host: *host
     persistence:
       enabled: true
-      storageClassName: home-cluster-nfs-1
+      accessModes:
+        - "ReadWriteOnce"
+      storageClassName: local-path
     postgresql:
       bundled: false
       connection:
