@@ -38,7 +38,7 @@ spec:
       local_setup: false
     minio:
       local_setup: false
-    valuesFrom:
-      - name: plane-app-secrets
-        kind: Secret
-        valuesKey: values.yaml
+  valuesFrom:
+    - name: plane-app-secrets
+      kind: Secret
+      valuesKey: values.yaml
