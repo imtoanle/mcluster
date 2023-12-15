@@ -1,0 +1,44 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: plane-app
+  namespace: business
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: plane-ce
+      version: 1.0.6
+      sourceRef:
+        kind: HelmRepository
+        name: makeplane
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: "external.${SECRET_DOMAIN}"
+      appHost: &host "plane.${SECRET_HOST}"
+      minioHost: "s3.${SECRET_DOMAIN_2}"
+      ingressClass: external
+    redis:
+      local_setup: true
+      storageClass: local-path
+    postgres:
+      local_setup: false
+    minio:
+      local_setup: false
+    valuesFrom:
+      - name: plane-app-secrets
+        kind: Secret
+        valuesKey: values.yaml

@@ -7,6 +7,6 @@ resources:
   - directus
   - leantime
   - mattermost
-  - ./openproject/ks.yaml
+  - ./plane/ks.yaml
   - superset
   - trilium-notes
