@@ -119,7 +119,7 @@ spec:
               #   memory: 32Mi
               limits:
                 memory: 4000Mi
-                cpu: 4000m
+                cpu: 1000m
       beat-worker:
         replicas: 1
         strategy: Recreate
@@ -140,7 +140,7 @@ spec:
               #   memory: 32Mi
               limits:
                 memory: 4000Mi
-                cpu: 4000m
+                cpu: 1000m
     service:
       main:
         controller: main
