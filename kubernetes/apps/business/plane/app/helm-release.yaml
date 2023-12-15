@@ -2,17 +2,17 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: plane-app
-  namespace: business
+  name: &app plane-app
+  namespace: plane
 spec:
   interval: 30m
   chart:
     spec:
-      chart: plane-ce
-      version: 1.0.6
+      chart: app-template
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
-        name: makeplane
+        name: bjw-s
         namespace: flux-system
   maxHistory: 2
   install:
@@ -24,21 +24,170 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: redis
+      namespace: database
   values:
+    controllers:
+      main:
+        replicas: 3
+        strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: makeplane/plane-frontend
+              tag: latest
+              pullPolicy: Always
+            command:
+              - /usr/local/bin/start.sh
+            args:
+              - web/server.js
+              - web
+            envFrom: &envFrom
+              - configMapRef:
+                  name: plane-config-envs
+              - secretRef:
+                  name: plane-secret-envs
+            resources:
+              # requests:
+              #   cpu: 10m
+              #   memory: 32Mi
+              limits:
+                memory: 300Mi
+                cpu: 200m
+      space:
+        replicas: 3
+        strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: makeplane/plane-space
+              tag: latest
+              pullPolicy: Always
+            command:
+              - /usr/local/bin/start.sh
+            args:
+              - space/server.js
+              - space
+            envFrom: *envFrom
+            resources:
+              # requests:
+              #   cpu: 10m
+              #   memory: 32Mi
+              limits:
+                memory: 300Mi
+                cpu: 200m
+      api:
+        replicas: 3
+        strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: makeplane/plane-backend
+              tag: latest
+              pullPolicy: Always
+            command:
+              - ./bin/takeoff
+            envFrom: *envFrom
+            resources:
+              # requests:
+              #   cpu: 10m
+              #   memory: 32Mi
+              limits:
+                memory: 300Mi
+                cpu: 200m
+      worker:
+        replicas: 1
+        strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: makeplane/plane-backend
+              tag: latest
+              pullPolicy: Always
+            command:
+              - ./bin/worker
+            envFrom: *envFrom
+            resources:
+              # requests:
+              #   cpu: 10m
+              #   memory: 32Mi
+              limits:
+                memory: 300Mi
+                cpu: 200m
+      beat-worker:
+        replicas: 1
+        strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: makeplane/plane-backend
+              tag: latest
+              pullPolicy: Always
+            command:
+              - ./bin/beat
+            envFrom: *envFrom
+            resources:
+              # requests:
+              #   cpu: 10m
+              #   memory: 32Mi
+              limits:
+                memory: 300Mi
+                cpu: 200m
+    service:
+      main:
+        ports:
+          http:
+            port: 3000
+      space:
+        ports:
+          http:
+            port: 3000
+      api:
+        ports:
+          http:
+            port: 8000
+
+    serviceAccount:
+      create: true
+
     ingress:
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: "external.${SECRET_DOMAIN}"
-      appHost: &host "plane.${SECRET_DOMAIN}"
-      minioHost: "s3.${SECRET_DOMAIN_2}"
-      ingressClass: external
-    redis:
-      local_setup: true
-      storageClass: local-path
-    postgres:
-      local_setup: false
-    minio:
-      local_setup: false
-  valuesFrom:
-    - name: plane-app-secrets
-      kind: Secret
-      valuesKey: values.yaml
+      main:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "plane.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                name: main
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+              - path: /api
+                name: api
+                pathType: Prefix
+                service:
+                  name: api
+                  port: http
+              - path: /spaces
+                name: space
+                pathType: Prefix
+                service:
+                  name: space
+                  port: http
+        tls:
+          - hosts:
+              - *host
