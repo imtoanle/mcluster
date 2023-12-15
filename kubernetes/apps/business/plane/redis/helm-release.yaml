@@ -28,8 +28,7 @@ spec:
   values:
     architecture: standalone
     auth:
-      existingSecret: db-secrets
-      existingSecretPasswordKey: redis-password
+      enabled: false
     master:
       persistence:
         enabled: true
