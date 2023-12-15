@@ -118,8 +118,8 @@ spec:
               #   cpu: 10m
               #   memory: 32Mi
               limits:
-                memory: 300Mi
-                cpu: 200m
+                memory: 1000Mi
+                cpu: 1000m
       beat-worker:
         replicas: 1
         strategy: Recreate
@@ -139,8 +139,8 @@ spec:
               #   cpu: 10m
               #   memory: 32Mi
               limits:
-                memory: 300Mi
-                cpu: 200m
+                memory: 1000Mi
+                cpu: 1000m
     service:
       main:
         controller: main
