@@ -13,5 +13,5 @@ data:
   DEBUG: "0"
   DOCKERIZED: "1"
   GUNICORN_WORKERS: "1"
-  REDIS_URL: "redis://plane-redis-master.plane.svc.cluster.local:6379/"
+  REDIS_URL: "redis://plane-redis-master.plane.svc.cluster.local:6379"
   FILE_SIZE_LIMIT: "5242880"
