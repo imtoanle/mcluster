@@ -5,13 +5,13 @@ metadata:
   name: plane-config-envs
   namespace: plane
 data:
-  ENABLE_SIGNUP: 0
-  ENABLE_EMAIL_PASSWORD: 1
-  ENABLE_MAGIC_LINK_LOGIN: 0
+  ENABLE_SIGNUP: "0"
+  ENABLE_EMAIL_PASSWORD: "1"
+  ENABLE_MAGIC_LINK_LOGIN: "0"
   SENTRY_DSN: ""
   SENTRY_ENVIRONMENT: ""
   DEBUG: "0"
   DOCKERIZED: "1"
-  GUNICORN_WORKERS: 1
+  GUNICORN_WORKERS: "1"
   REDIS_URL: "redis://plane-redis-master.plane.svc.cluster.local:6379/"
-  FILE_SIZE_LIMIT: 5242880
+  FILE_SIZE_LIMIT: "5242880"
