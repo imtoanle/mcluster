@@ -27,7 +27,7 @@ spec:
   values:
     controllers:
       main:
-        replicas: 3
+        replicas: 2
         strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -48,14 +48,14 @@ spec:
               - secretRef:
                   name: plane-secret-envs
             resources:
-              # requests:
-              #   cpu: 10m
-              #   memory: 32Mi
+              requests:
+                cpu: 200m
+                memory: 300Mi
               limits:
-                memory: 1000Mi
                 cpu: 2000m
+                memory: 3000Mi
       space:
-        replicas: 3
+        replicas: 2
         strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -72,14 +72,14 @@ spec:
               - space
             envFrom: *envFrom
             resources:
-              # requests:
-              #   cpu: 10m
-              #   memory: 32Mi
+              requests:
+                cpu: 200m
+                memory: 300Mi
               limits:
-                memory: 1000Mi
                 cpu: 2000m
+                memory: 3000Mi
       api:
-        replicas: 3
+        replicas: 2
         strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -93,12 +93,12 @@ spec:
               - ./bin/takeoff
             envFrom: *envFrom
             resources:
-              # requests:
-              #   cpu: 10m
-              #   memory: 32Mi
+              requests:
+                cpu: 200m
+                memory: 300Mi
               limits:
-                memory: 1000Mi
                 cpu: 2000m
+                memory: 3000Mi
       worker:
         replicas: 1
         strategy: Recreate
