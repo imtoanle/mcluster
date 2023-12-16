@@ -114,9 +114,9 @@ spec:
               - ./bin/worker
             envFrom: *envFrom
             resources:
-              # requests:
-              #   cpu: 10m
-              #   memory: 32Mi
+              requests:
+                cpu: 300m
+                memory: 500Mi
               limits:
                 memory: 4000Mi
                 cpu: 1000m
@@ -135,9 +135,9 @@ spec:
               - ./bin/beat
             envFrom: *envFrom
             resources:
-              # requests:
-              #   cpu: 10m
-              #   memory: 32Mi
+              requests:
+                cpu: 300m
+                memory: 200Mi
               limits:
                 memory: 4000Mi
                 cpu: 1000m
