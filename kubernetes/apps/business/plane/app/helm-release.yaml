@@ -52,8 +52,8 @@ spec:
               #   cpu: 10m
               #   memory: 32Mi
               limits:
-                memory: 300Mi
-                cpu: 200m
+                memory: 1000Mi
+                cpu: 2000m
       space:
         replicas: 3
         strategy: Recreate
@@ -76,8 +76,8 @@ spec:
               #   cpu: 10m
               #   memory: 32Mi
               limits:
-                memory: 300Mi
-                cpu: 200m
+                memory: 1000Mi
+                cpu: 2000m
       api:
         replicas: 3
         strategy: Recreate
@@ -97,8 +97,8 @@ spec:
               #   cpu: 10m
               #   memory: 32Mi
               limits:
-                memory: 300Mi
-                cpu: 200m
+                memory: 1000Mi
+                cpu: 2000m
       worker:
         replicas: 1
         strategy: Recreate
