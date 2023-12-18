@@ -12,7 +12,7 @@ spec:
   jobTemplate:
     spec:
       backoffLimit: 1
-      ttlSecondsAfterFinished: 300
+      ttlSecondsAfterFinished: 50000
       template:
         spec:
           restartPolicy: Never
@@ -39,7 +39,7 @@ spec:
   jobTemplate:
     spec:
       backoffLimit: 1
-      ttlSecondsAfterFinished: 300
+      ttlSecondsAfterFinished: 50000
       template:
         spec:
           restartPolicy: Never
