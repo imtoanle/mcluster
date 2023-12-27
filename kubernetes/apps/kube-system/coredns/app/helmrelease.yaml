@@ -51,7 +51,7 @@ spec:
           - name: ready
           - name: hosts
             configBlock: |-
-              10.0.99.233 frigate.${SECRET_DOMAIN_2}
+              10.0.99.243 frigate.${SECRET_DOMAIN_2}
               fallthrough
           - name: kubernetes
             parameters: cluster.local in-addr.arpa ip6.arpa
