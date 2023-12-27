@@ -16,4 +16,4 @@ kubernetes:
           ansible_host: 10.0.99.102
         hc-worker-3:
           ansible_user: mitm
-          ansible_host: 10.0.99.198
+          ansible_host: 10.0.99.103
