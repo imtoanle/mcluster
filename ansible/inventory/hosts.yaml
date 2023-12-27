@@ -6,14 +6,14 @@ kubernetes:
         hc-master-1:
           ansible_user: mitm
           ansible_host: 10.0.99.100
+        hc-master-2:
+          ansible_user: mitm
+          ansible_host: 10.0.99.101
+        hc-master-3:
+          ansible_user: mitm
+          ansible_host: 10.0.99.102
     worker:
       hosts:
         hc-worker-1:
-          ansible_user: mitm
-          ansible_host: 10.0.99.101
-        hc-worker-2:
-          ansible_user: mitm
-          ansible_host: 10.0.99.102
-        hc-worker-3:
           ansible_user: mitm
           ansible_host: 10.0.99.103
