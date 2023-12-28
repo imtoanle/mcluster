@@ -71,11 +71,19 @@ spec:
         useAllNodes: false
         useAllDevices: false
         config:
+          metadataDevice: ""
           osdsPerDevice: "1"
+          encryptedDevice: false
         nodes:
           - name: hc-master-1
+            devices:
+              - name: "/dev/disk/by-id/dm-name-hc--master--1--vg-root"
           - name: hc-master-2
+            devices:
+              - name: "/dev/disk/by-id/dm-name-hc--worker--1--vg-root"
           - name: hc-master-3
+            devices:
+              - name: "/dev/disk/by-id/dm-name-hc--worker--2--vg-root"
       # placement:
       #   mgr: &placement
       #     nodeAffinity:
