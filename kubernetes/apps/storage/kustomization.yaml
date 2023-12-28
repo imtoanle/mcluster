@@ -7,5 +7,5 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./snapshot-controller/ks.yaml
-  - ./minio/ks.yaml
-  - ./seafile/ks.yaml
+  # - ./minio/ks.yaml
+  # - ./seafile/ks.yaml
