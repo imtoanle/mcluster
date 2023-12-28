@@ -1,0 +1,73 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: utils
+  namespace: debugging
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    defaultPodOptions:
+      # -- Configuring the ndots option may resolve nslookup issues on some Kubernetes setups.
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
+
+      # -- Defaults to "ClusterFirst" if hostNetwork is false
+      # and "ClusterFirstWithHostNet" if hostNetwork is true.
+      dnsPolicy: # ClusterFirst
+
+      # -- Use hostAliases to add custom entries to /etc/hosts - mapping IP addresses to hostnames.
+      # [[ref]](https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/)
+      hostAliases: []
+      # - ip: "192.168.1.100"
+      #   hostnames:
+      #   - "example.com"
+      #   - "www.example.com"
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+    controllers:
+      main:
+        strategy: RollingUpdate
+        containers:
+          main:
+            image:
+              repository: arunvelsriram/utils
+              tag: latest
+
+            command: ["sh", "-c", "sleep infinity"]
+
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+    service:
+      main:
+        enabled: false
+
+    ingress:
+      main:
+        enabled: false

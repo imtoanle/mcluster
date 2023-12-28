@@ -1,0 +1,95 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: seafile-office
+  namespace: seafile
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        # strategy: RollingUpdate
+        containers:
+          main:
+            image:
+              repository: onlyoffice/documentserver
+              tag: 7.5
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            env:
+              DB_TYPE: mariadb
+              DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
+              DB_PORT: 3306
+              DB_NAME: onlyoffice
+              DB_USER: onlyoffice
+              JWT_ENABLED: true
+              DB_PWD:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: mariadb-password
+              JWT_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: onlyoffice-jwt-secret
+
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 80
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+        hosts:
+          - host: &host "files-office.${SECRET_DOMAIN_2}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - secretName: "files-office-production-tls"
+            hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: seafile-office-config
+        globalMounts:
+          - path: /etc/onlyoffice/documentserver/production-linux.json
+            subPath: production-linux.json

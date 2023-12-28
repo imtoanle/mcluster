@@ -1,0 +1,67 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vitess-main-cluster-acl-config
+  namespace: database
+data:
+  leantime.json: |
+    {
+      "table_groups": [
+        {
+          "name": "leantimeacls",
+          "table_names_or_prefixes": ["%"],
+          "readers": ["leantime"],
+          "writers": ["leantime"],
+          "admins": ["leantime"]
+        }
+      ]
+    }
+  ccnet_db.json: |
+    {
+      "table_groups": [
+        {
+          "name": "ccnet_dbacls",
+          "table_names_or_prefixes": ["%"],
+          "readers": ["seafile"],
+          "writers": ["seafile"],
+          "admins": ["seafile"]
+        }
+      ]
+    }
+  onlyoffice.json: |
+    {
+      "table_groups": [
+        {
+          "name": "onlyofficeacls",
+          "table_names_or_prefixes": ["%"],
+          "readers": ["seafile"],
+          "writers": ["seafile"],
+          "admins": ["seafile"]
+        }
+      ]
+    }
+  seahub_db.json: |
+    {
+      "table_groups": [
+        {
+          "name": "seahub_dbacls",
+          "table_names_or_prefixes": ["%"],
+          "readers": ["seafile"],
+          "writers": ["seafile"],
+          "admins": ["seafile"]
+        }
+      ]
+    }
+  seafile_db.json: |
+    {
+      "table_groups": [
+        {
+          "name": "seafile_dbacls",
+          "table_names_or_prefixes": ["%"],
+          "readers": ["seafile"],
+          "writers": ["seafile"],
+          "admins": ["seafile"]
+        }
+      ]
+    }

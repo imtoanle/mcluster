@@ -1,0 +1,20 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: frigate
+resources:
+  - ./namespace.yaml
+  - ./frigate-pvc.yaml
+  - ./secret.sops.yaml
+  - ./helmrelease.yaml
+  - ./gatus.yaml
+  - ./gatus-camera.yaml
+configMapGenerator:
+  - name: frigate-configmap
+    files:
+      - config.yml=./config/config.yml
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled

@@ -1,0 +1,114 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app mattermost-team-edition
+  namespace: mattermost
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        replicas: 2
+        strategy: RollingUpdate
+        annotations:
+          secret.reloader.stakater.com/reload: &secret mattermost-secrets
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14.9
+              pullPolicy: IfNotPresent
+            envFrom: &envFrom
+              - secretRef:
+                  name: *secret
+        containers:
+          main:
+            image:
+              repository: mattermost/mattermost-team-edition
+              tag: 9.1.0@sha256:9a6427b6da27e25c9280dfe9bca55afe8b06bb50a8417f7ee1ad73e00aefe536
+            env:
+              MM_CONFIG:
+                valueFrom:
+                  secretKeyRef:
+                    name: *secret
+                    key: mattermost.dbsecret
+              MM_SERVICESETTINGS_SITEURL: "https://chat.${SECRET_DOMAIN_2}"
+              MM_SQLSETTINGS_DRIVERNAME: postgres
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v4/system/ping
+                    port: &port 8065
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            # resources:
+            #   requests:
+            #     cpu: 10m
+            #     memory: 32Mi
+            #   limits:
+            #     memory: 128Mi
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+          # nginx.ingress.kubernetes.io/proxy-buffering: "on"
+          # nginx.ingress.kubernetes.io/configuration-snippet: |
+          #   proxy_cache mattermost_cache;
+          #   proxy_cache_revalidate on;
+          #   proxy_cache_min_uses 2;
+          #   proxy_cache_use_stale timeout;
+          #   proxy_cache_lock on;
+          #### To use the nginx cache you will need to set an http-snippet in the ingress-nginx configmap
+          #### http-snippet: |
+          ####     proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=mattermost_cache:10m max_size=3g inactive=120m use_temp_path=off;
+        hosts:
+          - host: &host "chat.${SECRET_DOMAIN_2}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - secretName: "${SECRET_DOMAIN_2/./-}-production-tls"
+            hosts:
+              - *host

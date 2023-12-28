@@ -1,0 +1,141 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: flowise-app
+  namespace: flowise
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        strategy: RollingUpdate
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14.9
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: app-secrets
+        containers:
+          main:
+            image:
+              repository: aitbase/flowise-ai
+              tag: v1.3.8
+
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 3000
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+
+            env:
+              FLOWISE_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: flowise.username
+              FLOWISE_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: flowise.password
+              FLOWISE_SECRETKEY_OVERWRITE:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: flowise.secretkey.overwrite
+              APIKEY_PATH: /flowise_data/api
+              LOG_PATH: /flowise_data/logs
+              SECRETKEY_PATH: /flowise_data/secrets
+              DATABASE_TYPE: postgres
+              DATABASE_PORT: 5432
+              DATABASE_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: INIT_POSTGRES_HOST
+              DATABASE_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: INIT_POSTGRES_USER
+              DATABASE_NAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: INIT_POSTGRES_DBNAME
+              DATABASE_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secrets
+                    key: INIT_POSTGRES_PASS
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "flowise.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+        tls:
+          - secretName: "flowise-app-tls"
+            hosts:
+              - *host
+
+    # resources:
+    #   requests:
+    #     cpu: 100m
+    #     memory: 100Mi
+    #   limits:
+    #     memory: 500Mi
+    persistence:
+      data:
+        enabled: true
+        storageClass: home-cluster-nfs-1
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        globalMounts:
+          - path: /flowise_data
+            readOnly: false
