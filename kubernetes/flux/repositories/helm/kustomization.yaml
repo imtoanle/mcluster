@@ -19,6 +19,7 @@ resources:
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
+  - ./mariadb-operator.yaml
   - ./mattermost.yaml
   - ./metrics-server.yaml
   - ./minio.yaml
