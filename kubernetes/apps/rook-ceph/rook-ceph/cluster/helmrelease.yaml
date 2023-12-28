@@ -69,13 +69,13 @@ spec:
         nodes:
           - name: hc-master-1
             devices:
-              - name: /dev/disk/by-id/nvme-GIGABYTE_GP-ASM2NE6200TTTD_SN210308905841
+              - name: nvme0n1
           - name: hc-master-2
             devices:
-              - name: /dev/disk/by-id/nvme-GIGABYTE_GP-ASM2NE6200TTTD_SN210308904562
+              - name: nvme0n1
           - name: hc-master-3
             devices:
-              - name: /dev/disk/by-id/nvme-GIGABYTE_GP-ASM2NE6200TTTD_SN210308905856
+              - name: nvme0n1
       placement:
         mgr: &placement
           nodeAffinity:
