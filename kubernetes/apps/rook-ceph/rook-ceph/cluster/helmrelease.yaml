@@ -73,7 +73,7 @@ spec:
         config:
           metadataDevice: ""
           osdsPerDevice: "1"
-          encryptedDevice: false
+          encryptedDevice: "false"
         nodes:
           - name: hc-master-1
             devices:
