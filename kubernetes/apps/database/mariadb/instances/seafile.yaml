@@ -1,0 +1,40 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: MariaDB
+metadata:
+  name: seafile
+spec:
+  # bootstrapFrom:
+  #   backupRef:
+  #     name: backup
+  #   physical: true
+  username: seafile
+  database: seafile
+  env:
+    - name: TZ
+      value: SYSTEM
+  # envFrom:
+  #   - configMapRef:
+  #       name: mariadb
+  image: "mariadb:11.0.3"
+  imagePullPolicy: IfNotPresent
+  rootPasswordSecretKeyRef:
+    key: seafile-root-password
+    name: mariadb-instances-config
+  passwordSecretKeyRef:
+    key: seafile-password
+    name: mariadb-instances-config
+  port: 3306
+  resources:
+    limits:
+      cpu: 300m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  volumeClaimTemplate:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: ceph-block
