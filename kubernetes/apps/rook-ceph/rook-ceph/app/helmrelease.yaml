@@ -29,6 +29,8 @@ spec:
     - name: snapshot-controller
       namespace: storage
   values:
+    enableDiscoveryDaemon: true
+    discoveryDaemonInterval: 60m
     csi:
       cephFSKernelMountOptions: ms_mode=prefer-crc
       enableLiveness: true

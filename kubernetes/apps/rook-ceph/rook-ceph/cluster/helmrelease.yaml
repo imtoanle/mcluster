@@ -51,6 +51,10 @@ spec:
       bdev_async_discard = true
       osd_class_update_on_start = false
     cephClusterSpec:
+      mgr:
+        modules:
+          - name: rook
+            enabled: true
       network:
         provider: host
         connections:
