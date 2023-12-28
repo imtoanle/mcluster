@@ -53,6 +53,8 @@ spec:
     cephClusterSpec:
       mgr:
         modules:
+          - name: pg_autoscaler # This is already enabled by default, but needs to be here so that we don't override the default behavior.
+            enabled: true
           - name: rook
             enabled: true
       network:
