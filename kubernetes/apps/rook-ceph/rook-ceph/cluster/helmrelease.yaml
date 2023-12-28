@@ -76,15 +76,15 @@ spec:
           - name: hc-master-1
           - name: hc-master-2
           - name: hc-master-3
-      placement:
-        mgr: &placement
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
-                      operator: Exists
-        mon: *placement
+      # placement:
+      #   mgr: &placement
+      #     nodeAffinity:
+      #       requiredDuringSchedulingIgnoredDuringExecution:
+      #         nodeSelectorTerms:
+      #           - matchExpressions:
+      #               - key: node-role.kubernetes.io/control-plane
+      #                 operator: Exists
+      #   mon: *placement
       resources:
         mgr:
           requests:
