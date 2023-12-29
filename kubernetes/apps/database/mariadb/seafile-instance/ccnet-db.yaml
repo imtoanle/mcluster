@@ -10,5 +10,3 @@ spec:
     name: seafile-mariadb
   characterSet: utf8
   collate: utf8_general_ci
-  requeueInterval: 30s
-  retryInterval: 5s
