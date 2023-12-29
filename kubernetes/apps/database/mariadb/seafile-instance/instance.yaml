@@ -18,10 +18,10 @@ spec:
   image: "mariadb:11.0.3"
   imagePullPolicy: IfNotPresent
   rootPasswordSecretKeyRef:
-    key: root-password
+    key: instance-root-password
     name: mariadb-seafile-instance-config
   passwordSecretKeyRef:
-    key: password
+    key: instance-password
     name: mariadb-seafile-instance-config
   port: 3306
   resources:
