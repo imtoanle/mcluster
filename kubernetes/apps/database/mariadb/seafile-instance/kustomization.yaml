@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: database
 resources:
   - ./secrets.sops.yaml
-  - ./seafile.yaml
+  - ./instance.yaml

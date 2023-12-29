@@ -1,7 +1,7 @@
 apiVersion: mariadb.mmontes.io/v1alpha1
 kind: MariaDB
 metadata:
-  name: seafile
+  name: seafile-mariadb
 spec:
   # bootstrapFrom:
   #   backupRef:
@@ -19,10 +19,10 @@ spec:
   imagePullPolicy: IfNotPresent
   rootPasswordSecretKeyRef:
     key: seafile-root-password
-    name: mariadb-instances-config
+    name: mariadb-seafile-instance-config
   passwordSecretKeyRef:
     key: seafile-password
-    name: mariadb-instances-config
+    name: mariadb-seafile-instance-config
   port: 3306
   resources:
     limits:
