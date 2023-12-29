@@ -5,3 +5,6 @@ namespace: database
 resources:
   - ./secrets.sops.yaml
   - ./instance.yaml
+  - ./ccnet-db.yaml
+  - ./onlyoffice-db.yaml
+  - ./seahub-db.yaml

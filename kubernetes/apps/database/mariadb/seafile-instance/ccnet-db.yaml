@@ -1,0 +1,14 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: Database
+metadata:
+  name: ccnet-db
+spec:
+  name: ccnet_db
+  # If you want the database to be created with a different name than the resource name
+  # name: data-custom
+  mariaDbRef:
+    name: seafile-mariadb
+  characterSet: utf8
+  collate: utf8_general_ci
+  requeueInterval: 30s
+  retryInterval: 5s
