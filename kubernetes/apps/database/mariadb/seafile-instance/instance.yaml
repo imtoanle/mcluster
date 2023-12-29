@@ -1,14 +1,14 @@
 apiVersion: mariadb.mmontes.io/v1alpha1
 kind: MariaDB
 metadata:
-  name: seafile
+  name: seafile-mariadb
 spec:
   # bootstrapFrom:
   #   backupRef:
   #     name: backup
   #   physical: true
   username: seafile
-  database: seafile
+  database: seafile_db
   env:
     - name: TZ
       value: SYSTEM
@@ -19,10 +19,10 @@ spec:
   imagePullPolicy: IfNotPresent
   rootPasswordSecretKeyRef:
     key: seafile-root-password
-    name: mariadb-instances-config
+    name: mariadb-seafile-instance-config
   passwordSecretKeyRef:
     key: seafile-password
-    name: mariadb-instances-config
+    name: mariadb-seafile-instance-config
   port: 3306
   resources:
     limits:
