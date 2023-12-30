@@ -1,0 +1,15 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: User
+metadata:
+  name: onlyoffice-user
+spec:
+  name: onlyoffice
+  # If you want the user to be created with a different name than the resource name
+  # name: user-custom
+  mariaDbRef:
+    name: seafile-mariadb
+  passwordSecretKeyRef:
+    name: mariadb-seafile-instance-config
+    key: onlyoffice-password
+  # This field is immutable and defaults to 10
+  host: "%"

@@ -7,4 +7,5 @@ resources:
   - ./instance.yaml
   - ./ccnet-db.yaml
   - ./onlyoffice-db.yaml
+  - ./onlyoffice-user.yaml
   - ./seahub-db.yaml
