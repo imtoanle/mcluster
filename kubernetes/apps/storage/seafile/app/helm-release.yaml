@@ -56,18 +56,18 @@ spec:
               DEBUG: "True"
               TIME_ZONE: Asia/Ho_Chi_Minh
               SEAFILE_SERVER_HOSTNAME: "files.${SECRET_DOMAIN_2}"
-              DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
+              DB_HOST: seafile-mariadb.database.svc.cluster.local
               MYSQL_USER: seafile
               MYSQL_USER_PASSWD:
                 valueFrom:
                   secretKeyRef:
                     name: app-secrets
-                    key: mariadb-password
+                    key: seafile-mariadb-password
               DB_ROOT_PASSWD:
                 valueFrom:
                   secretKeyRef:
                     name: app-secrets
-                    key: mariadb-root-password
+                    key: seafile-mariadb-root-password
               SEAFILE_ADMIN_EMAIL:
                 valueFrom:
                   secretKeyRef:

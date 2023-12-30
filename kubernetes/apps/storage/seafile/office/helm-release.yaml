@@ -42,7 +42,7 @@ spec:
                 enabled: false
             env:
               DB_TYPE: mariadb
-              DB_HOST: seafile-db-mariadb.seafile.svc.cluster.local
+              DB_HOST: seafile-mariadb.database.svc.cluster.local
               DB_PORT: 3306
               DB_NAME: onlyoffice
               DB_USER: onlyoffice
@@ -51,7 +51,7 @@ spec:
                 valueFrom:
                   secretKeyRef:
                     name: app-secrets
-                    key: mariadb-password
+                    key: onlyoffice-mariadb-password
               JWT_SECRET:
                 valueFrom:
                   secretKeyRef:

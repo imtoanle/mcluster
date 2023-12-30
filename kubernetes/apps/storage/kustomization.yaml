@@ -8,4 +8,4 @@ resources:
   # Flux-Kustomizations
   - ./snapshot-controller/ks.yaml
   # - ./minio/ks.yaml
-  # - ./seafile/ks.yaml
+  - ./seafile
