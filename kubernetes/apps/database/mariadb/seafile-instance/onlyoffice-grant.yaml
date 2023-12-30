@@ -1,0 +1,14 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: Grant
+metadata:
+  name: onlyoffice-grant
+spec:
+  mariaDbRef:
+    name: seafile-mariadb
+  privileges:
+    - "ALL PRIVILEGES"
+  database: "onlyoffice"
+  table: "*"
+  username: onlyoffice
+  grantOption: true
+  host: "%"

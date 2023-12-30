@@ -8,4 +8,5 @@ resources:
   - ./ccnet-db.yaml
   - ./onlyoffice-db.yaml
   - ./onlyoffice-user.yaml
+  - ./onlyoffice-grant.yaml
   - ./seahub-db.yaml
