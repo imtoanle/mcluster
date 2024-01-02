@@ -8,5 +8,6 @@ resources:
   - leantime
   - mattermost
   - ./plane/ks.yaml
+  - ./stirling-pdf/ks.yaml
   - superset
   - trilium-notes
