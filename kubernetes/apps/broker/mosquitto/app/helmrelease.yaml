@@ -64,7 +64,7 @@ spec:
             - name: data
               accessMode: ReadWriteOnce
               size: 512Mi
-              storageClass: home-cluster-nfs-1
+              storageClass: ceph-block
               globalMounts:
                 - path: /data
     service:
