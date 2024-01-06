@@ -9,3 +9,4 @@ resources:
   - ./snapshot-controller/ks.yaml
   - ./minio/ks.yaml
   - ./seafile
+  - ./volsync/ks.yaml
