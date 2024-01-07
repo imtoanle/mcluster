@@ -77,7 +77,7 @@ spec:
       #   pathType: Prefix
       console:
         enabled: true
-        ingressClassName: internal
+        ingressClassName: external
         # labels: {}
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
