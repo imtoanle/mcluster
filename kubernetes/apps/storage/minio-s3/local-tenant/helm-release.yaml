@@ -1,0 +1,83 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minio-local-tenant
+  namespace: storage
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: tenant
+      version: 5.0.11
+      sourceRef:
+        kind: HelmRepository
+        name: minio-operator
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    secrets:
+      existingSecret:
+        name: minio-local-tenant-env-configuration
+    tenant:
+      name: local-minio
+      configuration:
+        name: minio-local-tenant-env-configuration
+      pools:
+        - servers: 3
+          name: pool-0
+          volumesPerServer: 2
+          size: 100Gi
+          storageClassName: local-path
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: node-role.kubernetes.io/control-plane
+                        operator: Exists
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
+            runAsNonRoot: true
+          containerSecurityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+      subPath: /data
+      metrics:
+        enabled: true
+      buckets:
+        - name: data
+          objectLock: false
+      # ingress:
+      #   api:
+      #     enabled: false
+      #     ingressClassName: ""
+      #     labels: { }
+      #     annotations: { }
+      #     tls: [ ]
+      #     host: minio.local
+      #     path: /
+      #     pathType: Prefix
+      #   console:
+      #     enabled: false
+      #     ingressClassName: ""
+      #     labels: { }
+      #     annotations: { }
+      #     tls: [ ]
+      #     host: minio-console.local
+      #     path: /
+      #     pathType: Prefix
