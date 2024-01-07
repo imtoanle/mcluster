@@ -7,4 +7,3 @@ resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
   - ./gatus.yaml
-  - ../../../../templates/volsync
