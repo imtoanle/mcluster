@@ -1,0 +1,75 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minio-nas-tenant
+  namespace: storage
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: tenant
+      version: 5.0.11
+      sourceRef:
+        kind: HelmRepository
+        name: minio-operator
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    secrets:
+      existingSecret:
+        name: minio-nas-tenant-env-configuration
+    tenant:
+      name: nas-minio
+      configuration: minio-nas-tenant-env-configuration
+      pools:
+        - servers: 1
+          name: pool-0
+          volumesPerServer: 4
+          size: 500Gi
+          storageClassName: nfs-zfs-1
+          securityContext:
+            runAsUser: 65534
+            runAsGroup: 65534
+            fsGroup: 65534
+            fsGroupChangePolicy: "OnRootMismatch"
+            runAsNonRoot: true
+          containerSecurityContext:
+            runAsUser: 65534
+            runAsGroup: 65534
+            runAsNonRoot: true
+      subPath: /data
+      metrics:
+        enabled: true
+      buckets:
+        - name: backups
+          objectLock: false
+      # ingress:
+      #   api:
+      #     enabled: false
+      #     ingressClassName: ""
+      #     labels: { }
+      #     annotations: { }
+      #     tls: [ ]
+      #     host: minio.local
+      #     path: /
+      #     pathType: Prefix
+      #   console:
+      #     enabled: false
+      #     ingressClassName: ""
+      #     labels: { }
+      #     annotations: { }
+      #     tls: [ ]
+      #     host: minio-console.local
+      #     path: /
+      #     pathType: Prefix
