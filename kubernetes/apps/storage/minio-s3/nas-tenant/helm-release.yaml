@@ -55,6 +55,8 @@ spec:
       buckets:
         - name: backups
           objectLock: false
+        - name: restic-backups
+          objectLock: false
       # ingress:
       #   api:
       #     enabled: false

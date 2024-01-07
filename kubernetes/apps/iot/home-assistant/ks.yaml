@@ -5,6 +5,7 @@ metadata:
   name: cluster-apps-iot-home-assistant-app
   namespace: flux-system
 spec:
+  targetNamespace: home-assistant
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
   path: ./kubernetes/apps/iot/home-assistant/app
@@ -16,3 +17,10 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+  postBuild:
+    substitute:
+      APP: home-assistant
+      VOLSYNC_CAPACITY: 5Gi
+      VOLSYNC_ACCESSMODES: ReadWriteMany
+      VOLSYNC_STORAGECLASS: ceph-filesystem
+      VOLSYNC_SNAPSHOTCLASS: csi-ceph-filesystem
