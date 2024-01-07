@@ -36,8 +36,8 @@ spec:
       pools:
         - servers: 1
           name: pool-0
-          volumesPerServer: 4
-          size: 500Gi
+          volumesPerServer: 1
+          size: 1000Gi
           storageClassName: nfs-zfs-1
           securityContext:
             runAsUser: 65534
