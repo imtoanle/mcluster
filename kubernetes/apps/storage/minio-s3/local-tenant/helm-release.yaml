@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: minio-ceph-tenant
+  name: minio-local-tenant
   namespace: storage
 spec:
   interval: 15m
@@ -28,24 +28,24 @@ spec:
   values:
     secrets:
       existingSecret:
-        name: minio-ceph-tenant-env-configuration
+        name: minio-local-tenant-env-configuration
     tenant:
-      name: ceph-minio
+      name: local-minio
       configuration:
-        name: minio-ceph-tenant-env-configuration
+        name: minio-local-tenant-env-configuration
       pools:
         - servers: 3
           name: pool-0
           volumesPerServer: 2
           size: 100Gi
-          storageClassName: ceph-block
-          # affinity:
-          #   nodeAffinity:
-          #     requiredDuringSchedulingIgnoredDuringExecution:
-          #       nodeSelectorTerms:
-          #         - matchExpressions:
-          #             - key: node-role.kubernetes.io/control-plane
-          #               operator: Exists
+          storageClassName: local-path
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: node-role.kubernetes.io/control-plane
+                        operator: Exists
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
