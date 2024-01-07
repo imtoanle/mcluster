@@ -34,18 +34,11 @@ spec:
       configuration:
         name: minio-local-tenant-env-configuration
       pools:
-        - servers: 3
+        - servers: 4
           name: pool-0
           volumesPerServer: 1
           size: 100Gi
           storageClassName: local-path
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: node-role.kubernetes.io/control-plane
-                        operator: Exists
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
