@@ -59,9 +59,9 @@ spec:
           objectLock: false
       certificate:
         requestAutoCert: false
-        externalCertSecret:
-          - name: nas-minio-console-ingress-tls
-            type: cert-manager.io/v1
+        # externalCertSecret:
+        #   - name: nas-minio-console-ingress-tls
+        #     type: cert-manager.io/v1
     ingress:
       # api:
       #   enabled: false
