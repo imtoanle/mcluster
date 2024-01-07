@@ -5,6 +5,7 @@ metadata:
   name: cluster-apps-iot-home-assistant-app
   namespace: flux-system
 spec:
+  targetNamespace: home-assistant
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
   path: ./kubernetes/apps/iot/home-assistant/app
