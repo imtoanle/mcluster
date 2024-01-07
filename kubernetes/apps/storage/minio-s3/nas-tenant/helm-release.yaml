@@ -57,22 +57,31 @@ spec:
           objectLock: false
         - name: restic-backups
           objectLock: false
-      # ingress:
-      #   api:
-      #     enabled: false
-      #     ingressClassName: ""
-      #     labels: { }
-      #     annotations: { }
-      #     tls: [ ]
-      #     host: minio.local
-      #     path: /
-      #     pathType: Prefix
-      #   console:
-      #     enabled: false
-      #     ingressClassName: ""
-      #     labels: { }
-      #     annotations: { }
-      #     tls: [ ]
-      #     host: minio-console.local
-      #     path: /
-      #     pathType: Prefix
+      env:
+        MINIO_SERVER_URL: http://minio.nas-minio.svc.cluster.local:9000
+        MINIO_BROWSER_REDIRECT_URL: https://console.nas-s3.${SECRET_DOMAIN}
+      ingress:
+        api:
+          enabled: true
+          ingressClassName: internal
+          # labels: {}
+          # annotations: {}
+          # tls:
+          #   - secretName: nas-minio-ingress-tls
+          #     hosts:
+          #       - *host
+          host: "nas-s3.${SECRET_DOMAIN}"
+          path: /
+          pathType: Prefix
+        console:
+          enabled: true
+          ingressClassName: internal
+          # labels: {}
+          # annotations: {}
+          # tls:
+          #   - secretName: nas-minio-console-ingress-tls
+          #     hosts:
+          #       - *host
+          host: "console.nas-s3.${SECRET_DOMAIN}"
+          path: /
+          pathType: Prefix
