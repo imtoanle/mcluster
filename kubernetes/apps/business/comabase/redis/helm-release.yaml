@@ -27,17 +27,17 @@ spec:
     keepHistory: false
   values:
     # global:
-    #   storageClass: home-cluster-nfs-1
+    #   storageClass: local-path
     architecture: standalone
     auth:
       existingSecret: db-secrets
       existingSecretPasswordKey: redis-password
     master:
-      podSecurityContext:
-        fsGroup: 65534
-      containerSecurityContext:
-        runAsUser: 65534
-        runAsGroup: 0
+      # podSecurityContext:
+      #   fsGroup: 65534
+      # containerSecurityContext:
+      #   runAsUser: 65534
+      #   runAsGroup: 0
       persistence:
         enabled: true
         storageClass: local-path
