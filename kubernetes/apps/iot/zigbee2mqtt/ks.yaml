@@ -6,6 +6,7 @@ metadata:
   name: cluster-apps-zigbee2mqtt
   namespace: flux-system
 spec:
+  targetNamespace: zigbee2mqtt
   path: ./kubernetes/apps/iot/zigbee2mqtt/app
   prune: true
   sourceRef:
@@ -15,3 +16,10 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+  postBuild:
+    substitute:
+      APP: zigbee2mqtt
+      VOLSYNC_CAPACITY: 1Gi
+      VOLSYNC_ACCESSMODES: ReadWriteMany
+      VOLSYNC_STORAGECLASS: ceph-filesystem
+      VOLSYNC_SNAPSHOTCLASS: csi-ceph-filesystem

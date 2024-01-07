@@ -28,10 +28,13 @@ spec:
   dependsOn:
     - name: mosquitto
       namespace: broker
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+    - name: volsync
+      namespace: storage
   values:
     controllers:
       main:
-        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -81,18 +84,11 @@ spec:
                 memory: 512Mi
         pod:
           securityContext:
-            runAsUser: 0
+            runAsUser: 568
             runAsGroup: 568
-            fsGroup: 65536
+            runAsNonRoot: true
+            fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              size: 1Gi
-              storageClass: home-cluster-nfs-1
-              globalMounts:
-                - path: /config
     service:
       main:
         ports:
@@ -112,3 +108,7 @@ spec:
         tls:
           - hosts:
               - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: zigbee2mqtt
