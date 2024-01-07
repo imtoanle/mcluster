@@ -31,7 +31,8 @@ spec:
         name: minio-nas-tenant-env-configuration
     tenant:
       name: nas-minio
-      configuration: minio-nas-tenant-env-configuration
+      configuration:
+        name: minio-nas-tenant-env-configuration
       pools:
         - servers: 1
           name: pool-0
