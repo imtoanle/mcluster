@@ -61,6 +61,7 @@ spec:
         externalCertSecret:
           - name: "${SECRET_DOMAIN/./-}-production-tls"
             type: cert-manager.io/v1
+            namespace: networking
     ingress:
       # api:
       #   enabled: false
