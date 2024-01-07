@@ -74,11 +74,11 @@ spec:
         enabled: true
         ingressClassName: internal
         # labels: {}
-        # annotations: {}
-        # tls:
-        #   - secretName: nas-minio-console-ingress-tls
-        #     hosts:
-        #       - *host
+        annotations: {}
+        tls:
+          - secretName: nas-minio-console-ingress-tls
+            hosts:
+              - *host
         host: "console.nas-s3.${SECRET_DOMAIN}"
         path: /
         pathType: Prefix
