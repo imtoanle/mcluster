@@ -57,10 +57,10 @@ spec:
           objectLock: false
         - name: restic-backups
           objectLock: false
-      # certificate:
-      #   externalCertSecret:
-      #     - name: letsencrypt-production
-      #       type: cert-manager.io/v1
+      certificate:
+        externalCertSecret:
+          - name: "${SECRET_DOMAIN/./-}-production-tls"
+            type: cert-manager.io/v1
     ingress:
       # api:
       #   enabled: false
