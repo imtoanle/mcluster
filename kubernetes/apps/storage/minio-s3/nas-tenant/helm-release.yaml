@@ -81,9 +81,8 @@ spec:
         # labels: {}
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-        host: &consolehost "console.nas-s3.${SECRET_DOMAIN_2}"
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        host: &consolehost "console-nas-s3.${SECRET_DOMAIN}"
         tls:
           - secretName: nas-minio-console-ingress-tls
             hosts:
