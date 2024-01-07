@@ -59,9 +59,8 @@ spec:
           objectLock: false
       certificate:
         externalCertSecret:
-          - name: "${SECRET_DOMAIN/./-}-production-tls"
+          - name: nas-minio-console-ingress-tls
             type: cert-manager.io/v1
-            namespace: networking
     ingress:
       # api:
       #   enabled: false
