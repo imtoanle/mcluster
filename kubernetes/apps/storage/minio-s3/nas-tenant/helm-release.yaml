@@ -78,7 +78,8 @@ spec:
         enabled: true
         ingressClassName: internal
         # labels: {}
-        annotations: {}
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         tls:
           - secretName: nas-minio-console-ingress-tls
             hosts:
