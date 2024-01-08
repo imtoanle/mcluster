@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: &name immich-machine-learning
     app.kubernetes.io/instance: *name
 spec:
-  storageClassName: home-cluster-nfs-1
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:
