@@ -114,6 +114,6 @@ spec:
     #     globalMounts:
     #       - path: /directus/uploads
     #         readOnly: false
-    #     storageClass: home-cluster-nfs-1
+    #     storageClass: local-path
     #     accessMode: ReadWriteOnce
     #     size: 5Gi

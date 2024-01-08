@@ -81,11 +81,11 @@ spec:
         globalMounts:
           - path: /app/config.yaml
             subPath: config.yaml
-      uploads:
-        enabled: true
-        globalMounts:
-          - path: /app/uploads
-            readOnly: false
-        storageClass: home-cluster-nfs-1
-        accessMode: ReadWriteOnce
-        size: 1Gi
+      # uploads:
+      #   enabled: true
+      #   globalMounts:
+      #     - path: /app/uploads
+      #       readOnly: false
+      #   storageClass: rook-ceph
+      #   accessMode: ReadWriteOnce
+      #   size: 1Gi
