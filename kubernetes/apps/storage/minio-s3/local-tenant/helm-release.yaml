@@ -55,22 +55,34 @@ spec:
       buckets:
         - name: data
           objectLock: false
-      # ingress:
-      #   api:
-      #     enabled: false
-      #     ingressClassName: ""
-      #     labels: { }
-      #     annotations: { }
-      #     tls: [ ]
-      #     host: minio.local
-      #     path: /
-      #     pathType: Prefix
-      #   console:
-      #     enabled: false
-      #     ingressClassName: ""
-      #     labels: { }
-      #     annotations: { }
-      #     tls: [ ]
-      #     host: minio-console.local
-      #     path: /
-      #     pathType: Prefix
+    ingress:
+      api:
+        enabled: true
+        ingressClassName: external
+        # labels: {}
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+        host: &apihost "local-s3.${SECRET_DOMAIN_2}"
+        tls:
+          - secretName: local-minio-ingress-tls
+            hosts:
+              - *apihost
+        path: /
+        pathType: Prefix
+      console:
+        enabled: true
+        ingressClassName: external
+        # labels: {}
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+        host: &consolehost "console.local-s3.${SECRET_DOMAIN_2}"
+        tls:
+          - secretName: local-minio-console-ingress-tls
+            hosts:
+              - *consolehost
+        path: /
+        pathType: Prefix
