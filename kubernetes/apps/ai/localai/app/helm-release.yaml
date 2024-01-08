@@ -46,7 +46,7 @@ spec:
             - ReadWriteOnce
           annotations: {}
           # Optional
-          storageClass: home-cluster-nfs-1
+          storageClass: local-path
 
         hostPath:
           enabled: true
