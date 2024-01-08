@@ -90,4 +90,4 @@ spec:
       fsGroup: 65534
     resources:
       requests:
-        memory: 4Gi
+        memory: 12Gi
