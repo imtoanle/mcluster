@@ -121,3 +121,6 @@ spec:
         storageClass: home-cluster-nfs-1
         accessMode: ReadWriteOnce
         size: 100Gi
+      new-data:
+        enabled: true
+        existingClaim: seafile-data
