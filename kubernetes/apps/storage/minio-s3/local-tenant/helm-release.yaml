@@ -50,6 +50,14 @@ spec:
             runAsGroup: 1000
             runAsNonRoot: true
       subPath: /data
+      additionalVolumes:
+        - name: old-data
+          persistentVolumeClaim:
+            claimName: minio
+            namespace: minio
+      additionalVolumeMounts:
+        - mountPath: /old-data
+          name: old-data
       metrics:
         enabled: true
       buckets:
