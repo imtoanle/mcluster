@@ -5,6 +5,7 @@ metadata:
   name: cluster-apps-business-trilium-notes-app
   namespace: flux-system
 spec:
+  targetNamespace: trilium-notes
   path: ./kubernetes/apps/business/trilium-notes/app
   prune: true
   sourceRef:
