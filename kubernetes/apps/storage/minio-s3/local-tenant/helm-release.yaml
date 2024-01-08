@@ -55,6 +55,8 @@ spec:
       buckets:
         - name: data
           objectLock: false
+      certificate:
+        requestAutoCert: false
     ingress:
       api:
         enabled: true
