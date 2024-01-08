@@ -41,7 +41,9 @@ spec:
           storageClassName: local-path
           resources:
             requests:
-              memory: 8Gi
+              memory: 4Gi
+            limits:
+              memory: 12Gi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
