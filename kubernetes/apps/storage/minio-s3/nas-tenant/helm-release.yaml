@@ -59,30 +59,31 @@ spec:
           objectLock: false
       certificate:
         requestAutoCert: false
-        # externalCertSecret:
-        #   - name: nas-minio-console-ingress-tls
-        #     type: cert-manager.io/v1
     ingress:
-      # api:
-      #   enabled: false
-      #   ingressClassName: internal
-      #   # labels: {}
-      #   # annotations: {}
-      #   # tls:
-      #   #   - secretName: nas-minio-ingress-tls
-      #   #     hosts:
-      #   #       - *host
-      #   host: "nas-s3.${SECRET_DOMAIN}"
-      #   path: /
-      #   pathType: Prefix
+      api:
+        enabled: true
+        ingressClassName: external
+        # labels: {}
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+        host: &apihost "nas-s3.${SECRET_DOMAIN_2}"
+        tls:
+          - secretName: nas-minio-ingress-tls
+            hosts:
+              - *apihost
+        path: /
+        pathType: Prefix
       console:
         enabled: true
         ingressClassName: external
         # labels: {}
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        host: &consolehost "console-nas-s3.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+        host: &consolehost "console.nas-s3.${SECRET_DOMAIN_2}"
         tls:
           - secretName: nas-minio-console-ingress-tls
             hosts:
