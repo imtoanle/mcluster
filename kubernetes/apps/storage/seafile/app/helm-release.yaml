@@ -113,14 +113,6 @@ spec:
               - *host
 
     persistence:
-      data:
-        enabled: true
-        globalMounts:
-          - path: /shared
-            readOnly: false
-        storageClass: home-cluster-nfs-1
-        accessMode: ReadWriteOnce
-        size: 100Gi
-      new-data:
+      shared:
         enabled: true
         existingClaim: seafile-data
