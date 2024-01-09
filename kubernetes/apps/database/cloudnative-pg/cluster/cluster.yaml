@@ -8,7 +8,7 @@ metadata:
     kyverno.io/ignore: "true"
 spec:
   instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
+  imageName: ghcr.io/imtoanle/cnpgvecto.rs:16.1-v0.1.13
   enableSuperuserAccess: true
   inheritedMetadata:
     labels:
@@ -23,6 +23,8 @@ spec:
     recovery:
       source: &previousCluster postgres-v1
   postgresql:
+    shared_preload_libraries:
+      - "vectors.so"
     parameters:
       max_connections: "600"
       shared_buffers: 512MB
