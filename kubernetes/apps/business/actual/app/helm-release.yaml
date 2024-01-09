@@ -1,0 +1,79 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app actual-app
+  namespace: business
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        replicas: 1
+        # strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: docker.io/actualbudget/actual-server
+              tag: latest
+              pullPolicy: Always
+            env:
+              ACTUAL_UPLOAD_FILE_SYNC_SIZE_LIMIT_MB: 20
+              ACTUAL_UPLOAD_SYNC_ENCRYPTED_FILE_SYNC_SIZE_LIMIT_MB: 50
+              ACTUAL_UPLOAD_FILE_SIZE_LIMIT_MB: 20
+            # resources:
+            #   requests:
+            #     cpu: 200m
+            #     memory: 300Mi
+            #   limits:
+            #     cpu: 2000m
+            #     memory: 3000Mi
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 5006
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "actual.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                name: main
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      data:
+        enabled: true
+        existingClaim: actual-server
