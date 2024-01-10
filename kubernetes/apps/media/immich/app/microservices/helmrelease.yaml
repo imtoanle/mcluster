@@ -31,7 +31,7 @@ spec:
   values:
     controllers:
       main:
-        replicas: 2
+        replicas: 1
         strategy: RollingUpdate
         annotations:
           configmap.reloader.stakater.com/reload: &configMap immich-configmap
@@ -41,8 +41,10 @@ spec:
             image:
               repository: ghcr.io/immich-app/immich-server
               tag: v1.91.4
-            command: "/bin/sh"
-            args: ["start-microservices.sh"]
+            command:
+              - /bin/sh
+            args:
+              - ./start-microservices.sh
             envFrom:
               - configMapRef:
                   name: *configMap
