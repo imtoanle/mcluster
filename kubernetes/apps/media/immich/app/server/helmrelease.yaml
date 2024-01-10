@@ -26,8 +26,6 @@ spec:
   uninstall:
     keepHistory: false
   dependsOn:
-    - name: immich-typesense
-      namespace: immich
     - name: redis
       namespace: database
   values:
@@ -73,7 +71,7 @@ spec:
           main:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v1.84.0
+              tag: v1.91.4
             args: ["start-server.sh"]
             envFrom: *envFrom
             resources:
@@ -93,6 +91,44 @@ spec:
         ports:
           http:
             port: 3001
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          # nginx.ingress.kubernetes.io/configuration-snippet: |
+          #   rewrite /api/(.*) /$1 break;
+          #   set $forwarded_client_ip "";
+          #   if ($http_x_forwarded_for ~ "^([^,]+)") {
+          #     set $forwarded_client_ip $1;
+          #   }
+          #   set $client_ip $remote_addr;
+          #   if ($forwarded_client_ip != "") {
+          #     set $client_ip $forwarded_client_ip;
+          #   }
+          # nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          # nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          # nginx.ingress.kubernetes.io/upstream-hash-by: "$client_ip"
+        hosts:
+          - host: &host photos.${SECRET_DOMAIN_2}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+              # - path: /api
+              #   service:
+              #     name: immich-server
+              #     port: 3001
+        tls:
+          - secretName: immich-ingress-tls
+            hosts:
+              - *host
+
     persistence:
       library:
         existingClaim: immich-nfs

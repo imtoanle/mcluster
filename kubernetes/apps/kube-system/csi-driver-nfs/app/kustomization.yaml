@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ./helmrelease.yaml
-  - ./mcluster-storageclass.yaml
   - ./storageclass.yaml
   - ./zfs1-storageclass.yaml
   - ./camera-storageclass.yaml
