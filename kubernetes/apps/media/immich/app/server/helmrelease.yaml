@@ -72,12 +72,13 @@ spec:
             image:
               repository: ghcr.io/immich-app/immich-server
               tag: v1.91.4
+            command: "/bin/sh"
             args: ["start-server.sh"]
             envFrom: *envFrom
-            resources:
-              requests:
-                cpu: 100m
-                memory: 250Mi
+            # resources:
+            #   requests:
+            #     cpu: 100m
+            #     memory: 250Mi
         pod:
           topologySpreadConstraints:
             - maxSkew: 1
