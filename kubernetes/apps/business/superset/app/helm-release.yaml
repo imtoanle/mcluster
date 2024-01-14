@@ -35,6 +35,11 @@ spec:
           secretKeyRef:
             name: db-secrets
             key: password
+      - name: SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            name: db-secrets
+            key: secretkey
 
     postgresql:
       enabled: false
