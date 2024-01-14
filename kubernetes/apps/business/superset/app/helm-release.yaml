@@ -27,6 +27,7 @@ spec:
     keepHistory: false
   values:
     extraEnvRaw:
+      - DB_HOST: postgres-rw.database.svc.cluster.local
       - name: DB_PASS
         valueFrom:
           secretKeyRef:
@@ -34,29 +35,7 @@ spec:
             key: password
 
     postgresql:
-      enabled: true
-
-      ## Authentication parameters
-      auth:
-        ## The name of an existing secret that contains the postgres password.
-        existingSecret: db-secrets
-        username: superset
-        database: superset
-      primary:
-        podSecurityContext:
-          fsGroup: 65534
-        containerSecurityContext:
-          runAsUser: 65534
-          runAsGroup: 0
-        ##
-        ## Persistent Volume Storage configuration.
-        ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
-        persistence:
-          enabled: true
-          storageClass: home-cluster-nfs-1
-          size: 20Gi
-          accessModes:
-            - ReadWriteOnce
+      enabled: false
 
     ingress:
       enabled: true
