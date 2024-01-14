@@ -27,7 +27,11 @@ spec:
     keepHistory: false
   values:
     extraEnvRaw:
-      - DB_HOST: postgres-rw.database.svc.cluster.local
+      - name: DB_HOST
+        valueFrom:
+          secretKeyRef:
+            name: db-secrets
+            key: db-host
       - name: DB_PASS
         valueFrom:
           secretKeyRef:
