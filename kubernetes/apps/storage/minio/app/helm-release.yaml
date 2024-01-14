@@ -35,7 +35,7 @@ spec:
     existingSecret: user-secrets
     persistence:
       enabled: true
-      storageClass: home-cluster-nfs-1
+      # storageClass: home-cluster-nfs-1
       accessMode: ReadWriteOnce
       size: 500Gi
       subPath: data

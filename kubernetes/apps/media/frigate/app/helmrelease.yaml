@@ -85,7 +85,7 @@ spec:
             - name: config
               accessMode: ReadWriteOnce
               size: 5Gi
-              storageClass: home-cluster-nfs-1
+              # storageClass: home-cluster-nfs-1
               globalMounts:
                 - path: /data
     service:
