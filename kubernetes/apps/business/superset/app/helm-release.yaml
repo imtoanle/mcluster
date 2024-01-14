@@ -26,9 +26,9 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    configOverrides:
-      secret: |
-        SECRET_KEY = env('SECRET_KEY', '')
+    # configOverrides:
+    #   secret: |
+    #     SECRET_KEY = env('SECRET_KEY', '')
     supersetNode:
       connections:
         db_host: postgres-rw.database.svc.cluster.local
@@ -38,7 +38,7 @@ spec:
           secretKeyRef:
             name: db-secrets
             key: password
-      - name: SECRET_KEY
+      - name: SUPERSET_SECRET_KEY
         valueFrom:
           secretKeyRef:
             name: db-secrets
