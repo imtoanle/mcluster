@@ -6,6 +6,6 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./cloudnative-pg/ks.yaml
-  - ./vitess/ks.yaml
+  # - ./vitess/ks.yaml
   - ./redis/ks.yaml
   - ./mariadb/ks.yaml
