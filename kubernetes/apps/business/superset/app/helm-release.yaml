@@ -26,12 +26,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    supersetNode:
+      connections:
+        db_host: postgres-rw.database.svc.cluster.local
     extraEnvRaw:
-      - name: DB_HOST
-        valueFrom:
-          secretKeyRef:
-            name: db-secrets
-            key: db-host
       - name: DB_PASS
         valueFrom:
           secretKeyRef:
