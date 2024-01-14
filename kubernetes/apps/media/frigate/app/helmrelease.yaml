@@ -71,11 +71,11 @@ spec:
               limits:
                 # memory: 3Gi
                 gpu.intel.com/i915: "1"
-        pod:
-          securityContext:
-            # runAsUser: 568
-            # runAsGroup: 568
-            fsGroup: 65534
+          # pod:
+          # securityContext:
+          # runAsUser: 568
+          # runAsGroup: 568
+          # fsGroup: 65534
           nodeSelector:
             google.feature.node.kubernetes.io/coral: "true"
             intel.feature.node.kubernetes.io/gpu: "true"
