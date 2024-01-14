@@ -84,8 +84,8 @@ spec:
           volumeClaimTemplates:
             - name: config
               accessMode: ReadWriteOnce
-              size: 5Gi
-              # storageClass: home-cluster-nfs-1
+              size: 1Gi
+              storageClass: ceph-block
               globalMounts:
                 - path: /data
     service:
