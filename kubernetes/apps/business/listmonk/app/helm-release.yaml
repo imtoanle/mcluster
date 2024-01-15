@@ -51,10 +51,7 @@ spec:
             command:
               - sh
               - -c
-              - ./listmonk
-            args:
-              - --config
-              - /etc/config.toml
+              - ./listmonk --config /etc/config.toml
     service:
       main:
         controller: main
