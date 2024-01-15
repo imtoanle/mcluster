@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.0.3
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -44,7 +44,7 @@ spec:
           main:
             image:
               repository: mattermost/mattermost-team-edition
-              tag: 9.1.0@sha256:9a6427b6da27e25c9280dfe9bca55afe8b06bb50a8417f7ee1ad73e00aefe536
+              tag: 9.3.0
             env:
               MM_CONFIG:
                 valueFrom:
