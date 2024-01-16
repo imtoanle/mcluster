@@ -48,29 +48,9 @@ spec:
               pullPolicy: Always
             env:
               TZ: Asia/Ho_Chi_Minh
-              LISTMONK_app__address: "0.0.0.0:9000"
-              LISTMONK_app__admin_username: ""
-              LISTMONK_app__admin_password: ""
-              LISTMONK_db__host:
-                valueFrom:
-                  secretKeyRef:
-                    name: listmonk-secrets
-                    key: INIT_POSTGRES_HOST
-              LISTMONK_db__user:
-                valueFrom:
-                  secretKeyRef:
-                    name: listmonk-secrets
-                    key: INIT_POSTGRES_USER
-              LISTMONK_db__password:
-                valueFrom:
-                  secretKeyRef:
-                    name: listmonk-secrets
-                    key: INIT_POSTGRES_PASS
-              LISTMONK_db__database:
-                valueFrom:
-                  secretKeyRef:
-                    name: listmonk-secrets
-                    key: INIT_POSTGRES_DBNAME
+            envFrom:
+              - secretRef:
+                  name: listmonk-secrets
             command:
               - sh
               - -c
@@ -87,9 +67,6 @@ spec:
         enabled: true
         className: external
         annotations:
-          nginx.ingress.kubernetes.io/auth-type: basic
-          nginx.ingress.kubernetes.io/auth-secret: listmonk-secrets
-          nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hosts:
           - host: &host "subcribe.${SECRET_DOMAIN}"
