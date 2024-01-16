@@ -73,7 +73,7 @@ spec:
             command:
               - sh
               - -c
-              - ./listmonk
+              - ./listmonk --install
     service:
       main:
         controller: main
