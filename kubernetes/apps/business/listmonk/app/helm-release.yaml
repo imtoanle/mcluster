@@ -48,6 +48,7 @@ spec:
               pullPolicy: Always
             env:
               TZ: Asia/Ho_Chi_Minh
+              LISTMONK_app__address: "0.0.0.0:9000"
               LISTMONK_app__admin_username: ""
               LISTMONK_app__admin_password: ""
               LISTMONK_db__host:
