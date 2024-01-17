@@ -1,0 +1,103 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app n8n-app
+  namespace: automation
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        replicas: 1
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 14.9
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: n8n-app-secrets
+        containers:
+          main:
+            image:
+              repository: docker.io/n8nio/n8n
+              tag: 1.24.1
+            env:
+              GENERIC_TIMEZONE: Asia/ho_Chi_Minh
+              N8N_PORT: &port 80
+              N8N_HOST: &host "n8n.${SECRET_DOMAIN}"
+              WEBHOOK_URL: "https://n8n.${SECRET_DOMAIN}"
+              N8N_LOG_LEVEL: verbose
+              N8N_LOG_OUTPUT: console, file
+              N8N_PERSONALIZATION_ENABLED: false
+              N8N_VERSION_NOTIFICATIONS_ENABLED: true
+              N8N_DIAGONISTICS_ENABLED: true
+              N8N_HIRING_BANNER_ENABLED: false
+              N8N_USER_MANAGEMENT_DISABLED: true
+              N8N_TEMPLATES_ENABLED: false
+              N8N_METRICS: true
+              N8N_USER_FOLDER: /config
+              NODE_FUNCTION_ALLOW_EXTERNAL: databricks/sql
+              DB_TYPE: postgresdb
+            envFrom:
+              - secretRef:
+                  name: n8n-app-secrets
+            # resources:
+            #   requests:
+            #     cpu: 200m
+            #     memory: 300Mi
+            #   limits:
+            #     cpu: 2000m
+            #     memory: 3000Mi
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: *host
+            paths:
+              - path: /
+                name: main
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: n8n-app
+        mountPath: /home/node/.n8n
