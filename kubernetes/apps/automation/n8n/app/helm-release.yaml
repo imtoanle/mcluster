@@ -49,7 +49,7 @@ spec:
               N8N_USER_MANAGEMENT_DISABLED: true
               N8N_TEMPLATES_ENABLED: false
               N8N_METRICS: true
-              N8N_USER_FOLDER: /config
+              N8N_USER_FOLDER: /home/node
               NODE_FUNCTION_ALLOW_EXTERNAL: databricks/sql
               DB_TYPE: postgresdb
             envFrom:
@@ -91,3 +91,4 @@ spec:
       config:
         enabled: true
         existingClaim: n8n-app
+        mountPath: /home/node/.n8n
