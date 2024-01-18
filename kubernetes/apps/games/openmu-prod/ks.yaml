@@ -1,0 +1,68 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-dapr-placement
+  namespace: flux-system
+spec:
+  targetNamespace: openmu
+  path: ./kubernetes/apps/games/openmu/dapr-placement
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-pubsub
+  namespace: flux-system
+spec:
+  targetNamespace: openmu
+  path: ./kubernetes/apps/games/openmu/pubsub
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-zipkin
+  namespace: flux-system
+spec:
+  targetNamespace: openmu
+  path: ./kubernetes/apps/games/openmu/zipkin
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-connect-server
+  namespace: flux-system
+spec:
+  targetNamespace: openmu
+  path: ./kubernetes/apps/games/openmu/connect-server
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
