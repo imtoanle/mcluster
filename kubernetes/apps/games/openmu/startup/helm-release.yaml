@@ -1,0 +1,82 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app startup
+  namespace: openmu
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        replicas: 1
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: munique/openmu
+              tag: latest
+            envFrom:
+              - secretRef:
+                  name: app-secrets
+            # resources:
+            #   requests:
+            #     cpu: 200m
+            #     memory: 300Mi
+            #   limits:
+            #     cpu: 2000m
+            #     memory: 3000Mi
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 80
+          gamesv1:
+            port: 55901
+          gamesv2:
+            port: 55902
+          gamesv3:
+            port: 55903
+          connectsv:
+            port: 44405
+          chatsv:
+            port: 55980
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "mu.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                name: main
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
