@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app pubsub
+  name: &app admin-panel
   namespace: openmu-prod
 spec:
   interval: 30m
@@ -33,8 +33,11 @@ spec:
         containers:
           main:
             image:
-              repository: rabbitmq
-              tag: 3-management-alpine
+              repository: munique/openmu-admin
+              tag: 0.8.2
+            env:
+              ASPNETCORE_URLS: http://+:8080
+              PATH_BASE: /admin/
             # resources:
             #   requests:
             #     cpu: 200m
@@ -47,7 +50,10 @@ spec:
         controller: main
         ports:
           http:
-            port: 5672
+            port: 8080
+          # Prometheus
+          metrics:
+            port: 9464
 
     ingress:
       main:

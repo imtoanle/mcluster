@@ -2,8 +2,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app connect-server
-  namespace: openmu
+  name: &app connect-server-dapr
+  namespace: openmu-prod
 spec:
   interval: 30m
   chart:
@@ -33,10 +33,22 @@ spec:
         containers:
           main:
             image:
-              repository: munique/openmu-connect
-              tag: 0.8.2
-            env:
-              APPID: connectServer
+              repository: "daprio/daprd:latest"
+              tag: latest
+            command:
+              [
+                "./daprd",
+                "-app-id",
+                "connectServer",
+                "-app-port",
+                "8080",
+                "-components-path",
+                "/components",
+                "-config",
+                "/components/config.yaml",
+                "-placement-host-address",
+                "dapr-placement.openmu-prod.svc.cluster.local:50006",
+              ]
             # resources:
             #   requests:
             #     cpu: 200m
@@ -44,17 +56,6 @@ spec:
             #   limits:
             #     cpu: 2000m
             #     memory: 3000Mi
-    service:
-      main:
-        controller: main
-        ports:
-          http:
-            port: 50001
-          connect:
-            port: 44405
-          # Prometheus
-          metrics:
-            port: 9464
 
     ingress:
       main:

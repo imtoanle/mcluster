@@ -5,8 +5,8 @@ metadata:
   name: cluster-apps-games-openmu-dapr-placement
   namespace: flux-system
 spec:
-  targetNamespace: openmu
-  path: ./kubernetes/apps/games/openmu/dapr-placement
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/dapr-placement
   prune: true
   sourceRef:
     kind: GitRepository
@@ -22,8 +22,8 @@ metadata:
   name: cluster-apps-games-openmu-pubsub
   namespace: flux-system
 spec:
-  targetNamespace: openmu
-  path: ./kubernetes/apps/games/openmu/pubsub
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/pubsub
   prune: true
   sourceRef:
     kind: GitRepository
@@ -39,8 +39,8 @@ metadata:
   name: cluster-apps-games-openmu-zipkin
   namespace: flux-system
 spec:
-  targetNamespace: openmu
-  path: ./kubernetes/apps/games/openmu/zipkin
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/zipkin
   prune: true
   sourceRef:
     kind: GitRepository
@@ -56,8 +56,127 @@ metadata:
   name: cluster-apps-games-openmu-connect-server
   namespace: flux-system
 spec:
-  targetNamespace: openmu
-  path: ./kubernetes/apps/games/openmu/connect-server
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/connect-server
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-connect-server-dapr
+  namespace: flux-system
+spec:
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/connect-server-dapr
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-login-server
+  namespace: flux-system
+spec:
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/login-server
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-login-server-dapr
+  namespace: flux-system
+spec:
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/login-server-dapr
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-chat-server
+  namespace: flux-system
+spec:
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/chat-server
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-chat-server-dapr
+  namespace: flux-system
+spec:
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/chat-server-dapr
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-game-server-0
+  namespace: flux-system
+spec:
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/game-server-0
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-game-server-0-dapr
+  namespace: flux-system
+spec:
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/game-server-0-dapr
   prune: true
   sourceRef:
     kind: GitRepository

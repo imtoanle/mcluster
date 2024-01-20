@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: &app connect-server
-  namespace: openmu
+  namespace: openmu-prod
 spec:
   interval: 30m
   chart:
@@ -37,6 +37,8 @@ spec:
               tag: 0.8.2
             env:
               APPID: connectServer
+              ASPNETCORE_URLS: http://+:8080
+              ASPNETCORE_ENVIRONMENT: Production
             # resources:
             #   requests:
             #     cpu: 200m
