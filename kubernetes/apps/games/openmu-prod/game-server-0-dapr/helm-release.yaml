@@ -67,3 +67,24 @@ spec:
     ingress:
       main:
         enabled: false
+
+        persistence:
+      dapr-components:
+        enabled: true
+        type: configMap
+        name: dapr-components-config
+        globalMounts:
+          - path: /components/config.yaml
+            subPath: config.yaml
+          - path: /components/localSecretStore.yaml
+            subPath: localSecretStore.yaml
+          - path: /components/login-state.yaml
+            subPath: login-state.yaml
+          - path: /components/pubsub.yaml
+            subPath: pubsub.yaml
+      secrets:
+        type: secret
+        name: app-secrets
+        globalMounts:
+          - path: /components/secrets.json
+            subPath: dapr-secrets.json
