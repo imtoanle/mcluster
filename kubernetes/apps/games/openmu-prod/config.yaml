@@ -15,7 +15,7 @@ data:
         enabled: true
         samplingRate: "1"
         zipkin:
-          endpointAddress: "http://zipkin:9411/api/v2/spans"
+          endpointAddress: "http://zipkin.openmu-prod.svc.cluster.local:9411/api/v2/spans"
   localSecretStore.yaml: |
     apiVersion: dapr.io/v1alpha1
     kind: Component
@@ -41,7 +41,7 @@ data:
       version: v1
       metadata:
       - name: redisHost
-        value: redis-state:6379
+        value: redis.database.svc.cluster.local:6379
       #- name: ttlInSeconds
       #  value: <int> # Optional
   pubsub.yaml: |
@@ -54,7 +54,7 @@ data:
       version: v1
       metadata:
       - name: host
-        value: "amqp://pubsub:5672"
+        value: "amqp://pubsub.openmu-prod.svc.cluster.local:5672"
       - name: durable
         value: "true"
       - name: deletedWhenUnused
