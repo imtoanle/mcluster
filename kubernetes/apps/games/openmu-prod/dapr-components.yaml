@@ -6,7 +6,6 @@ metadata:
   namespace: openmu-prod
 spec:
   tracing:
-    enabled: true
     samplingRate: "1"
     zipkin:
       endpointAddress: "http://zipkin.openmu-prod.svc.cluster.local:9411/api/v2/spans"
