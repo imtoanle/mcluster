@@ -25,6 +25,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    defaultPodOptions:
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: chat-server
+        dapr.io/app-port: "8080"
     controllers:
       main:
         replicas: 1
@@ -36,7 +41,7 @@ spec:
               repository: munique/openmu-chat
               tag: 0.8.2
             env:
-              APPID: chatServer
+              APPID: chat-server
               ASPNETCORE_URLS: http://+:8080
               ASPNETCORE_ENVIRONMENT: Production
             # resources:
@@ -50,14 +55,10 @@ spec:
       main:
         controller: main
         ports:
+          http:
+            port: 8080
           chat:
             port: 55980
-          http:
-            port: 50001
           # Prometheus
           metrics:
             port: 9464
-
-    ingress:
-      main:
-        enabled: false
