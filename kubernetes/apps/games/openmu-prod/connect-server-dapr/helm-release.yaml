@@ -33,7 +33,7 @@ spec:
         containers:
           main:
             image:
-              repository: "daprio/daprd:latest"
+              repository: "daprio/daprd"
               tag: latest
             command:
               [
