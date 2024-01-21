@@ -63,10 +63,6 @@ spec:
           http:
             port: 8080
 
-    ingress:
-      main:
-        enabled: false
-
     persistence:
       dapr-components:
         enabled: true

@@ -63,11 +63,7 @@ spec:
           http:
             port: 8080
 
-    ingress:
-      main:
-        enabled: false
-
-        persistence:
+    persistence:
       dapr-components:
         enabled: true
         type: configMap

@@ -33,7 +33,7 @@ spec:
         containers:
           main:
             image:
-              repository: "daprio/daprd"
+              repository: "daprio/daprd:latest"
               tag: latest
             command:
               [
@@ -64,11 +64,7 @@ spec:
           http:
             port: 8080
 
-    ingress:
-      main:
-        enabled: false
-
-        persistence:
+    persistence:
       dapr-components:
         enabled: true
         type: configMap
