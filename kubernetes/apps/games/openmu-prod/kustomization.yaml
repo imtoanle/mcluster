@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./dapr-components.yaml
+  - ./roles.yaml
   - ./config.yaml
   - ./secret.sops.yaml
   - ./ks.yaml
