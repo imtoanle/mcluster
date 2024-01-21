@@ -30,7 +30,6 @@ metadata:
   name: login-state
   namespace: openmu-prod
 spec:
-  spec:
   type: state.redis
   version: v1
   metadata:
