@@ -47,7 +47,7 @@ spec:
                 "-config",
                 "/components/config.yaml",
                 "-placement-host-address",
-                "dapr-placement.openmu-prod.svc.cluster.local:50006",
+                "dapr-placement-server.dapr-system.svc.cluster.local:50005",
               ]
             # resources:
             #   requests:
