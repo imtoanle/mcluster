@@ -20,7 +20,7 @@ spec:
   type: secretstores.kubernetes
   version: v1
   metadata:
-    defaultNamespace: openmu-prod
+    - defaultNamespace: openmu-prod
 ---
 apiVersion: dapr.io/v1alpha1
 kind: Component
