@@ -46,6 +46,7 @@ spec:
               repository: ktoanlba/openmu-login
               tag: 8.2.2
             env:
+              APPID: login-server
               ASPNETCORE_URLS: http://+:8080
               ASPNETCORE_ENVIRONMENT: Production
             # resources:
