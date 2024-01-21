@@ -44,6 +44,9 @@ spec:
               APPID: chat-server
               ASPNETCORE_URLS: http://+:8080
               ASPNETCORE_ENVIRONMENT: Production
+            envFrom:
+              - secretRef:
+                  name: connection-strings
             # resources:
             #   requests:
             #     cpu: 200m
