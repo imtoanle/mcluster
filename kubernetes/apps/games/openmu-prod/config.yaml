@@ -9,7 +9,7 @@ data:
     kind: Configuration
     metadata:
       name: daprConfig
-      namespace: default
+      namespace: openmu-prod
     spec:
       tracing:
         enabled: true
@@ -21,7 +21,7 @@ data:
     kind: Component
     metadata:
       name: secrets
-      namespace: default
+      namespace: openmu-prod
     spec:
       type: secretstores.local.file
       version: v1
@@ -35,6 +35,7 @@ data:
     kind: Component
     metadata:
       name: login-state
+      namespace: openmu-prod
     spec:
       spec:
       type: state.redis
@@ -49,6 +50,7 @@ data:
     kind: Component
     metadata:
       name: pubsub
+      namespace: openmu-prod
     spec:
       type: pubsub.rabbitmq
       version: v1
