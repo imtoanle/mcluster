@@ -28,7 +28,7 @@ spec:
     defaultPodOptions:
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: loginServer
+        dapr.io/app-id: login-server
         dapr.io/app-port: "8080"
     controllers:
       main:
@@ -36,7 +36,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
           dapr.io/enabled: "true"
-          dapr.io/app-id: loginServer
+          dapr.io/app-id: login-server
           dapr.io/app-port: "8080"
           # dapr.io/placement-host-address: dapr-placement-server.dapr-system.svc.cluster.local:50005
           # dapr.io/env
