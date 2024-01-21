@@ -10,6 +10,7 @@ resources:
   - ./cloudnative-pg.yaml
   - ./coredns.yaml
   - ./csi-driver-nfs.yaml
+  - ./dapr.yaml
   - ./external-dns.yaml
   - ./go-skynet.yaml
   - ./grafana.yaml
