@@ -2,7 +2,7 @@
 apiVersion: dapr.io/v1alpha1
 kind: Configuration
 metadata:
-  name: daprConfig
+  name: dapr-config
   namespace: openmu-prod
 spec:
   tracing:
