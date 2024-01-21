@@ -33,7 +33,7 @@ spec:
           dapr.io/enabled: true
           dapr.io/app-id: loginServer
           dapr.io/app-port: 8080
-          dapr.io/placement-host-address: dapr-placement-server.dapr-system.svc.cluster.local:50005
+          # dapr.io/placement-host-address: dapr-placement-server.dapr-system.svc.cluster.local:50005
           # dapr.io/env
         containers:
           main:
