@@ -35,6 +35,9 @@ spec:
         replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
+          dapr.io/enabled: "true"
+          dapr.io/app-id: login-server
+          dapr.io/app-port: "8080"
         containers:
           main:
             image:
