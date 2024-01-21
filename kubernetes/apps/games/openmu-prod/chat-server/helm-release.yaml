@@ -38,8 +38,8 @@ spec:
         containers:
           main:
             image:
-              repository: munique/openmu-chat
-              tag: 0.8.2
+              repository: ktoanlba/openmu-chat
+              tag: 8.2.2
             env:
               APPID: chat-server
               ASPNETCORE_URLS: http://+:8080

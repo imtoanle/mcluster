@@ -38,8 +38,8 @@ spec:
         containers:
           main:
             image:
-              repository: munique/openmu-game
-              tag: 0.8.2
+              repository: ktoanlba/openmu-game
+              tag: 8.2.2
             env:
               GS_ID: 0
               APPID: game-server-0

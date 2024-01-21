@@ -41,8 +41,8 @@ spec:
         containers:
           main:
             image:
-              repository: munique/openmu-connect
-              tag: 0.8.2
+              repository: ktoanlba/openmu-connect
+              tag: 8.2.2
             env:
               APPID: connect-server
               ASPNETCORE_URLS: http://+:8080
