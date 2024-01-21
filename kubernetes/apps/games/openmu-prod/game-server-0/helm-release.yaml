@@ -39,7 +39,7 @@ spec:
           main:
             image:
               repository: ktoanlba/openmu-game
-              tag: 8.2.2
+              tag: 8.2.3
             env:
               GS_ID: 0
               APPID: game-server-0

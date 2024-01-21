@@ -39,7 +39,7 @@ spec:
           main:
             image:
               repository: ktoanlba/openmu-chat
-              tag: 8.2.2
+              tag: 8.2.3
             env:
               APPID: chat-server
               ASPNETCORE_URLS: http://+:8080
