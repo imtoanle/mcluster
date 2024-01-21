@@ -21,6 +21,8 @@ spec:
   metadata:
     - name: connectionStrings
       value: "danhxanhrauma"
+    - name: "connectionStrings:taolao"
+      value: "hahaah123"
     # - name: connectionStrings
     #   value: "MUnique.OpenMU.Persistence.EntityFramework.EntityDataContext": "Server=openmu-postgres-rw.database.svc.cluster.local;Port=5432;User Id=postgres;Password=admin;Database=openmu;Command Timeout=120;"
 ---
