@@ -25,6 +25,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    defaultPodOptions:
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: game-server-0
+        dapr.io/app-port: "8080"
     controllers:
       main:
         replicas: 1
@@ -37,7 +42,7 @@ spec:
               tag: 0.8.2
             env:
               GS_ID: 0
-              APPID: gameServer0
+              APPID: game-server-0
               PATH_BASE: /gameServer/0/
               ASPNETCORE_URLS: http://+:8080
               ASPNETCORE_ENVIRONMENT: Production

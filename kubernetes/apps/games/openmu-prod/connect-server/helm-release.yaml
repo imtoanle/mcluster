@@ -25,6 +25,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    defaultPodOptions:
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: connect-server
+        dapr.io/app-port: "8080"
     controllers:
       main:
         replicas: 1
@@ -36,7 +41,7 @@ spec:
               repository: munique/openmu-connect
               tag: 0.8.2
             env:
-              APPID: connectServer
+              APPID: connect-server
               ASPNETCORE_URLS: http://+:8080
               ASPNETCORE_ENVIRONMENT: Production
             # resources:
@@ -51,7 +56,7 @@ spec:
         controller: main
         ports:
           http:
-            port: 50001
+            port: 8080
           connect:
             port: 44405
           # Prometheus
