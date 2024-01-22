@@ -35,14 +35,11 @@ spec:
         replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
-          dapr.io/enabled: "true"
-          dapr.io/app-id: login-server
-          dapr.io/app-port: "8080"
         containers:
           main:
             image:
               repository: ktoanlba/openmu-connect
-              tag: 8.2.3
+              tag: 1.0.4
             env:
               APPID: connect-server
               ASPNETCORE_URLS: http://+:8080
