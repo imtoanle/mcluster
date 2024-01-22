@@ -62,4 +62,15 @@ spec:
 
     ingress:
       main:
-        enabled: false
+        enabled: true
+        className: internal
+        hosts:
+          - host: &host "uminu.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
