@@ -25,6 +25,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    defaultPodOptions:
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: admin-panel
+        dapr.io/app-port: "8080"
     controllers:
       main:
         replicas: 1
