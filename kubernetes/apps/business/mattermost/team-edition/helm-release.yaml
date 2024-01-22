@@ -44,7 +44,7 @@ spec:
           main:
             image:
               repository: mattermost/mattermost-team-edition
-              tag: 9.3.0
+              tag: 9.4.2
             env:
               MM_CONFIG:
                 valueFrom:
