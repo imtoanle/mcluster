@@ -39,7 +39,7 @@ spec:
           main:
             image:
               repository: ktoanlba/openmu-admin
-              tag: 1.0.4
+              tag: 1.0.5
             env:
               ASPNETCORE_URLS: http://+:8080
               PATH_BASE: /admin/

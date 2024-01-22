@@ -39,7 +39,7 @@ spec:
           main:
             image:
               repository: ktoanlba/openmu-login
-              tag: 1.0.4
+              tag: 1.0.5
             env:
               APPID: login-server
               ASPNETCORE_URLS: http://+:8080
