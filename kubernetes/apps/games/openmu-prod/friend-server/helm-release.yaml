@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app chat-server
+  name: &app friend-server
   namespace: openmu-prod
 spec:
   interval: 30m
@@ -28,7 +28,7 @@ spec:
     defaultPodOptions:
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: chat-server
+        dapr.io/app-id: friend-server
         dapr.io/app-port: "8080"
     controllers:
       main:
@@ -38,10 +38,10 @@ spec:
         containers:
           main:
             image:
-              repository: ktoanlba/openmu-chat
+              repository: ktoanlba/openmu-friend
               tag: 1.0.4
             env:
-              APPID: chat-server
+              APPID: friend-server
               ASPNETCORE_URLS: http://+:8080
               ASPNETCORE_ENVIRONMENT: Production
             # resources:
@@ -57,8 +57,8 @@ spec:
         ports:
           http:
             port: 8080
-          chat:
-            port: 55980
+          friend:
+            port: 50001
           # Prometheus
           metrics:
             port: 9464

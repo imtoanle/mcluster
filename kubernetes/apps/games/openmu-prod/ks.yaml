@@ -82,7 +82,7 @@ spec:
   wait: true
   interval: 30m
   retryInterval: 1m
-  timeout: 20m
+  timeout: 5m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -99,7 +99,41 @@ spec:
   wait: true
   interval: 30m
   retryInterval: 1m
-  timeout: 20m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-friend-server
+  namespace: flux-system
+spec:
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/friend-server
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-games-openmu-guild-server
+  namespace: flux-system
+spec:
+  targetNamespace: openmu-prod
+  path: ./kubernetes/apps/games/openmu-prod/guild-server
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
