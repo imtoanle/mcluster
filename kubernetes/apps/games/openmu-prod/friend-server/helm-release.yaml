@@ -26,6 +26,8 @@ spec:
     keepHistory: false
   values:
     defaultPodOptions:
+      imagePullSecrets:
+        - name: imtoanle-ghcr-key
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: friend-server
@@ -38,8 +40,8 @@ spec:
         containers:
           main:
             image:
-              repository: ktoanlba/openmu-friend
-              tag: 1.0.5
+              repository: ghcr.io/imtoanle/newmu-friend
+              tag: 0.8.3.0
             env:
               APPID: friend-server
               ASPNETCORE_URLS: http://+:8080

@@ -26,6 +26,8 @@ spec:
     keepHistory: false
   values:
     defaultPodOptions:
+      imagePullSecrets:
+        - name: imtoanle-ghcr-key
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: admin-panel
@@ -38,8 +40,8 @@ spec:
         containers:
           main:
             image:
-              repository: ktoanlba/openmu-admin
-              tag: 1.0.5
+              repository: ghcr.io/imtoanle/newmu-admin
+              tag: 0.8.3.0
             env:
               ASPNETCORE_URLS: http://+:8080
               PATH_BASE: /admin/
