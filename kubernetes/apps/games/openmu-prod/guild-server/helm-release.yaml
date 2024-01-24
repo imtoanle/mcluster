@@ -41,7 +41,7 @@ spec:
           main:
             image:
               repository: ghcr.io/imtoanle/newmu-guild
-              tag: 0.8.3.0
+              tag: 0.8.4.0
             env:
               APPID: guild-server
               ASPNETCORE_URLS: http://+:8080
