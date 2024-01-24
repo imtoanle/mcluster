@@ -30,7 +30,7 @@ spec:
         - name: imtoanle-ghcr-key
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: connectServer
+        dapr.io/app-id: connect-server
         dapr.io/app-port: "8080"
     controllers:
       main:
@@ -43,7 +43,7 @@ spec:
               repository: ghcr.io/imtoanle/newmu-connect
               tag: 0.8.3.0
             env:
-              APPID: connectServer
+              APPID: connect-server
               ASPNETCORE_URLS: http://+:8080
               ASPNETCORE_ENVIRONMENT: Production
             # resources:
