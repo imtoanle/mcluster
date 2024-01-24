@@ -41,7 +41,7 @@ spec:
           main:
             image:
               repository: ghcr.io/imtoanle/newmu-admin
-              tag: 0.8.3.0
+              tag: 0.8.4.0
             env:
               ASPNETCORE_URLS: http://+:8080
               PATH_BASE: /admin/
