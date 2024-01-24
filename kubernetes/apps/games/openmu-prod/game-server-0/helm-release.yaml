@@ -58,12 +58,12 @@ spec:
     service:
       main:
         controller: main
+        annotations:
+          io.cilium/lb-ipam-ips: 10.0.99.162
         ports:
           http:
             port: 8080
-          connect:
-            port: 50001
-          login:
+          game:
             port: 55901
           # Prometheus
           metrics:
