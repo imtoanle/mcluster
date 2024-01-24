@@ -56,6 +56,7 @@ spec:
     service:
       main:
         controller: main
+        type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: 10.0.99.161
         ports:
