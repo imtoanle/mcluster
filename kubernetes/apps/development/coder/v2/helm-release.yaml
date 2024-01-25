@@ -36,16 +36,18 @@ spec:
               name: app-secrets
               key: pgurl
         - name: CODER_ACCESS_URL
-          value: "https://coder.${SECRET_DOMAIN}"
+          value: "https://coder.${SECRET_DOMAIN_2}"
         - name: CODER_WILDCARD_ACCESS_URL
-          value: "*-coder.${SECRET_DOMAIN}"
+          value: "*.coder.${SECRET_DOMAIN_2}"
       ingress:
         enable: true
         className: external
-        host: &host "coder.${SECRET_DOMAIN}"
-        wildcardHost: "*-coder.${SECRET_DOMAIN}"
+        host: &host "coder.${SECRET_DOMAIN_2}"
+        wildcardHost: "*.coder.${SECRET_DOMAIN_2}"
         annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
           nginx.ingress.kubernetes.io/enable-websocket: "true"
           nginx.ingress.kubernetes.io/configuration-snippet: |
             proxy_http_version 1.1;
