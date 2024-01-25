@@ -29,6 +29,8 @@ spec:
       env:
         - name: CODER_ACCESS_URL
           value: "https://coder.${SECRET_DOMAIN}"
+        - name: CODER_WILDCARD_ACCESS_URL
+          value: "*-coder.${SECRET_DOMAIN}"
       ingress:
         enable: true
         className: external
@@ -36,6 +38,7 @@ spec:
         wildcardHost: "*-coder.${SECRET_DOMAIN}"
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/enable-websocket: "true"
         tls:
           enable: true
           secretName: "coder-tls-secret"
