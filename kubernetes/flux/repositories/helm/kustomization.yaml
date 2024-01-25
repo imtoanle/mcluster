@@ -8,6 +8,7 @@ resources:
   - ./bryopsida.yaml
   - ./cilium.yaml
   - ./cloudnative-pg.yaml
+  - ./coder-v2.yaml
   - ./coredns.yaml
   - ./csi-driver-nfs.yaml
   - ./dapr.yaml

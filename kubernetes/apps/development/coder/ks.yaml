@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-development-coder-server
+  name: cluster-apps-development-coder-v2
   namespace: flux-system
 spec:
-  targetNamespace: coder-server
-  path: ./kubernetes/apps/development/coder/server
+  targetNamespace: coder-v2
+  path: ./kubernetes/apps/development/coder/v2
   prune: true
   sourceRef:
     kind: GitRepository
@@ -15,10 +15,3 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
-  postBuild:
-    substitute:
-      APP: coder-server
-      VOLSYNC_CAPACITY: 10Gi
-      VOLSYNC_ACCESSMODES: ReadWriteMany
-      VOLSYNC_STORAGECLASS: ceph-filesystem
-      VOLSYNC_SNAPSHOTCLASS: csi-ceph-filesystem
