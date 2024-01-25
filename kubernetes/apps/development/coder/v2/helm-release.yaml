@@ -39,6 +39,9 @@ spec:
           value: "https://coder.${SECRET_DOMAIN_2}"
         - name: CODER_WILDCARD_ACCESS_URL
           value: "*.coder.${SECRET_DOMAIN_2}"
+      envFrom:
+        - secretRef:
+            name: app-envs
       ingress:
         enable: true
         className: external
