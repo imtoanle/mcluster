@@ -47,6 +47,10 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.ingress.kubernetes.io/enable-websocket: "true"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "Upgrade";
         tls:
           enable: true
           secretName: "coder-tls-secret"
