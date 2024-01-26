@@ -56,7 +56,7 @@ spec:
         controller: main
         ports:
           http:
-            enabled: false
+            port: 21114
           hbbs1:
             port: 21115
             protocol: TCP
