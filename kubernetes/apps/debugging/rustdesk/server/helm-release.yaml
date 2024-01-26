@@ -1,0 +1,84 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app rustdesk-server
+  namespace: debugging
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        replicas: 1
+        # strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: rustdesk/rustdesk-server
+              tag: latest
+            command: ["hbbs"]
+      hbbr:
+        replicas: 1
+        # strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          hbbr:
+            image:
+              repository: rustdesk/rustdesk-server
+              tag: latest
+            command: ["hbbr"]
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            enabled: false
+          hbbs1:
+            port: 21115
+            protocol: TCP
+          hbbs2tcp:
+            port: 21116
+            protocol: TCP
+          hbbs2udp:
+            port: 21116
+            protocol: UDP
+          hbbs3:
+            port: 21118
+            protocol: TCP
+      hbbr:
+        controller: hbbr
+        ports:
+          http:
+            enabled: false
+          hbbr1:
+            port: 21117
+            protocol: TCP
+          hbbr2:
+            port: 21119
+            protocol: TCP
+
+    persistence:
+      root:
+        enabled: true
+        existingClaim: *app
