@@ -50,6 +50,9 @@ spec:
             command: ["hbbr"]
     service:
       main:
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: 10.0.99.150
         controller: main
         ports:
           http:
@@ -67,6 +70,9 @@ spec:
             port: 21118
             protocol: TCP
       hbbr:
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: 10.0.99.151
         controller: hbbr
         ports:
           http:
