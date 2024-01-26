@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-debugging-rustdesk-server
   namespace: flux-system
 spec:
-  targetNamespace: business
+  targetNamespace: debugging
   path: ./kubernetes/apps/debugging/rustdesk/server
   prune: true
   sourceRef:

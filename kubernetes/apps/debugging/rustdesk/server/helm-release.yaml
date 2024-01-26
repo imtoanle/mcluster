@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: &app rustdesk-server
-  namespace: business
+  namespace: debugging
 spec:
   interval: 30m
   chart:
@@ -60,7 +60,7 @@ spec:
           hbbs2tcp:
             port: 21116
             protocol: TCP
-          hbbs2tcp:
+          hbbs2udp:
             port: 21116
             protocol: UDP
           hbbs3:
