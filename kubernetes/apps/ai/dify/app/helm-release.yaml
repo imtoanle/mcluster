@@ -164,4 +164,5 @@ spec:
       data:
         enabled: true
         existingClaim: dify-app
-        mountPath: /app/api/storage
+        globalMounts:
+          - path: /app/api/storage
