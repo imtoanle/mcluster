@@ -138,11 +138,23 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
+                  name: web
                   port: http
               - path: /api
                 service:
-                  name: web
+                  name: main
+                  port: http
+              - path: /v1
+                service:
+                  name: main
+                  port: http
+              - path: /files
+                service:
+                  name: main
+                  port: http
+              - path: /console/api
+                service:
+                  name: main
                   port: http
         tls:
           - hosts:
