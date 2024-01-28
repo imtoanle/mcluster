@@ -1,0 +1,68 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app weaviate-app
+  namespace: database
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        replicas: 1
+        # strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: semitechnologies/weaviate
+              tag: 1.19.0
+              pullPolicy: Always
+            env:
+              # The Weaviate configurations
+              # You can refer to the [Weaviate](https://weaviate.io/developers/weaviate/config-refs/env-vars) documentation for more information.
+              QUERY_DEFAULTS_LIMIT: 25
+              AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "false"
+              PERSISTENCE_DATA_PATH: "/var/lib/weaviate"
+              DEFAULT_VECTORIZER_MODULE: "none"
+              STANDALONE_MODE: "true"
+            envFrom:
+              - secretRef:
+                  name: weaviate-env-secrets
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 8080
+
+    ingress:
+      main:
+        enabled: false
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: weaviate-data
+        globalMounts:
+          - path: /var/lib/weaviate
+            readOnly: false
