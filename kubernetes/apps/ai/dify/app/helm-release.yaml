@@ -2,8 +2,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app actual-app
-  namespace: business
+  name: &app dify-app
+  namespace: ai-apps
 spec:
   interval: 30m
   chart:
@@ -34,13 +34,126 @@ spec:
         containers:
           main:
             image:
-              repository: docker.io/actualbudget/actual-server
-              tag: latest
+              repository: langgenius/dify-api
+              tag: 0.5.2
+              pullPolicy: Always
+            env: &env # Startup mode, 'api' starts the API server.
+              MODE: api
+              # The log level for the application. Supported values are `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
+              LOG_LEVEL: INFO
+              # The base URL of console application web frontend, refers to the Console base URL of WEB service if console domain is
+              # different from api or web app domain.
+              # example: http://cloud.dify.ai
+              # CONSOLE_WEB_URL: ""
+              # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
+              # different from api or web app domain.
+              # example: http://cloud.dify.ai
+              # CONSOLE_API_URL: ""
+              # The URL prefix for Service API endpoints, refers to the base URL of the current API service if api domain is
+              # different from console domain.
+              # example: http://api.dify.ai
+              # SERVICE_API_URL: ""
+              # The URL prefix for Web APP frontend, refers to the Web App base URL of WEB service if web app domain is different from
+              # console or api domain.
+              # example: http://udify.app
+              # APP_WEB_URL: ""
+              # File preview or download Url prefix.
+              # used to display File preview or download Url to the front-end or as Multi-model inputs;
+              # Url is signed and has expiration time.
+              # FILES_URL: ""
+              # When enabled, migrations will be executed prior to application startup and the application will start after the migrations have completed.
+              MIGRATION_ENABLED: "true"
+              # Specifies the allowed origins for cross-origin requests to the Web API, e.g. https://dify.app or * for all origins.
+              WEB_API_CORS_ALLOW_ORIGINS: "*"
+              # Specifies the allowed origins for cross-origin requests to the console API, e.g. https://cloud.dify.ai or * for all origins.
+              CONSOLE_CORS_ALLOW_ORIGINS: "*"
+              # CSRF Cookie settings
+              # Controls whether a cookie is sent with cross-site requests,
+              # providing some protection against cross-site request forgery attacks
+              #
+              # Default: `SameSite=Lax, Secure=false, HttpOnly=true`
+              # This default configuration supports same-origin requests using either HTTP or HTTPS,
+              # but does not support cross-origin requests. It is suitable for local debugging purposes.
+              #
+              # If you want to enable cross-origin support,
+              # you must use the HTTPS protocol and set the configuration to `SameSite=None, Secure=true, HttpOnly=true`.
+              #
+              # The type of storage to use for storing user files. Supported values are `local` and `s3`, Default: `local`
+              STORAGE_TYPE: local
+              # The path to the local storage directory, the directory relative the root path of API service codes or absolute path. Default: `storage` or `/home/john/storage`.
+              # only available when STORAGE_TYPE is `local`.
+              STORAGE_LOCAL_PATH: storage
+              # The type of vector store to use. Supported values are `weaviate`, `qdrant`, `milvus`.
+              VECTOR_STORE: weaviate
+              # The Weaviate endpoint URL. Only available when VECTOR_STORE is `weaviate`.
+              WEAVIATE_ENDPOINT: http://weaviate-app.database.svc.cluster.local:8080
+              # Mail configuration, support: resend
+              MAIL_TYPE: ""
+              # default send from email address, if not specified
+              MAIL_DEFAULT_SEND_FROM: "no-reply <no-reply@aitbase.com>"
+              # the api-key for resend (https://resend.com)
+              RESEND_API_KEY: ""
+              RESEND_API_URL: https://api.resend.com
+              # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
+              SENTRY_DSN: ""
+              # The sample rate for Sentry events. Default: `1.0`
+              SENTRY_TRACES_SAMPLE_RATE: 1.0
+              # The sample rate for Sentry profiles. Default: `1.0`
+              SENTRY_PROFILES_SAMPLE_RATE: 1.0
+            envFrom: &envFrom
+              - secretRef:
+                  name: dify-env-secrets
+            # resources:
+            #   requests:
+            #     cpu: 200m
+            #     memory: 300Mi
+            #   limits:
+            #     cpu: 2000m
+            #     memory: 3000Mi
+      worker:
+        replicas: 1
+        # strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          web:
+            image:
+              repository: langgenius/dify-api
+              tag: 0.5.2
+              pullPolicy: Always
+            env: *env # Startup mode, 'api' starts the API server.
+              MODE: worker
+            envFrom: *envFrom
+            # resources:
+            #   requests:
+            #     cpu: 200m
+            #     memory: 300Mi
+            #   limits:
+            #     cpu: 2000m
+            #     memory: 3000Mi
+      web:
+        replicas: 1
+        # strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          web:
+            image:
+              repository: langgenius/dify-web
+              tag: 0.5.2
               pullPolicy: Always
             env:
-              ACTUAL_UPLOAD_FILE_SYNC_SIZE_LIMIT_MB: 20
-              ACTUAL_UPLOAD_SYNC_ENCRYPTED_FILE_SYNC_SIZE_LIMIT_MB: 50
-              ACTUAL_UPLOAD_FILE_SIZE_LIMIT_MB: 20
+              EDITION: SELF_HOSTED
+              # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
+              # different from api or web app domain.
+              # example: http://cloud.dify.ai
+              CONSOLE_API_URL: ''
+              # The URL for Web APP api server, refers to the Web App base URL of WEB service if web app domain is different from
+              # console or api domain.
+              # example: http://udify.app
+              APP_API_URL: ''
+              # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
+              SENTRY_DSN: ''
             # resources:
             #   requests:
             #     cpu: 200m
@@ -53,7 +166,12 @@ spec:
         controller: main
         ports:
           http:
-            port: 5006
+            port: 5001
+      web:
+        controller: web
+        ports:
+          http:
+            port: 3000
 
     ingress:
       main:
@@ -61,18 +179,34 @@ spec:
         className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            rewrite /api/(.*) /$1 break;
+            set $forwarded_client_ip "";
+            if ($http_x_forwarded_for ~ "^([^,]+)") {
+              set $forwarded_client_ip $1;
+            }
+            set $client_ip $remote_addr;
+            if ($forwarded_client_ip != "") {
+              set $client_ip $forwarded_client_ip;
+            }
+          # nignx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          # nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          # nginx.ingress.kubernetes.io/upstream-hash-by: "$client_ip"
         hosts:
-          - host: &host "actual.${SECRET_DOMAIN}"
+          - host: &host dify.${SECRET_DOMAIN}
             paths:
               - path: /
-                name: main
-                pathType: Prefix
                 service:
                   name: main
+                  port: http
+              - path: /api
+                service:
+                  name: web
                   port: http
         tls:
           - hosts:
               - *host
+
     persistence:
       data:
         enabled: true
