@@ -63,6 +63,6 @@ data:
   # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
   SENTRY_DSN: ""
   # The sample rate for Sentry events. Default: `1.0`
-  SENTRY_TRACES_SAMPLE_RATE: 1.0
+  SENTRY_TRACES_SAMPLE_RATE: "1.0"
   # The sample rate for Sentry profiles. Default: `1.0`
-  SENTRY_PROFILES_SAMPLE_RATE: 1.0
+  SENTRY_PROFILES_SAMPLE_RATE: "1.0"
