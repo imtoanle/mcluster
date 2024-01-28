@@ -57,7 +57,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          web:
+          main:
             image:
               repository: langgenius/dify-api
               tag: 0.5.2
@@ -164,5 +164,10 @@ spec:
       data:
         enabled: true
         existingClaim: dify-app
-        globalMounts:
-          - path: /app/api/storage
+        advancedMounts:
+          main:
+            main:
+              - path: /app/api/storage
+          worker:
+            main:
+              - path: /app/api/storage
