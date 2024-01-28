@@ -210,4 +210,4 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: actual-server
+        existingClaim: dify-app
