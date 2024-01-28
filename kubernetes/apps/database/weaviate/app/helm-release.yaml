@@ -63,6 +63,4 @@ spec:
       data:
         enabled: true
         existingClaim: weaviate-data
-        globalMounts:
-          - path: /var/lib/weaviate
-            readOnly: false
+        mountPath: /var/lib/weaviate
