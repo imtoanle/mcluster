@@ -9,3 +9,4 @@ resources:
   # - ./vitess/ks.yaml
   - ./redis/ks.yaml
   - ./mariadb/ks.yaml
+  - ./weaviate/ks.yaml
