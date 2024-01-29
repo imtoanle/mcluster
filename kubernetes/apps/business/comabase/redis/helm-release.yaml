@@ -39,6 +39,4 @@ spec:
       #   runAsUser: 65534
       #   runAsGroup: 0
       persistence:
-        enabled: true
-        storageClass: local-path
-        size: 10Gi
+        enabled: false

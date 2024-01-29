@@ -26,8 +26,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    # global:
-    #   storageClass: local-path
     architecture: standalone
     auth:
       existingSecret: dify-redis-secrets
@@ -38,5 +36,3 @@ spec:
         name: dify-redis
       persistence:
         enabled: false
-        # storageClass: local-path
-        # size: 1Gi

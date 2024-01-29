@@ -31,6 +31,4 @@ spec:
       enabled: false
     master:
       persistence:
-        enabled: true
-        storageClass: local-path
-        size: 10Gi
+        enabled: false
