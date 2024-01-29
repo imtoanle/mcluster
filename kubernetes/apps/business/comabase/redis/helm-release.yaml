@@ -39,7 +39,7 @@ spec:
       #   runAsUser: 65534
       #   runAsGroup: 0
       serviceAccount:
-        create: false
+        create: true
         name: comabase-redis-master
       persistence:
         enabled: false
