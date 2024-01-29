@@ -34,7 +34,7 @@ spec:
           main:
             image:
               repository: openzipkin/zipkin
-              tag: 3.0.4
+              tag: 3.0.5
             # resources:
             #   requests:
             #     cpu: 200m
