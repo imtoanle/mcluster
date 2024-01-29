@@ -33,7 +33,10 @@ spec:
       existingSecret: dify-redis-secrets
       existingSecretPasswordKey: redis-password
     master:
+      serviceAccount:
+        create: true
+        name: dify-redis
       persistence:
         enabled: false
-        # storageClass: local-path
-        # size: 1Gi
+        storageClass: local-path
+        size: 1Gi
