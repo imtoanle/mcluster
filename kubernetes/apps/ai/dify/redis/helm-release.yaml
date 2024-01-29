@@ -38,5 +38,5 @@ spec:
         name: dify-redis
       persistence:
         enabled: false
-        storageClass: local-path
-        size: 1Gi
+        # storageClass: local-path
+        # size: 1Gi
