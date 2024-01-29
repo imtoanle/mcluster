@@ -34,6 +34,6 @@ spec:
       existingSecretPasswordKey: redis-password
     master:
       persistence:
-        enabled: true
-        storageClass: local-path
-        size: 1Gi
+        enabled: false
+        # storageClass: local-path
+        # size: 1Gi
