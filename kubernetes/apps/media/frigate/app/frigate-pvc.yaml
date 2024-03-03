@@ -10,8 +10,8 @@ spec:
   accessModes: ["ReadWriteMany"]
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.0.100.156
-    path: /mnt/camera/Frigate
+    server: 10.0.99.166
+    path: /mnt/camera_data/Frigate
   mountOptions:
     - nfsvers=4.2
     - nconnect=8

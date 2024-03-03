@@ -5,8 +5,8 @@ metadata:
   name: home-cluster-camera-nfs
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: 10.0.100.156
-  share: /mnt/camera
+  server: 10.0.99.166
+  share: /mnt/camera_data
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions: ["hard", "noatime"]
