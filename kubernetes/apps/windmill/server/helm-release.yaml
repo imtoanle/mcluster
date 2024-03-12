@@ -31,7 +31,7 @@ spec:
 
     windmill:
       tag: "main"
-      image: "aitbase/windmill-puppeteer"
+      image: "ghcr.io/imtoanle/windmill-playwright"
       databaseUrlSecretName: app-secrets
       baseDomain: &host "windmill.${SECRET_DOMAIN}"
       baseProtocol: https
