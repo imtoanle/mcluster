@@ -41,7 +41,7 @@ spec:
           main:
             image:
               repository: aitbase/comabase-server
-              tag: v1.4.3
+              tag: v1.4.3 #DO_NOT_REMOVE_TAG_INDICATOR
 
             probes:
               liveness: &probes
