@@ -35,7 +35,7 @@ spec:
           main:
             image:
               repository: langgenius/dify-api
-              tag: 0.5.2
+              tag: 0.5.10
               pullPolicy: Always
             env:
               MODE: api
@@ -60,7 +60,7 @@ spec:
           main:
             image:
               repository: langgenius/dify-api
-              tag: 0.5.2
+              tag: 0.5.10
               pullPolicy: Always
             env:
               MODE: worker
