@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./actual/ks.yaml
+  - ./chatwoot/vietwings/ks.yaml
   - comabase
   - directus
   - leantime
