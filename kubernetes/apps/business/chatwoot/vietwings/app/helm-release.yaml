@@ -111,7 +111,7 @@ spec:
         controller: main
         ports:
           http:
-            port: 3000
+            port: &port 3000
 
     serviceAccount:
       create: true
@@ -129,6 +129,7 @@ spec:
                 pathType: Prefix
                 service:
                   name: main
+                  port: *port
         tls:
           - hosts:
               - *host
