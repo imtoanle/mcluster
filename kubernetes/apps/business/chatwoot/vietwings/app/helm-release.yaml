@@ -30,7 +30,7 @@ spec:
         replicas: 1
         strategy: Recreate
         annotations:
-          reloader.stakater.com/auto: "true"
+          secret.reloader.stakater.com/reload: "chatwoot-vietwings-secret-envs"
         containers:
           main:
             image:
@@ -85,7 +85,7 @@ spec:
         replicas: 2
         strategy: Recreate
         annotations:
-          reloader.stakater.com/auto: "true"
+          secret.reloader.stakater.com/reload: "chatwoot-vietwings-secret-envs"
         containers:
           main:
             image:
