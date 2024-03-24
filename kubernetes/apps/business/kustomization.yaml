@@ -10,6 +10,7 @@ resources:
   - leantime
   - ./listmonk/ks.yaml
   - mattermost
+  - ./memos/ks.yaml
   - ./plane/ks.yaml
   - ./stirling-pdf/ks.yaml
   - superset
