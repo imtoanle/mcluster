@@ -33,13 +33,28 @@ spec:
         replicas: 1
         strategy: Recreate
         annotations:
-          # secret.reloader.stakater.com/reload: "chatwoot-vietwings-secret-envs"
+          configmap.reloader.stakater.com/reload: "locatepin-backend-secrets"
         containers:
           main:
             image:
               repository: ghcr.io/imtoanle/locatepin-server
               tag: 0.0.2
               pullPolicy: Always
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: &port 8888
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
             # resources:
             #   requests:
             #     cpu: 250m
@@ -50,13 +65,28 @@ spec:
       adminfe:
         replicas: 1
         annotations:
-          # secret.reloader.stakater.com/reload: "chatwoot-vietwings-secret-envs"
+          # configmap.reloader.stakater.com/reload: "locatepin-backend-secrets"
         containers:
           main:
             image:
               repository: ghcr.io/imtoanle/locatepin-adminfe
               tag: 0.0.2
               pullPolicy: Always
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: &port 8080
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
             # resources:
             #   requests:
             #     cpu: 250m
