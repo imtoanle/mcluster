@@ -9,6 +9,7 @@ resources:
   - directus
   - leantime
   - ./listmonk/ks.yaml
+  - ./locatepin/ks.yaml
   - mattermost
   - ./memos/ks.yaml
   - ./plane/ks.yaml
