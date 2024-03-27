@@ -5,6 +5,7 @@ resources:
   - ./namespace.yaml
   - ./actual/ks.yaml
   - ./chatwoot/vietwings/ks.yaml
+  - ./chatwoot/aitbase/ks.yaml
   - comabase
   - directus
   - leantime
