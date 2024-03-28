@@ -42,6 +42,11 @@ spec:
             image:
               repository: flowiseai/flowise
               tag: 1.6.2
+            command:
+              - "/bin/sh"
+              - "-c"
+            args:
+              - "sleep 3; flowise start"
 
             probes:
               liveness: &probes
