@@ -40,8 +40,8 @@ spec:
         containers:
           main:
             image:
-              repository: aitbase/flowise-ai
-              tag: v1.3.8
+              repository: flowiseai/flowise
+              tag: 1.6.2
 
             probes:
               liveness: &probes
@@ -60,6 +60,7 @@ spec:
                 enabled: false
 
             env:
+              PORT: "3000"
               FLOWISE_USERNAME:
                 valueFrom:
                   secretKeyRef:
@@ -77,6 +78,7 @@ spec:
                     key: flowise.secretkey.overwrite
               APIKEY_PATH: /flowise_data/api
               LOG_PATH: /flowise_data/logs
+              BLOB_STORAGE_PATH: /flowise_data/storage
               SECRETKEY_PATH: /flowise_data/secrets
               DATABASE_TYPE: postgres
               DATABASE_PORT: 5432
