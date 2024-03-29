@@ -70,7 +70,7 @@ spec:
           db-migrate-job:
             image:
               repository: chatwoot/chatwoot
-              tag: v3.6.0
+              tag: v3.7.0
               pullPolicy: IfNotPresent
             # command:
             args:
@@ -90,7 +90,7 @@ spec:
           main:
             image:
               repository: chatwoot/chatwoot
-              tag: v3.6.0
+              tag: v3.7.0
               pullPolicy: Always
             command:
               - bundle
