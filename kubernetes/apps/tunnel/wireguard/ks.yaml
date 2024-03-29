@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-vpn-wireguard-server
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/vpn/wireguard/server
+  path: ./kubernetes/apps/tunnel/wireguard/server
   prune: true
   sourceRef:
     kind: GitRepository
