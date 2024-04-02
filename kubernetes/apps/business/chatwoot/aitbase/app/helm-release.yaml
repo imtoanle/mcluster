@@ -122,8 +122,6 @@ spec:
         className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            underscores_in_headers on;
         hosts:
           - host: &host "livesupport.${SECRET_DOMAIN}"
             paths:
