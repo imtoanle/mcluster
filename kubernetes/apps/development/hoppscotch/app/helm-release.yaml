@@ -40,12 +40,35 @@ spec:
             envFrom:
               - secretRef:
                   name: hoppscotch-secret-envs
+      hookjob:
+        enabled: true
+        type: job
+        annotations:
+          helm.sh/hook: "post-install,post-upgrade"
+          helm.sh/hook-delete-policy: "hook-succeeded,before-hook-creation"
+          helm.sh/hook-weight: "-1"
+        replicas: 1
+        containers:
+          db-migrate-job:
+            image:
+              repository: hoppscotch/hoppscotch
+              tag: 2024.3.0
+              pullPolicy: IfNotPresent
+            # command:
+            args:
+              - pnpx
+              - prisma
+              - migrate
+              - deploy
+            envFrom:
+              - secretRef:
+                  name: hoppscotch-secret-envs
     service:
       main:
         controller: main
         ports:
           http:
-            port: 5230
+            port: 8080
 
     ingress:
       main:
