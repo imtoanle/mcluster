@@ -76,8 +76,8 @@ spec:
         className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          nginx.ingress.kubernetes.io/enable-cors: "true"
-          nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+          # nginx.ingress.kubernetes.io/enable-cors: "true"
+          # nginx.ingress.kubernetes.io/cors-allow-origin: "*"
         hosts:
           - host: &host "restc.${SECRET_DOMAIN}"
             paths:
