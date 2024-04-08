@@ -63,7 +63,6 @@ spec:
               - sh
               - -c
               - ./listmonk
-            args:
               - --upgrade
             env:
               TZ: Asia/Ho_Chi_Minh
