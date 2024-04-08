@@ -118,7 +118,10 @@ spec:
               tag: v3.7.0
               pullPolicy: Always
             command:
-              - sleep 9999999
+              - docker/entrypoints/rails.sh
+            args:
+              - sleep
+              - 99999999
             envFrom: &envFrom
               - secretRef:
                   name: chatwoot-aitbase-secret-envs
