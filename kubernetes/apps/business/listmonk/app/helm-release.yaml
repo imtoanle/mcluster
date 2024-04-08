@@ -31,15 +31,6 @@ spec:
         # strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: 16.1
-              pullPolicy: IfNotPresent
-            envFrom:
-              - secretRef:
-                  name: listmonk-secrets
         containers:
           main:
             image:
