@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.4.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -55,6 +55,31 @@ spec:
               - sh
               - -c
               - ./listmonk
+      hookjob:
+        enabled: true
+        type: job
+        annotations:
+          helm.sh/hook: "post-install,post-upgrade"
+          helm.sh/hook-delete-policy: "hook-succeeded,before-hook-creation"
+          helm.sh/hook-weight: "-1"
+        replicas: 1
+        containers:
+          db-migrate-job:
+            image:
+              repository: listmonk/listmonk
+              tag: latest
+              pullPolicy: IfNotPresent
+            command:
+              - sh
+              - -c
+              - ./listmonk
+            args:
+              - --upgrade
+            env:
+              TZ: Asia/Ho_Chi_Minh
+            envFrom:
+              - secretRef:
+                  name: listmonk-secrets
     service:
       main:
         controller: main
@@ -72,10 +97,8 @@ spec:
           - host: &host "subcribe.${SECRET_DOMAIN}"
             paths:
               - path: /
-                name: main
-                pathType: Prefix
                 service:
-                  name: main
+                  identifier: main
                   port: http
         tls:
           - hosts:
