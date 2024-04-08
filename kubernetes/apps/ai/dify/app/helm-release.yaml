@@ -81,7 +81,7 @@ spec:
           web:
             image:
               repository: langgenius/dify-web
-              tag: 0.5.10
+              tag: 0.6.0
               pullPolicy: Always
             env:
               EDITION: SELF_HOSTED
