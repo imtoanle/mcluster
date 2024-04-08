@@ -121,7 +121,7 @@ spec:
               - docker/entrypoints/rails.sh
             args:
               - sleep
-              - 99999999
+              - "99999999"
             envFrom: &envFrom
               - secretRef:
                   name: chatwoot-aitbase-secret-envs
