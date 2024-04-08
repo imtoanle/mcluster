@@ -34,8 +34,8 @@ spec:
         containers:
           main:
             image:
-              repository: chatwoot/chatwoot
-              tag: v3.7.0
+              repository: ktoanlba/chatwoot
+              tag: v3.7.0-custom
               pullPolicy: Always
             command:
               - docker/entrypoints/rails.sh
@@ -69,8 +69,8 @@ spec:
         containers:
           db-migrate-job:
             image:
-              repository: chatwoot/chatwoot
-              tag: v3.7.0
+              repository: ktoanlba/chatwoot
+              tag: v3.7.0-custom
               pullPolicy: IfNotPresent
             # command:
             args:
@@ -89,8 +89,8 @@ spec:
         containers:
           main:
             image:
-              repository: chatwoot/chatwoot
-              tag: v3.7.0
+              repository: ktoanlba/chatwoot
+              tag: v3.7.0-custom
               pullPolicy: Always
             command:
               - bundle
@@ -114,8 +114,8 @@ spec:
         containers:
           main:
             image:
-              repository: chatwoot/chatwoot
-              tag: v3.7.0
+              repository: ktoanlba/chatwoot
+              tag: v3.7.0-custom
               pullPolicy: Always
             command:
               - docker/entrypoints/rails.sh
