@@ -82,7 +82,7 @@ spec:
               - secretRef:
                   name: chatwoot-aitbase-secret-envs
       worker:
-        replicas: 2
+        replicas: 1
         strategy: Recreate
         annotations:
           secret.reloader.stakater.com/reload: "chatwoot-aitbase-secret-envs"
@@ -101,11 +101,11 @@ spec:
             envFrom: *envFrom
             resources:
               requests:
-                cpu: 250m
-                memory: 256Mi
-              limits:
                 cpu: 500m
                 memory: 512Mi
+              limits:
+                cpu: 1000m
+                memory: 1024Mi
       console:
         replicas: 1
         strategy: Recreate
