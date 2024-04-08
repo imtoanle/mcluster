@@ -60,8 +60,6 @@ spec:
               tag: latest
               pullPolicy: IfNotPresent
             command:
-              - sh
-              - -c
               - ./listmonk
               - --upgrade
             env:
