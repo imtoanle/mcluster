@@ -71,7 +71,7 @@ spec:
             image:
               repository: ktoanlba/chatwoot
               tag: v3.7.0-custom
-              pullPolicy: IfNotPresent
+              pullPolicy: Always
             # command:
             args:
               - bundle
