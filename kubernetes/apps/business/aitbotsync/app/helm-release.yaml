@@ -38,7 +38,7 @@ spec:
           main:
             image:
               repository: ghcr.io/imtoanle/aitbotsync-server
-              tag: 0.0.5
+              tag: 0.0.6
               pullPolicy: Always
             # probes:
             #   liveness: &probes
@@ -70,7 +70,7 @@ spec:
           main:
             image:
               repository: ghcr.io/imtoanle/aitbotsync-adminfe
-              tag: 0.0.5
+              tag: 0.0.6
               pullPolicy: Always
             # probes:
             #   liveness: &probes
