@@ -10,3 +10,4 @@ resources:
   - ./loki/ks.yaml
   - ./prometheus-pushgateway/ks.yaml
   - ./tempo/ks.yaml
+  - ./vector/ks.yaml
