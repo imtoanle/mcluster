@@ -9,3 +9,4 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./loki/ks.yaml
   - ./prometheus-pushgateway/ks.yaml
+  - ./tempo/ks.yaml
