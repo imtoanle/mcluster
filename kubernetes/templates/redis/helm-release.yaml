@@ -3,7 +3,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: ${APP}-redis
-  namespace: ${APP_NAMESPACE}
 spec:
   interval: 15m
   chart:
@@ -28,10 +27,17 @@ spec:
   values:
     architecture: standalone
     auth:
-      existingSecret: ${APP}-redis-secrets
-      existingSecretPasswordKey: redis-password
+      enabled: false
     master:
       persistence:
         enabled: true
         storageClass: ${PERSISTENCE_STORAGE_CLASS:-ceph-block}
         size: ${PERSISTENCE_SIZE:-8Gi}
+    networkPolicy:
+      enabled: true
+      allowExternal: false
+      extraIngress:
+        - from:
+            - podSelector:
+                - matchLabels:
+                    - app: ${APP}
