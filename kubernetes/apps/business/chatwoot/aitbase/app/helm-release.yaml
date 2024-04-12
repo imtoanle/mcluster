@@ -24,6 +24,8 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: ${APP}-redis
   values:
     controllers:
       main:
@@ -31,6 +33,9 @@ spec:
         strategy: Recreate
         annotations:
           secret.reloader.stakater.com/reload: "chatwoot-aitbase-secret-envs"
+        pod:
+          labels:
+            "${APP}-redis-client": "true"
         containers:
           main:
             image:
@@ -66,6 +71,9 @@ spec:
           helm.sh/hook-delete-policy: "hook-succeeded,before-hook-creation"
           helm.sh/hook-weight: "-1"
         replicas: 1
+        pod:
+          labels:
+            "${APP}-redis-client": "true"
         containers:
           db-migrate-job:
             image:
@@ -86,6 +94,9 @@ spec:
         strategy: Recreate
         annotations:
           secret.reloader.stakater.com/reload: "chatwoot-aitbase-secret-envs"
+        pod:
+          labels:
+            "${APP}-redis-client": "true"
         containers:
           main:
             image:
@@ -111,6 +122,9 @@ spec:
         strategy: Recreate
         annotations:
           secret.reloader.stakater.com/reload: "chatwoot-aitbase-secret-envs"
+        pod:
+          labels:
+            "${APP}-redis-client": "true"
         containers:
           main:
             image:
