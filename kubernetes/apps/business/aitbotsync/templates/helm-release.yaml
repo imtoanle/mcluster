@@ -23,6 +23,8 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: ${APP}-redis
   values:
     defaultPodOptions:
       imagePullSecrets:
