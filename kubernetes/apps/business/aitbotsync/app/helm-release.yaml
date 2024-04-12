@@ -27,8 +27,6 @@ spec:
     defaultPodOptions:
       imagePullSecrets:
         - name: imtoanle-ghcr-key
-      labels:
-        aitbotsync-prod-redis-client: "true"
     controllers:
       main:
         replicas: 1
