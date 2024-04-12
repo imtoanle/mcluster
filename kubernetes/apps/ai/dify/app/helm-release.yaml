@@ -3,7 +3,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: &app dify-app
-  namespace: ai-apps
 spec:
   interval: 30m
   chart:
@@ -24,6 +23,8 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: ${APP}-redis
   values:
     controllers:
       main:
@@ -31,6 +32,9 @@ spec:
         # strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          labels:
+            "${APP}-redis-client": "true"
         containers:
           main:
             image:
@@ -56,6 +60,9 @@ spec:
         # strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          labels:
+            "${APP}-redis-client": "true"
         containers:
           main:
             image:
