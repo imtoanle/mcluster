@@ -28,7 +28,7 @@ spec:
       imagePullSecrets:
         - name: imtoanle-ghcr-key
       labels:
-        app: ${APP}
+        aitbotsync-prod-redis-client: "true"
     controllers:
       main:
         replicas: 1
