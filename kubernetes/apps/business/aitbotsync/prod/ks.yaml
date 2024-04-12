@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-business-aitbotsync-app
+  name: cluster-apps-business-aitbotsync-prod-app
   namespace: flux-system
 spec:
   targetNamespace: business
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
-  path: ./kubernetes/apps/business/aitbotsync/app
+  path: ./kubernetes/apps/business/aitbotsync/prod/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -20,3 +20,4 @@ spec:
   postBuild:
     substitute:
       APP: aitbotsync-prod
+      INGRESS_DOMAIN: "aitbotsync.${SECRET_DOMAIN}"
