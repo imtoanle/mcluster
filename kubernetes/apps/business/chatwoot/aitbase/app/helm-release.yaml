@@ -3,7 +3,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: &app chatwoot-aitbase-app
-  namespace: business
 spec:
   interval: 30m
   chart:
@@ -24,6 +23,8 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: ${APP}-redis
   values:
     controllers:
       main:

@@ -32,9 +32,6 @@ spec:
         # strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          labels:
-            "${APP}-redis-client": "true"
         containers:
           main:
             image:
@@ -60,9 +57,6 @@ spec:
         # strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          labels:
-            "${APP}-redis-client": "true"
         containers:
           main:
             image:

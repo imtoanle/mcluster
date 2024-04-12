@@ -36,3 +36,12 @@ spec:
     networkPolicy:
       enabled: true
       allowExternal: false
+      extraIngress:
+        - ports:
+            - protocol: TCP
+              port: 6379
+          from:
+            - podSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: ${APP}
+                  app.kubernetes.io/name: ${APP}
