@@ -29,9 +29,9 @@ spec:
     controllers:
       main:
         replicas: 1
-        # strategy: Recreate
+        strategy: Recreate
         annotations:
-          reloader.stakater.com/auto: "true"
+          secret.reloader.stakater.com/reload: "dify-env-secrets"
         containers:
           main:
             image:
@@ -54,9 +54,9 @@ spec:
             #     memory: 3000Mi
       worker:
         replicas: 1
-        # strategy: Recreate
+        strategy: Recreate
         annotations:
-          reloader.stakater.com/auto: "true"
+          secret.reloader.stakater.com/reload: "dify-env-secrets"
         containers:
           main:
             image:
@@ -76,8 +76,8 @@ spec:
       web:
         replicas: 1
         # strategy: Recreate
-        annotations:
-          reloader.stakater.com/auto: "true"
+        # annotations:
+        #   reloader.stakater.com/auto: "true"
         containers:
           web:
             image:
