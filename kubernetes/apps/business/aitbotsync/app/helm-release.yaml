@@ -35,7 +35,7 @@ spec:
           configmap.reloader.stakater.com/reload: "aitbotsync-backend-secrets"
         pod:
           labels:
-            aitbotsync-prod-redis-client: "true"
+            "${APP}-redis-client": "true"
         containers:
           main:
             image:
