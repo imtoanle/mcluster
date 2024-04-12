@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./private-registry
   - ./actual/ks.yaml
-  - ./aitbotsync/ks.yaml
+  - ./aitbotsync/prod/ks.yaml
   # - ./chatwoot/vietwings/ks.yaml
   - ./chatwoot/aitbase/ks.yaml
   - comabase
