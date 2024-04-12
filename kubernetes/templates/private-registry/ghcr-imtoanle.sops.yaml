@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: imtoanle-ghcr-key
-    namespace: business
 data:
     .dockerconfigjson: ENC[AES256_GCM,data:LdWN9U00joUxPj+CEBmFoN9E6YBwCq8GH6I4hO/7BIajJLth6fRTiMfUqq2GL1oNoVzL53CG68FMWN0A6atuk/Tb1q7j4u5Ho6ZnnEKYijOD4DGN1HqT1qOJO5AC9zTjMGsQPj+S+ifQJA7gS5BZhF+goqhjLH9kgF2r8tqd6gkWwCCt3S1HJA==,iv:05M5Gohp1rgCXL+TU1Y4m9/IPAbHQmKHN6Un+5Q6uzw=,tag:Zz/OtNXyF9UjVWsNPJmBTQ==,type:str]
 type: kubernetes.io/dockerconfigjson
@@ -21,8 +20,8 @@ sops:
             emF6Zm5yemlOaTg0K2loaUlHR010bEkKswyZFmFXnok/O54Cj2wDdBDgIP5GWb3z
             A4IipHp46RpleiquXDubChc1JLYpQhx6WkEm+pBCfLBDUpF9IEyvCg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-03-26T08:02:38Z"
-    mac: ENC[AES256_GCM,data:SJmwSV8hsttD5dYnViGzMOJWs9W+4Pp+c/eLFT5QCYH8NL2JoYhgc0CjNgNxWJOLLmWSwb6RB8+KsgxDZ/I84M9OsLHl8bnuOnZe/TC007swmZQtGyIB4wmnuTT9RXbOyWTZZbRXYOubxdncC/l7yHMWnK38/8rfTTmjLbgZ+gg=,iv:oaM1BQLYxayH5BEOAcOAP/eZtFfzjhhBgQXoQ0mEjtc=,tag:o4ox1ENnqp/OPJdvzUEcRA==,type:str]
+    lastmodified: "2024-04-12T13:59:31Z"
+    mac: ENC[AES256_GCM,data:XiPxkdzcKaEwMGCJW5TQEFOTtZBdXF2YFEolvBtjXYuS1vvW9QWFcAzUjZT4kRpZ5et761zE/HmtP7SPN7vNOFC1UCUjM/aX/c/OojW9i5pnfkdn/LNaXqsBKbKYoJU4eEmmhQbN4L2JpC0c2kfxd9AUPUaX94Kdja6LNRvREr8=,iv:gSFOQ5GXjiCg6/w27R12NvqJRwLDAFGzgmGWZt8V7Z8=,tag:iWPOPsJrO7/wiD9VGd1mPA==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
