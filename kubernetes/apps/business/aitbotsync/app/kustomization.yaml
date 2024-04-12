@@ -4,5 +4,4 @@ kind: Kustomization
 resources:
   - ../../../../templates/redis
   - backend-config.sops.yaml
-  - registry-secrets.sops.yaml
   - helm-release.yaml
