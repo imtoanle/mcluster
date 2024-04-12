@@ -5,6 +5,7 @@ metadata:
   name: cluster-apps-business-chatwoot-aitbase-app
   namespace: flux-system
 spec:
+  targetNamespace: business
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
   path: ./kubernetes/apps/business/chatwoot/aitbase/app
