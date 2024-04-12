@@ -36,8 +36,3 @@ spec:
     networkPolicy:
       enabled: true
       allowExternal: false
-      extraIngress:
-        - from:
-            - podSelector:
-                - matchLabels:
-                    - app: ${APP}
