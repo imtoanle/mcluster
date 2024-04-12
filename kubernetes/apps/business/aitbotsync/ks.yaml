@@ -2,28 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-business-aitbotsync-redis
-  namespace: flux-system
-spec:
-  path: ./kubernetes/apps/business/aitbotsync/redis
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-kubernetes
-  wait: true
-  interval: 30m
-  retryInterval: 1m
-  timeout: 5m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
   name: cluster-apps-business-aitbotsync-app
   namespace: flux-system
 spec:
+  targetNamespace: business
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
-    - name: cluster-apps-business-aitbotsync-redis
   path: ./kubernetes/apps/business/aitbotsync/app
   prune: true
   sourceRef:
@@ -33,3 +17,6 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+  postBuild:
+    substitute:
+      APP: aitbotsync-prod
