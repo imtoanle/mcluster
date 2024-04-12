@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./actual/ks.yaml
   - ./aitbotsync/ks.yaml
-  - ./chatwoot/vietwings/ks.yaml
+  # - ./chatwoot/vietwings/ks.yaml
   - ./chatwoot/aitbase/ks.yaml
   - comabase
   - directus
