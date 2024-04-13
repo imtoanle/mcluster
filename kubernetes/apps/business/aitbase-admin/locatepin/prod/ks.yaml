@@ -1,0 +1,26 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-business-locatepin-prod-app
+  namespace: flux-system
+spec:
+  targetNamespace: business
+  dependsOn:
+    - name: cluster-apps-cloudnative-pg-cluster
+  path: ./kubernetes/apps/business/aitbase-admin/locatepin/prod/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  postBuild:
+    substitute:
+      APP: locatepin-prod
+      INGRESS_DOMAIN: "locatepin.${SECRET_DOMAIN}"
+      SERVER_IMAGE_REPO: ghcr.io/imtoanle/locatepin-server
+      FE_IMAGE_REPO: ghcr.io/imtoanle/locatepin-adminfe
+      IMAGE_TAG: 0.0.2
