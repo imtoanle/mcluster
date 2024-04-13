@@ -6,13 +6,13 @@ resources:
   - ./private-registry
   - ./actual/ks.yaml
   - ./aitbase-admin/aitbotsync/prod/ks.yaml
+  - ./aitbase-admin/locatepin/prod/ks.yaml
   # - ./chatwoot/vietwings/ks.yaml
   - ./chatwoot/aitbase/ks.yaml
   - comabase
   - directus
   - leantime
   - ./listmonk/ks.yaml
-  - ./locatepin/ks.yaml
   - mattermost
   - ./memos/ks.yaml
   - ./plane/ks.yaml
