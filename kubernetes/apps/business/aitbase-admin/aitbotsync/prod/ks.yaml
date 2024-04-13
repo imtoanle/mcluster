@@ -8,7 +8,7 @@ spec:
   targetNamespace: business
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
-  path: ./kubernetes/apps/business/aitbotsync/prod/app
+  path: ./kubernetes/apps/business/aitbase-admin/aitbotsync/prod/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -21,3 +21,6 @@ spec:
     substitute:
       APP: aitbotsync-prod
       INGRESS_DOMAIN: "aitbotsync.${SECRET_DOMAIN}"
+      SERVER_IMAGE_REPO: ghcr.io/imtoanle/aitbotsync-server
+      FE_IMAGE_REPO: ghcr.io/imtoanle/aitbotsync-adminfe
+      IMAGE_TAG: 0.0.8

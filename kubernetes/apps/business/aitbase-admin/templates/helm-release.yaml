@@ -41,8 +41,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/imtoanle/aitbotsync-server
-              tag: 0.0.8
+              repository: ${SERVER_IMAGE_REPO}
+              tag: ${IMAGE_TAG}
               pullPolicy: Always
             # probes:
             #   liveness: &probes
@@ -71,8 +71,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/imtoanle/aitbotsync-adminfe
-              tag: 0.0.8
+              repository: ${FE_IMAGE_REPO}
+              tag: ${IMAGE_TAG}
               pullPolicy: Always
             # probes:
             #   liveness: &probes
