@@ -21,5 +21,7 @@ spec:
     substitute:
       APP: aitbotsync-prod
       INGRESS_DOMAIN: "aitbotsync.${SECRET_DOMAIN}"
-      IMAGE_REPO: ghcr.io/imtoanle/aitbotsync-server
-      IMAGE_TAG: 0.0.8
+      SERVER_IMAGE_REPO: ghcr.io/imtoanle/aitbotsync-server
+      SERVER_IMAGE_TAG: 0.0.8
+      FE_IMAGE_REPO: ghcr.io/imtoanle/aitbotsync-adminfe
+      FE_IMAGE_TAG: 0.0.8

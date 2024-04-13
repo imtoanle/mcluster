@@ -71,8 +71,8 @@ spec:
         containers:
           main:
             image:
-              repository: ${IMAGE_REPO}
-              tag: ${IMAGE_TAG}
+              repository: ${FE_IMAGE_REPO}
+              tag: ${FE_IMAGE_TAG}
               pullPolicy: Always
             # probes:
             #   liveness: &probes
