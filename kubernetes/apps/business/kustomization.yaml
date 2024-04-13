@@ -6,6 +6,7 @@ resources:
   - ./private-registry
   - ./actual/ks.yaml
   - ./aitbase-admin/aitbotsync/prod/ks.yaml
+  - ./aitbase-admin/aitbotsync/staging/ks.yaml
   - ./aitbase-admin/locatepin/prod/ks.yaml
   # - ./chatwoot/vietwings/ks.yaml
   - ./chatwoot/aitbase/ks.yaml
