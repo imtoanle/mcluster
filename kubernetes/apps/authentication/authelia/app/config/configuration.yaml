@@ -81,7 +81,8 @@ identity_providers:
       - key_id: "authmclusterkey"
         algorithm: "RS256"
         use: "sig"
-        key: ${AUTHENTICATION_OIDC_PRIVATEKEY}
+        key: |
+          ${AUTHENTICATION_OIDC_PRIVATEKEY}
     cors:
       endpoints: ["authorization", "token", "revocation", "introspection"]
       allowed_origins_from_client_redirect_uris: true
