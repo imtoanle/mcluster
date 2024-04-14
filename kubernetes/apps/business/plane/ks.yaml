@@ -5,6 +5,7 @@ metadata:
   name: cluster-apps-business-plane-app
   namespace: flux-system
 spec:
+  targetNamespace: plane
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
   path: ./kubernetes/apps/business/plane/app
