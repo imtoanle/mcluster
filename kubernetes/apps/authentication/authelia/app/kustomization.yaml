@@ -5,6 +5,13 @@ kind: Kustomization
 namespace: authentication
 resources:
   - ./secrets.sops.yaml
-  - ./secret-configs.sops.yaml
   - ./helmrelease.yaml
   - ./gatus.yaml
+configMapGenerator:
+  - name: authelia-configmap
+    files:
+      - configuration.yaml=./config/configuration.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
