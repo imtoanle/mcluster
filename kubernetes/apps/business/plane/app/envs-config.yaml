@@ -12,5 +12,5 @@ data:
   SENTRY_ENVIRONMENT: ""
   DEBUG: "0"
   GUNICORN_WORKERS: "1"
-  REDIS_URL: "redis://plane-redis-master.plane.svc.cluster.local:6379"
+  REDIS_URL: "redis://${APP}-redis-master.plane.svc.cluster.local:6379"
   FILE_SIZE_LIMIT: "5242880"
