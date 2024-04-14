@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.4.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -28,8 +28,31 @@ spec:
     - name: ${APP}-redis
   values:
     controllers:
+      migrator:
+        enabled: true
+        type: job
+        annotations:
+          helm.sh/hook: "post-install,post-upgrade"
+          helm.sh/hook-delete-policy: "hook-succeeded,before-hook-creation"
+          helm.sh/hook-weight: "-1"
+        replicas: 1
+        containers:
+          db-migrate-job:
+            image:
+              repository: makeplane/plane-backend
+              tag: stable
+              pullPolicy: Always
+            command:
+              - sh
+              - -c
+              - python manage.py wait_for_db && python manage.py migrate
+            envFrom: &envFrom
+              - configMapRef:
+                  name: plane-config-envs
+              - secretRef:
+                  name: plane-secret-envs
       main:
-        replicas: 2
+        replicas: 1
         strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -37,7 +60,7 @@ spec:
           main:
             image:
               repository: makeplane/plane-frontend
-              tag: latest
+              tag: stable
               pullPolicy: Always
             command:
               - /usr/local/bin/start.sh
@@ -57,7 +80,7 @@ spec:
                 cpu: 2000m
                 memory: 3000Mi
       space:
-        replicas: 2
+        replicas: 1
         strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -65,7 +88,7 @@ spec:
           main:
             image:
               repository: makeplane/plane-space
-              tag: latest
+              tag: stable
               pullPolicy: Always
             command:
               - /usr/local/bin/start.sh
@@ -81,7 +104,7 @@ spec:
                 cpu: 2000m
                 memory: 3000Mi
       api:
-        replicas: 2
+        replicas: 1
         strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -89,7 +112,7 @@ spec:
           main:
             image:
               repository: makeplane/plane-backend
-              tag: latest
+              tag: stable
               pullPolicy: Always
             command:
               - ./bin/takeoff
@@ -110,7 +133,7 @@ spec:
           main:
             image:
               repository: makeplane/plane-backend
-              tag: latest
+              tag: stable
               pullPolicy: Always
             command:
               - ./bin/worker
@@ -131,7 +154,7 @@ spec:
           main:
             image:
               repository: makeplane/plane-backend
-              tag: latest
+              tag: stable
               pullPolicy: Always
             command:
               - ./bin/beat
@@ -173,23 +196,21 @@ spec:
           - host: &host "plane.${SECRET_DOMAIN}"
             paths:
               - path: /
-                name: main
                 pathType: Prefix
                 service:
-                  name: main
+                  identifier: main
                   port: http
               - path: /api
-                name: api
                 pathType: Prefix
                 service:
-                  name: api
+                  identifier: api
                   port: http
               - path: /spaces
-                name: space
                 pathType: Prefix
                 service:
-                  name: space
+                  identifier: space
                   port: http
+
         tls:
           - hosts:
               - *host
