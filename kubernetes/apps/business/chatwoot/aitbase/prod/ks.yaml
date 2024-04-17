@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-business-chatwoot-aitbase-app
+  name: cluster-apps-business-chatwoot-aitbase-prod
   namespace: flux-system
 spec:
   targetNamespace: business
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
-  path: ./kubernetes/apps/business/chatwoot/aitbase/app
+  path: ./kubernetes/apps/business/chatwoot/aitbase/prod/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -19,4 +19,5 @@ spec:
   timeout: 5m
   postBuild:
     substitute:
-      APP: chatwoot-aitbase-app
+      APP: chatwoot-aitbase-prod
+      INGRESS_DOMAIN: livesupport.${SECRET_DOMAIN}

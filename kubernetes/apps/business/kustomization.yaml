@@ -9,7 +9,7 @@ resources:
   - ./aitbase-admin/aitbotsync/staging/ks.yaml
   - ./aitbase-admin/locatepin/prod/ks.yaml
   # - ./chatwoot/vietwings/ks.yaml
-  - ./chatwoot/aitbase/ks.yaml
+  - ./chatwoot/aitbase/prod/ks.yaml
   - comabase
   - directus
   - leantime
