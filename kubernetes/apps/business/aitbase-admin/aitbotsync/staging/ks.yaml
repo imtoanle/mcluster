@@ -23,4 +23,4 @@ spec:
       INGRESS_DOMAIN: "aitbotsync-staging.${SECRET_DOMAIN}"
       SERVER_IMAGE_REPO: ghcr.io/imtoanle/aitbotsync-server
       FE_IMAGE_REPO: ghcr.io/imtoanle/aitbotsync-adminfe
-      IMAGE_TAG: 0.0.8
+      IMAGE_TAG: 0.1.0
