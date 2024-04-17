@@ -20,7 +20,7 @@ spec:
   postBuild:
     substitute:
       APP: aitbotsync-prod
-      INGRESS_DOMAIN: "aitbotsync.${SECRET_DOMAIN}"
+      INGRESS_DOMAIN: "connector.${SECRET_DOMAIN}"
       SERVER_IMAGE_REPO: ghcr.io/imtoanle/aitbotsync-server
       FE_IMAGE_REPO: ghcr.io/imtoanle/aitbotsync-adminfe
       IMAGE_TAG: 0.1.0
