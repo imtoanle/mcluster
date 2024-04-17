@@ -20,3 +20,4 @@ spec:
   postBuild:
     substitute:
       APP: chatwoot-aitbase-app
+      INGRESS_DOMAIN: livesupport.${SECRET_DOMAIN}

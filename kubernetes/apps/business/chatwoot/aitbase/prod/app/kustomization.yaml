@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ../../../../../templates/redis
   - ./secret.sops.yaml
-  - ./helm-release.yaml
+  - ../../../../templates

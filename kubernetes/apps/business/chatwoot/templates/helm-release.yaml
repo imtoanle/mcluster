@@ -1,0 +1,161 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app ${APP}
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.0.4
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: ${APP}-redis
+  values:
+    controllers:
+      main:
+        replicas: 1
+        strategy: Recreate
+        annotations:
+          secret.reloader.stakater.com/reload: "${APP}-secret-envs"
+        containers:
+          main:
+            image:
+              repository: ktoanlba/chatwoot
+              tag: v3.7.0-custom
+              pullPolicy: Always
+            command:
+              - docker/entrypoints/rails.sh
+            args:
+              - bundle
+              - exec
+              - rails
+              - s
+              - -p
+              - "3000"
+              - -b
+              - "0.0.0.0"
+            envFrom: &envFrom
+              - secretRef:
+                  name: ${APP}-secret-envs
+            resources:
+              requests:
+                cpu: 250m
+                memory: 256Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+      hookjob:
+        enabled: true
+        type: job
+        annotations:
+          helm.sh/hook: "post-install,post-upgrade"
+          helm.sh/hook-delete-policy: "hook-succeeded,before-hook-creation"
+          helm.sh/hook-weight: "-1"
+        replicas: 1
+        containers:
+          db-migrate-job:
+            image:
+              repository: ktoanlba/chatwoot
+              tag: v3.7.0-custom
+              pullPolicy: Always
+            # command:
+            args:
+              - bundle
+              - exec
+              - rails
+              - db:chatwoot_prepare
+            envFrom:
+              - secretRef:
+                  name: ${APP}-secret-envs
+      worker:
+        replicas: 2
+        strategy: Recreate
+        annotations:
+          secret.reloader.stakater.com/reload: "${APP}-secret-envs"
+        containers:
+          main:
+            image:
+              repository: ktoanlba/chatwoot
+              tag: v3.7.0-custom
+              pullPolicy: Always
+            command:
+              - bundle
+              - exec
+              - sidekiq
+              - -C
+              - config/sidekiq.yml
+            envFrom: *envFrom
+            resources:
+              requests:
+                cpu: 250m
+                memory: 256Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+      console:
+        replicas: 1
+        strategy: Recreate
+        annotations:
+          secret.reloader.stakater.com/reload: "${APP}-secret-envs"
+        containers:
+          main:
+            image:
+              repository: ktoanlba/chatwoot
+              tag: v3.7.0-custom
+              pullPolicy: Always
+            command:
+              - docker/entrypoints/rails.sh
+            args:
+              - sleep
+              - "99999999"
+            envFrom: &envFrom
+              - secretRef:
+                  name: ${APP}-secret-envs
+            resources:
+              requests:
+                cpu: 250m
+                memory: 256Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: &port 3000
+
+    serviceAccount:
+      create: true
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "${INGRESS_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
