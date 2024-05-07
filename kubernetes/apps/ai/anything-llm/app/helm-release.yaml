@@ -55,7 +55,7 @@ spec:
             command:
               - "/bin/sh"
               - "-c"
-              - "chown -Rv 1000:1000 /data/storage"
+              - "mkdir -p /data/storage && chown -Rv 1000:1000 /data/storage"
     service:
       main:
         controller: main
