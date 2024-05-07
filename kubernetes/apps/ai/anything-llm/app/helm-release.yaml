@@ -84,4 +84,6 @@ spec:
       data:
         enabled: true
         existingClaim: anything-llm-server
-        mountPath: /app/server/storage
+        globalMounts:
+          - path: /app/server/storage
+            readOnly: false
