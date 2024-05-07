@@ -39,6 +39,13 @@ spec:
             envFrom:
               - secretRef:
                   name: anything-llm-env-secrets
+            initContainers:
+              init-permissions:
+                image:
+                  repository: busybox
+                  tag: 1.36
+                  imagePullPolicy: IfNotPresent
+                command: ["sh", "-c", "chown -Rv 1000:1000 /data/storage"]
             # resources:
             #   requests:
             #     cpu: 200m
