@@ -55,7 +55,7 @@ spec:
             command:
               - "/bin/sh"
               - "-c"
-              - "mkdir -p /data/storage && chown -Rv 1000:1000 /data/storage"
+              - "mkdir -p /app/server/storage && chown -Rv 1000:1000 /app/server/storage"
     service:
       main:
         controller: main
@@ -84,3 +84,4 @@ spec:
       data:
         enabled: true
         existingClaim: anything-llm-server
+        mountPath: /app/server/storage
