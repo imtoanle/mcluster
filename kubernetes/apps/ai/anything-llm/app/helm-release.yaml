@@ -25,13 +25,6 @@ spec:
     keepHistory: false
   values:
     controllers:
-      initContainers:
-        init-permissions:
-          image:
-            repository: busybox
-            tag: 1.36
-            imagePullPolicy: IfNotPresent
-          command: ["sh", "-c", "chown -Rv 1000:1000 /data/storage"]
       main:
         replicas: 1
         # strategy: Recreate
@@ -53,6 +46,16 @@ spec:
             #   limits:
             #     cpu: 2000m
             #     memory: 3000Mi
+        initContainers:
+          init-permissions:
+            image:
+              repository: public.ecr.aws/docker/library/busybox
+              tag: latest@sha256:650fd573e056b679a5110a70aabeb01e26b76e545ec4b9c70a9523f2dfaf18c6
+              pullPolicy: IfNotPresent
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "chown -Rv 1000:1000 /data/storage"
     service:
       main:
         controller: main
