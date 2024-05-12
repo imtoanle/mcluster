@@ -21,3 +21,4 @@ resources:
   - ./stirling-pdf/ks.yaml
   - superset
   - trilium-notes
+  - ./valhalla/ks.yaml
