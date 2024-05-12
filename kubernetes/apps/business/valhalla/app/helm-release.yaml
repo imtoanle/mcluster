@@ -81,5 +81,5 @@ spec:
         enabled: true
         existingClaim: ${APP}
         globalMounts:
-          - path: /app/server/storage
+          - path: /custom_files
             readOnly: false
