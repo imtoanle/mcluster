@@ -11,4 +11,5 @@ spec:
     kind: ClusterIssuer
   commonName: "${SECRET_DOMAIN_3}"
   dnsNames:
+    - "${SECRET_DOMAIN_3}"
     - "*.${SECRET_DOMAIN_3}"
