@@ -4,5 +4,7 @@ kind: Kustomization
 resources:
   - ./staging.yaml
   - ./staging_domain2.yaml
+  - ./staging_domain3.yaml
   - ./production.yaml
   - ./production_domain2.yaml
+  - ./production_domain3.yaml
