@@ -39,7 +39,7 @@ spec:
         # workers configuration
         # The default worker group
         - name: "default"
-          replicas: 3
+          replicas: 2
           # -- Annotations to apply to the pods
           annotations: {}
           # -- Node selector to use for scheduling the pods
@@ -61,7 +61,27 @@ spec:
           extraEnv: []
 
         - name: "native"
-          replicas: 4
+          replicas: 2
+          # -- Annotations to apply to the pods
+          annotations: {}
+          # -- Node selector to use for scheduling the pods
+          nodeSelector: {}
+          # -- Tolerations to apply to the pods
+          tolerations: []
+          # -- Affinity rules to apply to the pods
+          affinity: {}
+          # -- Resource limits and requests for the pods
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          # -- Extra environment variables to apply to the pods
+          extraEnv: []
+        - name: "reports"
+          replicas: 2
           # -- Annotations to apply to the pods
           annotations: {}
           # -- Node selector to use for scheduling the pods
