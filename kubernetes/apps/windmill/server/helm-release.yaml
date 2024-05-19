@@ -30,8 +30,8 @@ spec:
       enabled: false
 
     windmill:
-      tag: "main"
-      image: "ghcr.io/imtoanle/windmill-playwright"
+      # tag: "main"
+      # image: "ghcr.io/imtoanle/windmill-playwright"
       databaseUrlSecretName: app-secrets
       baseDomain: &host "windmill.${SECRET_DOMAIN}"
       baseProtocol: https
@@ -91,13 +91,13 @@ spec:
           # -- Affinity rules to apply to the pods
           affinity: {}
           # -- Resource limits and requests for the pods
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "100m"
-            limits:
-              memory: "256Mi"
-              cpu: "200m"
+          # resources:
+          #   requests:
+          #     memory: "128Mi"
+          #     cpu: "100m"
+          #   limits:
+          #     memory: "256Mi"
+          #     cpu: "200m"
           # -- Extra environment variables to apply to the pods
           extraEnv: []
     ingress:
