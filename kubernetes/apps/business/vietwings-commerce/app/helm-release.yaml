@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/imtoanle/vietwings-commerce
-              tag: 0.0.4
+              tag: 0.0.5
             envFrom:
               - secretRef:
                   name: vietwings-commerce-env-secrets
