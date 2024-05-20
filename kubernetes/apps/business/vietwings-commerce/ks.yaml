@@ -1,0 +1,17 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-ai-vietwings-commerce-app
+  namespace: flux-system
+spec:
+  targetNamespace: ai-apps
+  path: ./kubernetes/apps/business/vietwings-commerce/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
