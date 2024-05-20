@@ -47,6 +47,27 @@ spec:
             #   limits:
             #     cpu: 2000m
             #     memory: 3000Mi
+      hookjob:
+        enabled: true
+        type: job
+        annotations:
+          helm.sh/hook: "post-install,post-upgrade"
+          helm.sh/hook-delete-policy: "hook-succeeded,before-hook-creation"
+          helm.sh/hook-weight: "-1"
+        replicas: 1
+        containers:
+          db-migrate-job:
+            image:
+              repository: ghcr.io/imtoanle/vietwings-commerce
+              tag: 0.0.6
+            # command:
+            args:
+              - medusa
+              - migrations
+              - run
+            envFrom:
+              - secretRef:
+                  name: vietwings-commerce-env-secrets
     service:
       main:
         controller: main
