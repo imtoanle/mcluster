@@ -41,6 +41,43 @@ spec:
                   name: erpnext-app-env-secrets
             args:
               - nginx-entrypoint.sh
+            probes: &probes
+              # -- Liveness probe configuration
+              # @default -- See below
+              liveness:
+                # -- Enable the liveness probe
+                enabled: true
+                # -- Set this to `true` if you wish to specify your own livenessProbe
+                custom: false
+                # -- sets the probe type when not using a custom probe
+                # @default -- "TCP"
+                type: TCP
+                # -- The spec field contains the values for the default livenessProbe.
+                # If you selected `custom: true`, this field holds the definition of the livenessProbe.
+                # @default -- See below
+                spec:
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+
+              # -- Readiness probe configuration
+              readiness:
+                # -- Enable the readiness probe
+                enabled: true
+                # -- Set this to `true` if you wish to specify your own readinessProbe
+                custom: false
+                # -- sets the probe type when not using a custom probe
+                # @default -- "TCP"
+                type: TCP
+                # -- The spec field contains the values for the default readinessProbe.
+                # If you selected `custom: true`, this field holds the definition of the readinessProbe.
+                # @default -- See below
+                spec:
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
             # resources:
             #   requests:
             #     cpu: 200m
@@ -68,6 +105,7 @@ spec:
             args:
               - node
               - /home/frappe/frappe-bench/apps/frappe/socketio.js
+            probes: &probes
       scheduler:
         replicas: 1
         containers:
@@ -121,6 +159,7 @@ spec:
             image:
               repository: frappe/erpnext
               tag: v15.24.1
+            probes: &probes
     service:
       main:
         controller: main
