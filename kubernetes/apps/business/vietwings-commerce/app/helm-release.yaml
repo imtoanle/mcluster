@@ -60,8 +60,8 @@ spec:
             image:
               repository: ghcr.io/imtoanle/vietwings-commerce
               tag: 0.0.6
-            # command:
-            args:
+            command:
+              # args:
               - medusa
               - migrations
               - run
