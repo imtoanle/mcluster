@@ -48,16 +48,6 @@ spec:
             #   limits:
             #     cpu: 2000m
             #     memory: 3000Mi
-        initContainers:
-          permission:
-            image:
-              repository: public.ecr.aws/docker/library/busybox
-              tag: latest@sha256:650fd573e056b679a5110a70aabeb01e26b76e545ec4b9c70a9523f2dfaf18c6
-              pullPolicy: IfNotPresent
-            command:
-              - "/bin/sh"
-              - "-c"
-              - "mkdir -p /app/server/storage && chown -Rv 1000:1000 /app/server/storage"
       socketio:
         replicas: 1
         containers:
