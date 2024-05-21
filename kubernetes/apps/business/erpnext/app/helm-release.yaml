@@ -54,7 +54,7 @@ spec:
           main:
             image:
               repository: frappe/erpnext
-              tag: v15.27.0
+              tag: v15.24.1
             args:
               - node
               - /home/frappe/frappe-bench/apps/frappe/socketio.js
