@@ -1,0 +1,33 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: MariaDB
+metadata:
+  name: vietwings-erp-mariadb
+spec:
+  username: vietwings_erp
+  database: vietwings_erp
+  env:
+    - name: TZ
+      value: SYSTEM
+  image: "mariadb:11.2.2"
+  imagePullPolicy: IfNotPresent
+  rootPasswordSecretKeyRef:
+    key: instance-root-password
+    name: mariadb-vietwings-erp-instance-config
+  passwordSecretKeyRef:
+    key: instance-password
+    name: mariadb-vietwings-erp-instance-config
+  port: 3306
+  resources:
+    limits:
+      cpu: 300m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  volumeClaimTemplate:
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: 5Gi
+    storageClassName: ceph-filesystem

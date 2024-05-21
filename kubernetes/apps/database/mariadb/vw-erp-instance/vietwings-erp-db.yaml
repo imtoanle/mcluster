@@ -1,0 +1,12 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: Database
+metadata:
+  name: vietwings-erp-db
+spec:
+  name: vietwings_erp
+  # If you want the database to be created with a different name than the resource name
+  # name: data-custom
+  mariaDbRef:
+    name: vietwings-erp-mariadb
+  characterSet: utf8
+  collate: utf8_general_ci
