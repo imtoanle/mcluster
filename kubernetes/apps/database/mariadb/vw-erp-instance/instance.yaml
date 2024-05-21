@@ -26,8 +26,8 @@ spec:
       memory: 128Mi
   volumeClaimTemplate:
     accessModes:
-      - ReadWriteMany
+      - ReadWriteOnce
     resources:
       requests:
         storage: 5Gi
-    storageClassName: ceph-filesystem
+    storageClassName: ceph-block
