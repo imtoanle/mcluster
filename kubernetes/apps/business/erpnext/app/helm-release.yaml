@@ -68,9 +68,6 @@ spec:
             args:
               - node
               - /home/frappe/frappe-bench/apps/frappe/socketio.js
-            envFrom:
-              - secretRef:
-                  name: erpnext-app-env-secrets
       scheduler:
         replicas: 1
         containers:
