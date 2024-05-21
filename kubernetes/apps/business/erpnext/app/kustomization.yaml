@@ -5,4 +5,5 @@ resources:
   - ./secret.sops.yaml
   - ./helm-release.yaml
   - ./socketio-service.yaml
+  - ./gunicorn-service.yaml
   - ../../../../templates/volsync
