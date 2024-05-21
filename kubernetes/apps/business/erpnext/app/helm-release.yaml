@@ -1,0 +1,108 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app erpnext-app
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        replicas: 1
+        # strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: frappe/erpnext
+              tag: v15.24.1
+              pullPolicy: Always
+            envFrom:
+              - secretRef:
+                  name: erpnext-app-env-secrets
+            args:
+              - nginx-entrypoint.sh
+            # resources:
+            #   requests:
+            #     cpu: 200m
+            #     memory: 300Mi
+            #   limits:
+            #     cpu: 2000m
+            #     memory: 3000Mi
+        initContainers:
+          permission:
+            image:
+              repository: public.ecr.aws/docker/library/busybox
+              tag: latest@sha256:650fd573e056b679a5110a70aabeb01e26b76e545ec4b9c70a9523f2dfaf18c6
+              pullPolicy: IfNotPresent
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "mkdir -p /app/server/storage && chown -Rv 1000:1000 /app/server/storage"
+      socketio:
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: frappe/erpnext
+              tag: v15.24.1
+            args:
+              - node
+              - /home/frappe/frappe-bench/apps/frappe/socketio.js
+      gunicorn:
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: frappe/erpnext
+              tag: v15.24.1
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 3001
+
+    ingress:
+      main:
+        enabled: false
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "vw-erp.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      worker:
+        enabled: true
+        existingClaim: ${APP}
+        globalMounts:
+          - path: /home/frappe/frappe-bench/sites
+            readOnly: false

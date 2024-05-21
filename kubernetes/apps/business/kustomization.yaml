@@ -13,6 +13,7 @@ resources:
   - ./chatwoot/aitbase/staging/ks.yaml
   - comabase
   - directus
+  - erpnext/ks.yaml
   - leantime
   - ./listmonk/ks.yaml
   - mattermost
