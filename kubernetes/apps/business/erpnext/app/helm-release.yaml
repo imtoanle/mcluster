@@ -71,21 +71,52 @@ spec:
             envFrom:
               - secretRef:
                   name: erpnext-app-env-secrets
-      # worker-default:
-      #   replicas: 1
-      #   containers:
-      #     main:
-      #       image:
-      #         repository: frappe/erpnext
-      #         tag: v15.24.1
-      #       args:
-      #         - bench
-      #         - worker
-      #         - --queue
-      #         - default
-      #       envFrom:
-      #         - secretRef:
-      #             name: erpnext-app-env-secrets
+      scheduler:
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: frappe/erpnext
+              tag: v15.24.1
+            args:
+              - bench
+              - schedule
+      worker-default:
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: frappe/erpnext
+              tag: v15.24.1
+            args:
+              - bench
+              - worker
+              - --queue
+              - default
+      worker-short:
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: frappe/erpnext
+              tag: v15.24.1
+            args:
+              - bench
+              - worker
+              - --queue
+              - short,default
+      worker-long:
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: frappe/erpnext
+              tag: v15.24.1
+            args:
+              - bench
+              - worker
+              - --queue
+              - long,default,short
       gunicorn:
         replicas: 1
         containers:
