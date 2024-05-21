@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: erpnext-socketio
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 9000
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/component: socketio
+    app.kubernetes.io/instance: erpnext-app
+    app.kubernetes.io/name: erpnext-app
