@@ -40,7 +40,7 @@ spec:
           init-db:
             image:
               repository: ghcr.io/haraldkoch/postgres-init
-              tag: 16.1@sha256:1643b66cc670909b3363796f713570fa9a601b13bfd4b1243f231516520b83d9
+              tag: 16.3@sha256:b7d133b42701da3f44f393802b0cd2cdce7e933ed202626a1e561036e26751df
             env:
               INIT_POSTGRES_HOST:
                 valueFrom:
