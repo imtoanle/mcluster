@@ -97,8 +97,12 @@ spec:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
-                      operator: Exists
+                    - key: kubernetes.io/hostname
+                      operator: In
+                      values:
+                        - hc-master-1
+                        - hc-master-2
+                        - hc-master-3
       resources:
         mgr:
           requests:
