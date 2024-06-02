@@ -7,7 +7,7 @@ resources:
   - ./actual/ks.yaml
   - ./aitbase-admin/aitbotsync/prod/ks.yaml
   - ./aitbase-admin/aitbotsync/staging/ks.yaml
-  - ./aitbase-admin/locatepin/prod/ks.yaml
+  # - ./aitbase-admin/locatepin/prod/ks.yaml
   # - ./chatwoot/vietwings/ks.yaml
   - ./chatwoot/aitbase/prod/ks.yaml
   - ./chatwoot/aitbase/staging/ks.yaml
