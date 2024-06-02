@@ -44,21 +44,21 @@ spec:
               repository: ${SERVER_IMAGE_REPO}
               tag: ${IMAGE_TAG}
               pullPolicy: Always
-            # probes:
-            #   liveness: &probes
-            #     enabled: true
-            #     custom: true
-            #     spec:
-            #       httpGet:
-            #         path: /health
-            #         port: &port 8888
-            #       initialDelaySeconds: 0
-            #       periodSeconds: 10
-            #       timeoutSeconds: 1
-            #       failureThreshold: 3
-            #   readiness: *probes
-            #   startup:
-            #     enabled: false
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: &port 8888
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
             # resources:
             #   requests:
             #     cpu: 250m
@@ -101,7 +101,7 @@ spec:
         controller: main
         ports:
           http:
-            port: 8888
+            port: *port
       adminfe:
         controller: adminfe
         ports:
