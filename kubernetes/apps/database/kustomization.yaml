@@ -10,4 +10,5 @@ resources:
   # - ./vitess/ks.yaml
   - ./redis/ks.yaml
   - ./mariadb/ks.yaml
+  - ./obsidian-couchdb/ks.yaml
   - ./weaviate/ks.yaml
