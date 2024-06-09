@@ -29,6 +29,18 @@ spec:
             fsGroupChangePolicy: "OnRootMismatch"
             supplementalGroups:
               - 65542 # gladius:external-services
+              - 65534
+
+        # initContainers:
+        #   init-config:
+        #     image:
+        #       repository: public.ecr.aws/docker/library/busybox
+        #       tag: latest@sha256:650fd573e056b679a5110a70aabeb01e26b76e545ec4b9c70a9523f2dfaf18c6
+        #       pullPolicy: IfNotPresent
+        #     command:
+        #       - "/bin/sh"
+        #       - "-c"
+        #       - "cp /tmp/config/*.ini /opt/couchdb/etc/default.d/; ls -lrt /opt/couchdb/etc/default.d;"
 
         containers:
           app:
