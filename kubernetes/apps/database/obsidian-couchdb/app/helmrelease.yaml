@@ -76,9 +76,11 @@ spec:
       app:
         className: external
         annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
         hosts:
-          - host: &hostName "obsd.${SECRET_DOMAIN}"
+          - host: &hostName "obsd.${SECRET_DOMAIN_2}"
             paths:
               - path: /
                 service:
