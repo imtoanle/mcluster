@@ -37,7 +37,7 @@ spec:
             image:
               repository: ghcr.io/imtoanle/vietwings-commerce
               tag: 0.0.6
-            command: "medusa start"
+            command: "npx medusa start"
             envFrom:
               - secretRef:
                   name: vietwings-commerce-env-secrets
