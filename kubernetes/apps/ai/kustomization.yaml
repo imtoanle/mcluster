@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./anything-llm/ks.yaml
-  - ./dify/ks.yaml
+  # - ./dify/ks.yaml
   - ./flowise
   # - ./langflow
   # - ./localai
