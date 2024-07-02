@@ -18,3 +18,4 @@ jobs:
         uses: actions/labeler@v2
         with:
           configuration-path: .github/labeler.yaml
+          repo-token: ${{ secrets.GITHUB_TOKEN || github.token }}
