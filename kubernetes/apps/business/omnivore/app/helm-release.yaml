@@ -44,7 +44,7 @@ spec:
             command: ["/bin/sh", "-c", "--"]
             args: ["./packages/db/setup.sh"]
             env:
-              NO_DEMO_USER: 1
+              NO_DEMO_USER: "1"
             envFrom:
               - secretRef:
                   name: omnivore-env-secrets
