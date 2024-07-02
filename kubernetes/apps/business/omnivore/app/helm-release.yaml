@@ -1,0 +1,146 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app omnivore-app
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: ${APP}-redis
+  values:
+    controllers:
+      migrate-hook:
+        enabled: true
+        type: job
+        annotations:
+          helm.sh/hook: "post-install,post-upgrade"
+          helm.sh/hook-delete-policy: "hook-succeeded,before-hook-creation"
+          helm.sh/hook-weight: "-1"
+        replicas: 1
+        containers:
+          db-migrate-job:
+            image:
+              repository: sejaeger/omnivore-migrate
+              tag: f603e4e52
+              pullPolicy: IfNotPresent
+            command: ["/bin/sh", "-c", "--"]
+            args: ["./packages/db/setup.sh"]
+            env:
+              NO_DEMO_USER: 1
+            envFrom:
+              - secretRef:
+                  name: omnivore-env-secrets
+
+      main:
+        replicas: 1
+        # strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: sejaeger/omnivore-api
+              tag: f603e4e52
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: omnivore-env-secrets
+            # resources:
+            #   requests:
+            #     cpu: 200m
+            #     memory: 300Mi
+            #   limits:
+            #     cpu: 2000m
+            #     memory: 3000Mi
+        # initContainers:
+        #   migrate-db:
+        #     image:
+        #       repository: sejaeger/omnivore-migrate
+        #       tag: f603e4e52
+        #       pullPolicy: IfNotPresent
+        #     command: ["/bin/sh", "-c", "--"]
+        #     args: ["./packages/db/setup.sh"]
+        #     env:
+        #       NO_DEMO_USER: 1
+        #     envFrom:
+        #       - secretRef:
+        #           name: omnivore-env-secrets
+      web:
+        strategy: RollingUpdate
+        containers:
+          web:
+            image:
+              repository: sejaeger/omnivore-web
+              tag: f603e4e52
+              pullPolicy: IfNotPresent
+            env:
+              NEXT_PUBLIC_APP_ENV: prod
+              NEXT_PUBLIC_BASE_URL: https://omnivore.aitbase.com
+              NEXT_PUBLIC_SERVER_BASE_URL: http://omnivore-main.business.svc.cluster.local:8080
+              NEXT_PUBLIC_HIGHLIGHTS_BASE_URL: https://omnivore.aitbase.com
+
+      content-fetch:
+        strategy: RollingUpdate
+        containers:
+          content-fetch:
+            image:
+              repository: sejaeger/omnivore-content-fetch
+              tag: f603e4e52
+              pullPolicy: IfNotPresent
+            env:
+              REST_BACKEND_ENDPOINT: http://omnivore-api:8080/api
+            envFrom:
+              - secretRef:
+                  name: omnivore-env-secrets
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 8080
+      web:
+        controller: web
+        ports:
+          http:
+            port: 8080
+      content-fetch:
+        controller: content-fetch
+        ports:
+          http:
+            port: 8080
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "omnivore.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: web
+                  port: http
+        tls:
+          - hosts:
+              - *host
