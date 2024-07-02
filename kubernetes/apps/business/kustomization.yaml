@@ -19,7 +19,7 @@ resources:
   - mattermost
   - ./memos/ks.yaml
   - ./omnivore/ks.yaml
-  - ./plane/ks.yaml
+  # - ./plane/ks.yaml
   - ./stirling-pdf/ks.yaml
   - superset
   - trilium-notes
