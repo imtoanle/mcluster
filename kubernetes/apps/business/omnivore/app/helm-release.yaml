@@ -48,19 +48,19 @@ spec:
             #   limits:
             #     cpu: 2000m
             #     memory: 3000Mi
-          initContainers:
-            migrate:
-              image:
-                repository: sejaeger/omnivore-migrate
-                tag: f603e4e52
-                pullPolicy: IfNotPresent
-              command: ["/bin/sh", "-c", "--"]
-              args: ["./packages/db/setup.sh"]
-              env:
-                NO_DEMO_USER: 1
-              envFrom:
-                - secretRef:
-                    name: omnivore-env-secrets
+            initContainers:
+              migrate-db:
+                image:
+                  repository: sejaeger/omnivore-migrate
+                  tag: f603e4e52
+                  pullPolicy: IfNotPresent
+                command: ["/bin/sh", "-c", "--"]
+                args: ["./packages/db/setup.sh"]
+                env:
+                  NO_DEMO_USER: 1
+                envFrom:
+                  - secretRef:
+                      name: omnivore-env-secrets
       web:
         strategy: RollingUpdate
         containers:
