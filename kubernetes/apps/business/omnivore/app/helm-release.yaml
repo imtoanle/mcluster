@@ -30,6 +30,8 @@ spec:
       migrate-hook:
         enabled: true
         type: job
+        job:
+          ttlSecondsAfterFinished: 300
         annotations:
           helm.sh/hook: "post-install,post-upgrade"
           helm.sh/hook-delete-policy: "hook-succeeded,before-hook-creation"
@@ -83,19 +85,6 @@ spec:
         #     envFrom:
         #       - secretRef:
         #           name: omnivore-env-secrets
-      web:
-        strategy: RollingUpdate
-        containers:
-          web:
-            image:
-              repository: sejaeger/omnivore-web
-              tag: f603e4e52
-              pullPolicy: IfNotPresent
-            env:
-              NEXT_PUBLIC_APP_ENV: prod
-              NEXT_PUBLIC_BASE_URL: https://omnivore.aitbase.com
-              NEXT_PUBLIC_SERVER_BASE_URL: http://omnivore-main.business.svc.cluster.local:8080
-              NEXT_PUBLIC_HIGHLIGHTS_BASE_URL: https://omnivore.aitbase.com
 
       content-fetch:
         strategy: RollingUpdate
@@ -113,11 +102,6 @@ spec:
     service:
       main:
         controller: main
-        ports:
-          http:
-            port: 8080
-      web:
-        controller: web
         ports:
           http:
             port: 8080
@@ -139,7 +123,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: web
+                  identifier: main
                   port: http
         tls:
           - hosts:
