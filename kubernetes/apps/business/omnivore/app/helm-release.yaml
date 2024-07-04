@@ -44,7 +44,7 @@ spec:
               tag: 84092ddbd1dc2f82e55d85f5a28d5a190c690a36
               pullPolicy: IfNotPresent
             command: ["/bin/sh", "-c", "--"]
-            args: ["./packages/db/setup.sh"]
+            args: ["yarn workspace @omnivore/db migrate"]
             env:
               NO_DEMO_USER: "1"
             envFrom:
