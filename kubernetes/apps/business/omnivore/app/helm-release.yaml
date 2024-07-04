@@ -40,8 +40,8 @@ spec:
         containers:
           db-migrate-job:
             image:
-              repository: sejaeger/omnivore-migrate
-              tag: f603e4e52
+              repository: ghcr.io/imtoanle/omnivore-db
+              tag: latest
               pullPolicy: IfNotPresent
             command: ["/bin/sh", "-c", "--"]
             args: ["./packages/db/setup.sh"]
@@ -59,8 +59,8 @@ spec:
         containers:
           main:
             image:
-              repository: sejaeger/omnivore-api
-              tag: f603e4e52
+              repository: ghcr.io/imtoanle/omnivore-backend
+              tag: latest
               pullPolicy: IfNotPresent
             envFrom:
               - secretRef:
@@ -91,11 +91,11 @@ spec:
         containers:
           content-fetch:
             image:
-              repository: sejaeger/omnivore-content-fetch
-              tag: f603e4e52
+              repository: ghcr.io/imtoanle/omnivore-content-fetch
+              tag: latest
               pullPolicy: IfNotPresent
             env:
-              REST_BACKEND_ENDPOINT: http://omnivore-api:8080/api
+              REST_BACKEND_ENDPOINT: http://omnivore-app-main.business.svc.cluster.local:8080/api
             envFrom:
               - secretRef:
                   name: omnivore-env-secrets
