@@ -17,7 +17,7 @@ resources:
   - leantime
   - ./listmonk/ks.yaml
   - mattermost
-  - ./memos/ks.yaml
+  # - ./memos/ks.yaml
   - ./omnivore/ks.yaml
   # - ./plane/ks.yaml
   - ./stirling-pdf/ks.yaml
