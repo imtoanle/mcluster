@@ -31,7 +31,7 @@ spec:
         enabled: true
         type: job
         job:
-          ttlSecondsAfterFinished: 302
+          ttlSecondsAfterFinished: 303
         annotations:
           helm.sh/hook: "post-install,post-upgrade"
           helm.sh/hook-delete-policy: "before-hook-creation"
