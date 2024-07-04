@@ -41,12 +41,10 @@ spec:
           db-migrate-job:
             image:
               repository: ghcr.io/imtoanle/omnivore-db
-              tag: 84092ddbd1dc2f82e55d85f5a28d5a190c690a36
+              tag: 91ad7dca0dce026c34c98b325f48dac0c13f5d59
               pullPolicy: IfNotPresent
             command: ["/bin/sh", "-c", "--"]
             args: ["yarn workspace @omnivore/db migrate"]
-            env:
-              NO_DEMO_USER: "1"
             envFrom:
               - secretRef:
                   name: omnivore-migrate-env-secrets
@@ -60,7 +58,7 @@ spec:
           main:
             image:
               repository: ghcr.io/imtoanle/omnivore-backend
-              tag: 84092ddbd1dc2f82e55d85f5a28d5a190c690a36
+              tag: 91ad7dca0dce026c34c98b325f48dac0c13f5d59
               pullPolicy: IfNotPresent
             envFrom:
               - secretRef:
@@ -92,7 +90,7 @@ spec:
           content-fetch:
             image:
               repository: ghcr.io/imtoanle/omnivore-content-fetch
-              tag: 84092ddbd1dc2f82e55d85f5a28d5a190c690a36
+              tag: 91ad7dca0dce026c34c98b325f48dac0c13f5d59
               pullPolicy: IfNotPresent
             env:
               REST_BACKEND_ENDPOINT: http://omnivore-app-main.business.svc.cluster.local:8080/api
