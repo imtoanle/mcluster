@@ -20,10 +20,10 @@ spec:
   superuserSecret:
     name: cloudnative-pg-secret
   bootstrap:
-    initdb:
-      postInitSQL:
-        - ALTER SYSTEM SET search_path TO "$user", public, vectors;
-        - CREATE EXTENSION IF NOT EXISTS "vectors";
+    # initdb:
+    #   postInitSQL:
+    #     - ALTER SYSTEM SET search_path TO "$user", public, vectors;
+    #     - CREATE EXTENSION IF NOT EXISTS "vectors";
     recovery:
       source: &previousCluster postgres-v2
   postgresql:
