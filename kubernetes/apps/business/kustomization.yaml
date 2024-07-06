@@ -21,7 +21,7 @@ resources:
   - ./omnivore/ks.yaml
   # - ./plane/ks.yaml
   - ./stirling-pdf/ks.yaml
-  - superset
+  # - superset
   - trilium-notes
   - ./valhalla/ks.yaml
   - ./vietwings-commerce/ks.yaml
