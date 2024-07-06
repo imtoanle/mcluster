@@ -25,7 +25,7 @@ spec:
         - ALTER SYSTEM SET search_path TO "$user", public, vectors;
         - CREATE EXTENSION IF NOT EXISTS "vectors";
     recovery:
-      source: &previousCluster postgres-v1
+      source: &previousCluster postgres-v2
   postgresql:
     shared_preload_libraries:
       - "vectors.so"
@@ -42,7 +42,7 @@ spec:
         maxParallel: 8
       destinationPath: s3://cnpg-95wy8675sq/
       endpointURL: https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
-      serverName: &currentCluster postgres-v2
+      serverName: &currentCluster postgres-v3
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
