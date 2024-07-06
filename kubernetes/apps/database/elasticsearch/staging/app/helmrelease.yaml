@@ -25,25 +25,12 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    auth:
-      enabled: false
-      sentinel: false
     master:
-      persistence:
-        enabled: false
-    replica:
-      persistence:
-        enabled: false
-    sentinel:
-      enabled: true
-      masterSet: redis-master
-      getMasterTimeout: 10
-      startupProbe:
-        failureThreshold: 2
-      persistence:
-        enabled: false
-    metrics:
-      enabled: true
-      serviceMonitor:
-        enabled: true
-        interval: 1m
+      masterOnly: false
+      replicaCount: 1
+    data:
+      replicaCount: 0
+    coordinating:
+      replicaCount: 0
+    ingest:
+      replicaCount: 0
