@@ -106,9 +106,9 @@ cameras:
     motion:
       mask:
         - 513,36,680,39,683,21,518,21
-    # zones:
-    #   front_door:
-    #     coordinates: 0,184,275,0,427,128,153,398
+    zones:
+      zone_0:
+        coordinates: 657,448,655,94,171,108,127,402
   frigate_kitchen:
     ffmpeg:
       inputs:
