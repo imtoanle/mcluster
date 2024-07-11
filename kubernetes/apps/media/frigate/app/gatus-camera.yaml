@@ -22,5 +22,6 @@ data:
           - "[STATUS] == 200"
           - "[BODY].frigate_door.camera_fps > 0"
           - "[BODY].frigate_kitchen.camera_fps > 0"
+          - "[BODY].frigate_store.camera_fps > 0"
         alerts:
           - type: pushover
