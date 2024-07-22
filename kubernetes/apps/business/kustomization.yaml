@@ -22,6 +22,7 @@ resources:
   # - ./plane/ks.yaml
   - ./stirling-pdf/ks.yaml
   # - superset
+  - ./trarcar/ks.yaml
   - trilium-notes
   - ./valhalla/ks.yaml
   - ./vietwings-commerce/ks.yaml
