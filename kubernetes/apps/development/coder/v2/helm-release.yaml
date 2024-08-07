@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: coder
-      version: 2.12.3
+      version: 2.14.1
       sourceRef:
         kind: HelmRepository
         name: coder-v2
@@ -26,6 +26,8 @@ spec:
     keepHistory: false
   values:
     coder:
+      nodeSelector:
+        coder-v2: true
       env:
         - name: CODER_PG_CONNECTION_URL
           valueFrom:
