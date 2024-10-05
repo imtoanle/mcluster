@@ -5,6 +5,9 @@ logger:
   # logs:
   #   frigate.record: debug
 
+tls:
+  enabled: false
+
 mqtt:
   host: mosquitto.broker.svc.cluster.local
   topic_prefix: frigate
