@@ -34,7 +34,7 @@ spec:
           main:
             image:
               repository: ghcr.io/gis-ops/docker-valhalla/valhalla
-              tag: latest@sha256:b6aa2687028f86878d8f37e6d45029e345a724f453bc3f24e6c21c73327c2945
+              tag: latest@sha256:45be227143548d98e7a0c4c68d6871fd23ddcd79fcd6c5855c68f3773870377b
             env:
               tile_urls: https://download.geofabrik.de/asia/vietnam-latest.osm.pbf
               use_tiles_ignore_pbf: "True"
