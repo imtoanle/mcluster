@@ -40,7 +40,7 @@ spec:
           main:
             image:
               repository: ghcr.io/blakeblackshear/frigate
-              tag: stable
+              tag: 0.14.1
             env:
               TZ: Asia/Ho_Chi_Minh
               LIBVA_DRIVER_NAME: i965
@@ -93,6 +93,8 @@ spec:
         annotations:
           io.cilium/lb-ipam-ips: 10.0.99.210
         ports:
+          auth:
+            port: 8971
           http:
             port: 5000
           rtsp:
@@ -125,7 +127,7 @@ spec:
               - path: /
                 service:
                   name: main
-                  port: http
+                  port: auth
         tls:
           - secretName: "${SECRET_DOMAIN_2/./-}-production-tls"
             hosts:
