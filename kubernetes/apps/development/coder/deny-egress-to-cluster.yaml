@@ -11,6 +11,15 @@ spec:
   policyTypes:
     - Egress
   egress:
+    # Allow DNS traffic to the DNS service
+    - to:
+        - ipBlock:
+            cidr: 10.43.0.10/32
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
     - to:
         - ipBlock:
             cidr: 0.0.0.0/0
