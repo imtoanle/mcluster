@@ -25,4 +25,4 @@ resources:
   - ./trarcar/ks.yaml
   - trilium-notes
   - ./valhalla/ks.yaml
-  - ./vietwings-commerce/ks.yaml
+  # - ./vietwings-commerce/ks.yaml
