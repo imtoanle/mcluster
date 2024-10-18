@@ -36,37 +36,6 @@ spec:
         annotations:
           configmap.reloader.stakater.com/reload: &configMap immich-configmap
           secret.reloader.stakater.com/reload: &secret immich-secret
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/haraldkoch/postgres-init
-              tag: 16.1@sha256:1643b66cc670909b3363796f713570fa9a601b13bfd4b1243f231516520b83d9
-            env:
-              INIT_POSTGRES_HOST:
-                valueFrom:
-                  secretKeyRef:
-                    name: immich-secret
-                    key: DB_HOSTNAME
-              INIT_POSTGRES_DBNAME:
-                valueFrom:
-                  secretKeyRef:
-                    name: immich-secret
-                    key: DB_DATABASE_NAME
-              INIT_POSTGRES_USER:
-                valueFrom:
-                  secretKeyRef:
-                    name: immich-secret
-                    key: DB_USERNAME
-              INIT_POSTGRES_PASS:
-                valueFrom:
-                  secretKeyRef:
-                    name: immich-secret
-                    key: DB_PASSWORD
-            envFrom: &envFrom
-              - configMapRef:
-                  name: *configMap
-              - secretRef:
-                  name: *secret
         containers:
           main:
             image:
