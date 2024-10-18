@@ -71,11 +71,7 @@ spec:
           main:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v1.93.3
-            command:
-              - /bin/sh
-            args:
-              - ./start-server.sh
+              tag: v1.118.2
             envFrom: *envFrom
             # resources:
             #   requests:
@@ -93,7 +89,7 @@ spec:
       main:
         ports:
           http:
-            port: 3001
+            port: 2283
 
     ingress:
       main:

@@ -9,5 +9,4 @@ resources:
   - ./configmap.yaml
   - ./nfs-pvc.yaml
   - ./server
-  - ./microservices
   - ./machine-learning
