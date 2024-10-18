@@ -27,6 +27,7 @@ spec:
     recovery:
       source: &previousCluster postgres-v2
   postgresql:
+    enableAlterSystem: true
     shared_preload_libraries:
       - "vectors.so"
     parameters:
