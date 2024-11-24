@@ -75,6 +75,12 @@ go2rtc:
     frigate_store_lq:
       - rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.83:554/cam/realmonitor?channel=1&subtype=1
       - "ffmpeg:frigate_store_lq#audio=pcmu"
+    frigate_director_hq:
+      - rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.110:554/cam/realmonitor?channel=1&subtype=0
+      - "ffmpeg:frigate_director_hq#audio=pcmu"
+    frigate_director_lq:
+      - rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.110:554/cam/realmonitor?channel=1&subtype=1
+      - "ffmpeg:frigate_director_lq#audio=pcmu"
   webrtc:
     candidates:
       - 10.0.99.210:8555
@@ -141,6 +147,17 @@ cameras:
             - record
     live:
       stream_name: frigate_store_lq
+  frigate_director:
+    ffmpeg:
+      inputs:
+        - path: rtsp://localhost:8554/frigate_director_lq
+          roles:
+            - detect
+        - path: rtsp://localhost:8554/frigate_director_hq
+          roles:
+            - record
+    live:
+      stream_name: frigate_director_lq
 detectors:
   coral:
     type: edgetpu
