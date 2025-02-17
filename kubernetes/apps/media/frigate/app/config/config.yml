@@ -18,12 +18,12 @@ database:
   path: /data/frigate.db
 
 record:
-  enabled: true
+  enabled: True
   retain:
     days: 7
-  events:
+  alerts:
     retain:
-      default: 14
+      days: 14
 snapshots:
   enabled: True
   timestamp: False
@@ -31,6 +31,7 @@ snapshots:
   crop: False
 
 ffmpeg:
+  # check this
   global_args: ["-hide_banner", "-loglevel", "warning"]
   hwaccel_args:
     [
