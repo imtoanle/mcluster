@@ -5,8 +5,8 @@ metadata:
   name: cluster-apps-ai-paperless-ngx-app
   namespace: flux-system
 spec:
-  targetNamespace: ai-apps
-  path: ./kubernetes/apps/ai/paperless-ngx/app
+  targetNamespace: media
+  path: ./kubernetes/apps/media/paperless-ngx/app
   prune: true
   sourceRef:
     kind: GitRepository
