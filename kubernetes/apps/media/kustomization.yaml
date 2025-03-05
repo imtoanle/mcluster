@@ -6,3 +6,4 @@ resources:
   - ./immich/ks.yaml
   - ./frigate/ks.yaml
   - ./paperless-ngx/ks.yaml
+  - ./paperless-ai/ks.yaml
