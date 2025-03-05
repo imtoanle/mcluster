@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app paperless-ngx-server
+  name: &app paperless-ngx
 spec:
   interval: 30m
   chart:
