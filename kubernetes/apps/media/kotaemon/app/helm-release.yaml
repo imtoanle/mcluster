@@ -1,0 +1,79 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app kotaemon-app
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        replicas: 1
+        # strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: ghcr.io/cinnamon/kotaemon
+              tag: main-full
+              pullPolicy: Always
+            envFrom:
+              - secretRef:
+                  name: kotaemon-env-secrets
+            # resources:
+            #   requests:
+            #     cpu: 200m
+            #     memory: 300Mi
+            #   limits:
+            #     cpu: 2000m
+            #     memory: 3000Mi
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 7860
+
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "kotaemon.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      data:
+        enabled: true
+        existingClaim: kotaemon-app
+        globalMounts:
+          - path: /app/ktem_app_data
+            readOnly: false
