@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "${APP}-data"
+spec:
+  accessModes: ["ReadWriteMany"]
+  resources:
+    requests:
+      storage: "10G"
+  storageClassName: "ceph-filesystem"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "${APP}-media"
+spec:
+  accessModes: ["ReadWriteMany"]
+  resources:
+    requests:
+      storage: "10G"
+  storageClassName: "ceph-filesystem"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "${APP}-export"
+spec:
+  accessModes: ["ReadWriteMany"]
+  resources:
+    requests:
+      storage: "10G"
+  storageClassName: "ceph-filesystem"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "${APP}-consume"
+spec:
+  accessModes: ["ReadWriteMany"]
+  resources:
+    requests:
+      storage: "10G"
+  storageClassName: "ceph-filesystem"
