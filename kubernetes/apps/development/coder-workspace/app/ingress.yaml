@@ -10,8 +10,25 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   ingressClassName: external
+  tls:
+    - hosts:
+        - coder-workspace.${SECRET_DOMAIN_2}
+      secretName: coder-workspace-tls-secret
+    - hosts:
+        - "*.coder-workspace.${SECRET_DOMAIN_2}"
+      secretName: wildcard-coder-workspace-tls-secret
   rules:
-    - host: "coder-workspace.${SECRET_DOMAIN_2}"
+    - host: coder-workspace.${SECRET_DOMAIN_2}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: coder-workspace-local
+                port:
+                  number: 3000
+    - host: "*.coder-workspace.${SECRET_DOMAIN_2}"
       http:
         paths:
           - path: /
