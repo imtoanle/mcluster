@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-development-coder-workspace
   namespace: flux-system
 spec:
-  targetNamespace: coder-workspace
+  targetNamespace: development
   path: ./kubernetes/apps/development/coder-workspace/app
   prune: true
   sourceRef:
