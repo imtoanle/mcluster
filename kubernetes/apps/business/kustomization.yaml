@@ -15,7 +15,7 @@ resources:
   - directus
   - erpnext/ks.yaml
   - leantime
-  - ./listmonk/ks.yaml
+  # - ./listmonk/ks.yaml
   - mattermost
   # - ./memos/ks.yaml
   # - ./omnivore/ks.yaml
