@@ -6,4 +6,4 @@ resources:
   - ./secret.sops.yaml
   - ./envs-config.yaml
   - ./helm-release.yaml
-  - ../../../../templates/volsync
+  # - ../../../../templates/volsync
