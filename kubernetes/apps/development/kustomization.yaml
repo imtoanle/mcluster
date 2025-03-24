@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./coder
+  - ./coder-workspace/ks.yaml
   - ./hoppscotch/ks.yaml
