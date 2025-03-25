@@ -74,9 +74,9 @@ spec:
           osdsPerDevice: "1"
           encryptedDevice: "false"
         nodes:
-          - name: hc-master-1
-            devices:
-              - name: "/dev/disk/by-id/dm-name-hc--master--1--vg-ceph--disk"
+          # - name: hc-master-1
+          #   devices:
+          #     - name: "/dev/disk/by-id/dm-name-hc--master--1--vg-ceph--disk"
           - name: hc-master-2
             devices:
               - name: "/dev/disk/by-id/dm-name-hc--worker--1--vg-ceph--disk"
@@ -100,7 +100,7 @@ spec:
                     - key: kubernetes.io/hostname
                       operator: In
                       values:
-                        - hc-master-1
+                        # - hc-master-1
                         - hc-master-2
                         - hc-master-3
       resources:
@@ -131,7 +131,7 @@ spec:
         # This value should only be set when the cluster is about to be deleted. After the confirmation is set,
         # Rook will immediately stop configuring the cluster and only wait for the delete command.
         # If the empty string is set, Rook will not destroy any data on hosts during uninstall.
-        confirmation: ""
+        confirmation: "yes-really-destroy-data"
         # sanitizeDisks represents settings for sanitizing OSD disks on cluster deletion
         sanitizeDisks:
           # method indicates if the entire disk should be sanitized or simply ceph's metadata
@@ -153,7 +153,7 @@ spec:
         spec:
           failureDomain: host
           replicated:
-            size: 3
+            size: 2
         storageClass:
           enabled: true
           name: ceph-block
