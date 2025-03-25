@@ -3,6 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  - ./coder
+  # - ./coder
   - ./coder-workspace/ks.yaml
   - ./hoppscotch/ks.yaml
