@@ -7,4 +7,4 @@ resources:
   # - ./frigate/ks.yaml
   # - ./kotaemon/ks.yaml
   - ./paperless-ngx/ks.yaml
-  - ./paperless-ai/ks.yaml
+  # - ./paperless-ai/ks.yaml
