@@ -34,7 +34,7 @@ spec:
           main:
             image:
               repository: traccar/traccar
-              tag: 6.2-ubuntu
+              tag: 6.7-ubuntu
     service:
       main:
         controller: main
