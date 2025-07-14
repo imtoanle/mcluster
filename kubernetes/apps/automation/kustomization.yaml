@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./n8n/ks.yaml
-  - ./temporal/ks.yaml
