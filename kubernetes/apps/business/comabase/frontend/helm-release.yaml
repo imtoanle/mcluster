@@ -70,7 +70,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN_2}"
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
         hosts:
-          - host: &host "vietwings.${SECRET_DOMAIN}"
+          - host: &host "vietwings.${SECRET_DOMAIN_2}"
             paths:
               - path: /
                 pathType: Prefix
