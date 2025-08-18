@@ -44,7 +44,7 @@ spec:
           main:
             image:
               repository: ghcr.io/lldap/lldap
-              tag: v0.5.0
+              tag: v0.6.2
             env:
               TZ: Asia/Ho_Chi_Minh
               LLDAP_HTTP_PORT: &port 80
