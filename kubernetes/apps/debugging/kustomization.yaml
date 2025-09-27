@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./utils
-  # - ./rustdesk/ks.yaml
+  - ./rustdesk/ks.yaml
