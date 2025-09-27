@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./private-registry
-  - ./actual/ks.yaml
+  # - ./actual/ks.yaml
   # - ./aitbase-admin/aitbotsync/prod/ks.yaml
   # - ./aitbase-admin/aitbotsync/staging/ks.yaml
   # - ./aitbase-admin/locatepin/prod/ks.yaml
@@ -12,17 +12,17 @@ resources:
   # - ./chatwoot/aitbase/prod/ks.yaml
   # - ./chatwoot/aitbase/staging/ks.yaml
   - comabase
-  - directus
-  - erpnext/ks.yaml
-  - leantime
+  # - directus
+  # - erpnext/ks.yaml
+  # - leantime
   # - ./listmonk/ks.yaml
   - mattermost
   # - ./memos/ks.yaml
   # - ./omnivore/ks.yaml
   # - ./plane/ks.yaml
-  - ./stirling-pdf/ks.yaml
+  # - ./stirling-pdf/ks.yaml
   # - superset
-  - ./trarcar/ks.yaml
+  # - ./trarcar/ks.yaml
   - trilium-notes
   # - ./valhalla/ks.yaml
   # - ./vietwings-commerce/ks.yaml
