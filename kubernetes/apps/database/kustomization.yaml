@@ -6,10 +6,10 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./cloudnative-pg/ks.yaml
-  - ./elasticsearch/staging/ks.yaml
+  # - ./elasticsearch/staging/ks.yaml
   - ./staging-redis/ks.yaml
   # - ./vitess/ks.yaml
   - ./redis/ks.yaml
   - ./mariadb/ks.yaml
   - ./obsidian-couchdb/ks.yaml
-  - ./weaviate/ks.yaml
+  # - ./weaviate/ks.yaml
