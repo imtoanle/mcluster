@@ -3,8 +3,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  # - ./anything-llm/ks.yaml
+  - ./anything-llm/ks.yaml
   # - ./dify/ks.yaml
-  # - ./flowise
+  - ./flowise
   # - ./langflow
   # - ./localai
