@@ -3,17 +3,17 @@ kubernetes:
   children:
     master:
       hosts:
-        hc-master-1:
+        mcluster-master-1:
           ansible_user: mitm
-          ansible_host: 10.0.99.100
-        hc-master-2:
+          ansible_host: 10.0.99.201
+        mcluster-master-2:
           ansible_user: mitm
-          ansible_host: 10.0.99.101
-        hc-master-3:
+          ansible_host: 10.0.99.202
+        mcluster-master-3:
           ansible_user: mitm
-          ansible_host: 10.0.99.102
-    worker:
-      hosts:
-        hc-worker-1:
-          ansible_user: mitm
-          ansible_host: 10.0.99.103
+          ansible_host: 10.0.99.203
+    # worker:
+    #   hosts:
+    #     hc-worker-1:
+    #       ansible_user: mitm
+    #       ansible_host: 10.0.99.103
