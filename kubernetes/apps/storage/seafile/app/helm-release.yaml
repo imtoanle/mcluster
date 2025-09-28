@@ -53,6 +53,7 @@ spec:
               startup:
                 enabled: false
             env:
+              USE_EXISTING_DB: "1"
               DEBUG: "True"
               TIME_ZONE: Asia/Ho_Chi_Minh
               SEAFILE_SERVER_HOSTNAME: "files.${SECRET_DOMAIN_2}"
