@@ -32,7 +32,7 @@ spec:
           main:
             image:
               repository: aitbase/comabase-web
-              tag: v1.4.6 #DO_NOT_REMOVE_TAG_INDICATOR
+              tag: v1.4.7 #DO_NOT_REMOVE_TAG_INDICATOR
 
             probes:
               liveness: &probes
