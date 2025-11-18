@@ -8,7 +8,7 @@ spec:
   env:
     - name: TZ
       value: SYSTEM
-  image: "mariadb:11.2.2"
+  image: "mariadb:11.8.5"
   imagePullPolicy: IfNotPresent
   rootPasswordSecretKeyRef:
     key: instance-root-password
