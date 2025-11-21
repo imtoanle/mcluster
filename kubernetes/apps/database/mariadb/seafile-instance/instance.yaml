@@ -15,7 +15,7 @@ spec:
   # envFrom:
   #   - configMapRef:
   #       name: mariadb
-  image: "mariadb:11.2.2"
+  image: "mariadb:12.1.2"
   imagePullPolicy: IfNotPresent
   rootPasswordSecretKeyRef:
     key: instance-root-password
