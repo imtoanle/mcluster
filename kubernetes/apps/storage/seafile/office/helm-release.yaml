@@ -32,7 +32,7 @@ spec:
           main:
             image:
               repository: onlyoffice/documentserver
-              tag: 7.5
+              tag: 9.2
             probes:
               liveness:
                 enabled: false
