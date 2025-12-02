@@ -34,7 +34,7 @@ spec:
           main:
             image:
               repository: frappe/erpnext
-              tag: v15.26.1
+              tag: v15.91.0
               pullPolicy: Always
             envFrom:
               - secretRef:
@@ -101,7 +101,7 @@ spec:
           main:
             image:
               repository: frappe/erpnext
-              tag: v15.26.1
+              tag: v15.91.0
             args:
               - node
               - /home/frappe/frappe-bench/apps/frappe/socketio.js
@@ -112,7 +112,7 @@ spec:
           main:
             image:
               repository: frappe/erpnext
-              tag: v15.26.1
+              tag: v15.91.0
             args:
               - bench
               - schedule
@@ -122,7 +122,7 @@ spec:
           main:
             image:
               repository: frappe/erpnext
-              tag: v15.26.1
+              tag: v15.91.0
             args:
               - bench
               - worker
@@ -181,7 +181,7 @@ spec:
           main:
             image:
               repository: frappe/erpnext
-              tag: v15.26.1
+              tag: v15.91.0
             args:
               - bench
               - worker
@@ -194,7 +194,7 @@ spec:
           main:
             image:
               repository: frappe/erpnext
-              tag: v15.26.1
+              tag: v15.91.0
             args:
               - bench
               - worker
@@ -207,7 +207,7 @@ spec:
           main:
             image:
               repository: frappe/erpnext
-              tag: v15.26.1
+              tag: v15.91.0
             probes: *probes
     service:
       main:
