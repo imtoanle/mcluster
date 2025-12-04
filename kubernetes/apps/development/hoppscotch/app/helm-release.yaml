@@ -35,7 +35,7 @@ spec:
           main:
             image:
               repository: hoppscotch/hoppscotch
-              tag: 2024.3.0
+              tag: 2025.11.1
               pullPolicy: Always
             envFrom:
               - secretRef:
@@ -52,7 +52,7 @@ spec:
           db-migrate-job:
             image:
               repository: hoppscotch/hoppscotch
-              tag: 2024.3.0
+              tag: 2025.11.1
               pullPolicy: IfNotPresent
             # command:
             args:
