@@ -35,8 +35,8 @@ spec:
         containers:
           main:
             image:
-              repository: ktoanlba/chatwoot
-              tag: v3.7.0-custom
+              repository: chatwoot/chatwoot
+              tag: v3.9.0
               pullPolicy: Always
             command:
               - docker/entrypoints/rails.sh
