@@ -34,7 +34,7 @@ spec:
           main:
             image:
               repository: rabbitmq
-              tag: 3-management-alpine
+              tag: 4-management-alpine
             # resources:
             #   requests:
             #     cpu: 200m
